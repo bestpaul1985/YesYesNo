@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0E14B546-1834-4031-8B70-E3CAFE114F25</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Kiehl_prototype_2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2F4C57E6-6E11-4941-81AC-981C4DA86B8C</key>
+		<string>https://github.com/bestpaul1985/YesYesNo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Kiehl_prototype_2/Kiehl_prototype_2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2F4C57E6-6E11-4941-81AC-981C4DA86B8C</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bestpaul1985/YesYesNo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>2F4C57E6-6E11-4941-81AC-981C4DA86B8C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2F4C57E6-6E11-4941-81AC-981C4DA86B8C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>YesYesNo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

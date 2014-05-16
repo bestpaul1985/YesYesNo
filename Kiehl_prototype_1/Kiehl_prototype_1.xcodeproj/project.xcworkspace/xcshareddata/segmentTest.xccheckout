@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>456BC6F1-B60A-45BA-824D-1431930E2A80</string>
+	<key>IDESourceControlProjectName</key>
+	<string>segmentTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>853D0047-1ACA-4A74-8EB6-BB978694603F</key>
+		<string>https://github.com/bestpaul1985/YesYesNo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>segmentTest/segmentTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>853D0047-1ACA-4A74-8EB6-BB978694603F</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bestpaul1985/YesYesNo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>853D0047-1ACA-4A74-8EB6-BB978694603F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>853D0047-1ACA-4A74-8EB6-BB978694603F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>YesYesNo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
