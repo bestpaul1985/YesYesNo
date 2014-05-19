@@ -57,7 +57,7 @@ void ofApp::update(){
 void ofApp::draw(){
     
     ofSetColor(255);
-    video.draw(video.width, 0, -video.width, video.height);
+    video.draw(video.width/4*3, 0, -video.width, video.height);
     foreground[setNum].draw(0, 0);
     bot_banner.draw(0, 410);
 }
