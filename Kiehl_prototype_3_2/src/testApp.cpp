@@ -167,7 +167,7 @@ void testApp::draw(){
     ofSetColor(255);
     bot_banner.draw(0, 410);
     
-    ofSetColor(255);
+//    ofSetColor(255);
 //    gui.draw();
     
 }
@@ -254,6 +254,8 @@ void testApp::loadCity(){
     tempAngle.set(129,232,304);
     angle.push_back(tempAngle);
     tempAngle.set(136,45,18);
+    angle.push_back(tempAngle);
+    tempAngle.set(228,208,0);
     angle.push_back(tempAngle);
 }
 
