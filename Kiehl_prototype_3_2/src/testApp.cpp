@@ -93,10 +93,11 @@ void testApp::draw(){
     //--------------------------------------- line
     lineFbo.begin();
         cam.begin();
-        ofClear(0,0,0,255);
         ofScale(1,-1,1);
+
+        ofClear(0,0,0,255);
+    
    
-    ofScale(1,-1,1);
     material.begin();
     texture.getTextureReference().bind();
     ofFill();
@@ -156,9 +157,7 @@ void testApp::draw(){
     //----------------------------------- flags
     ofEnableDepthTest();
     cam.begin();
-    
-   
-   
+    ofScale(1,-1,1);
     drawCity();
     cam.end();
     ofDisableDepthTest();
