@@ -95,7 +95,15 @@ void testApp::draw(){
         cam.begin();
         ofClear(0,0,0,255);
         ofScale(1,-1,1);
-    
+   
+    ofScale(1,-1,1);
+    material.begin();
+    texture.getTextureReference().bind();
+    ofFill();
+    ofSetColor(255);
+    sphere.draw();
+    texture.getTextureReference().unbind();
+    material.end();
 //        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
         // sphere
     
@@ -149,14 +157,7 @@ void testApp::draw(){
     ofEnableDepthTest();
     cam.begin();
     
-    ofScale(1,-1,1);
-    material.begin();
-    texture.getTextureReference().bind();
-    ofFill();
-    ofSetColor(255);
-    sphere.draw();
-    texture.getTextureReference().unbind();
-    material.end();
+   
    
     drawCity();
     cam.end();
@@ -271,6 +272,12 @@ void testApp::drawCity(){
 		ofVec3f center = ofVec3f(0,0,earthSize+2);
 		ofVec3f worldPoint = latRot * longRot * spinQuat * center;
        
+        ofPoint pt = worldPoint * cam.getModelViewMatrix();
+        cout << pt << endl;
+        
+       
+        if (pt.z > -380){
+        
         ofSetRectMode(OF_RECTMODE_CENTER);
         ofPushMatrix();
         ofTranslate(worldPoint);
@@ -279,15 +286,14 @@ void testApp::drawCity(){
         ofRotate(angle[i].z, 0, 0, 1);
         
         ofSetColor(255);
-
+        
         flags[i].draw(0,0,20,15);
         
         ofPopMatrix();
         ofSetRectMode(OF_RECTMODE_CORNER);
+        }
 
 	}
-	
-    
    
 }
 
