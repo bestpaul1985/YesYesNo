@@ -62,6 +62,7 @@ void testApp::setup(){
     
     //--------------------------------------easy cam//
     cam.setDistance(400);
+   
     
     //------------------------------------city//
     loadCity();
@@ -77,7 +78,6 @@ void testApp::setup(){
 void testApp::update(){
     if (ofGetFrameNum() % 30 == 0) shader.load("shader/shader");;
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
-    
 }
 
 //--------------------------------------------------------------
@@ -95,8 +95,8 @@ void testApp::draw(){
         cam.begin();
         ofClear(0,0,0,255);
         ofScale(1,-1,1);
-
-//      ofRotate(ofGetFrameNum()/2, 0, 1, 0);
+    
+//        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
         // sphere
     
 //        mat.translate(ofGetWidth()/2, ofGetHeight()/2,0);
@@ -132,8 +132,6 @@ void testApp::draw(){
     lineFbo.end();
     
     
-  
-    
     // --------------------------------------- shader
    
     ofDisableDepthTest();
@@ -150,8 +148,8 @@ void testApp::draw(){
     //----------------------------------- flags
     ofEnableDepthTest();
     cam.begin();
+    
     ofScale(1,-1,1);
-
     material.begin();
     texture.getTextureReference().bind();
     ofFill();
@@ -159,7 +157,7 @@ void testApp::draw(){
     sphere.draw();
     texture.getTextureReference().unbind();
     material.end();
-    
+   
     drawCity();
     cam.end();
     ofDisableDepthTest();
@@ -265,7 +263,6 @@ void testApp::loadCity(){
 void testApp::drawCity(){
 
 		
-	ofSetColor(255);
 	for(int i = 0; i < cities.size(); i++){
 	
 		ofQuaternion latRot, longRot, spinQuat;
@@ -281,7 +278,10 @@ void testApp::drawCity(){
         ofRotate(angle[i].y, 0, 1, 0);
         ofRotate(angle[i].z, 0, 0, 1);
         
+        ofSetColor(255);
+
         flags[i].draw(0,0,20,15);
+        
         ofPopMatrix();
         ofSetRectMode(OF_RECTMODE_CORNER);
 
