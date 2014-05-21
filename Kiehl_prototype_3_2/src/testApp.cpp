@@ -275,7 +275,7 @@ void testApp::drawCity(){
         cout << pt << endl;
         
        
-        if (pt.z > -380){
+        if (pt.z > -360){
         
         ofSetRectMode(OF_RECTMODE_CENTER);
         ofPushMatrix();
