@@ -3,13 +3,21 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "earthLine.h"
+#include "ofxGui.h"
+typedef struct {
+	string name;
+	float latitude;
+	float longitude;
+} City;
+
+
 class testApp : public ofBaseApp{
 
 	public:
 		void setup();
 		void update();
 		void draw();
-
+    
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -19,13 +27,15 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+        void loadCity();
+        void drawCity();
+
         ofImage bot_banner;
         ofImage texture;
-        
+    
         ofSpherePrimitive sphere;
         ofMaterial material;
-        
+    
         ofImage                 image;
         ofxCvColorImage         colorImage;
         ofxCvGrayscaleImage 	grayImage;
@@ -38,10 +48,23 @@ class testApp : public ofBaseApp{
     
     
         ofFbo       lineFbo;
+        ofFbo       flagFbo;
+
         ofImage     rockImage;
         ofShader    shader;
     
         ofEasyCam cam;
     
+        vector<City> cities;
+        vector<ofImage> flags;
+        vector<ofPoint> angle;
+
     
+        ofxPanel gui;
+        ofxIntSlider x;
+        ofxIntSlider y;
+        ofxIntSlider z;
+    
+    
+
 };

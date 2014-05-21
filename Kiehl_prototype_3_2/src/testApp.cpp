@@ -20,7 +20,7 @@ void testApp::setup(){
     colorImage.setFromPixels(image.getPixels(),2000,1000);
     grayImage = colorImage;
     grayImage.threshold(threshold);
-    contourFinder.findContours(grayImage, 20, (2000*1000)/3, 10, true);	// find holes
+    contourFinder.findContours(grayImage, 20, 2000*1000, 100, true);	// find holes
     
     for (int i = 0; i < contourFinder.nBlobs; i++){
         earthLine newLine;
@@ -63,6 +63,13 @@ void testApp::setup(){
     //--------------------------------------easy cam//
     cam.setDistance(400);
     
+    //------------------------------------city//
+    loadCity();
+    gui.setup();
+    gui.add(x.setup("x res", 0, 0, 360));
+    gui.add(y.setup("y res", 0, 0, 360));
+    gui.add(z.setup("z res", 0, 0, 360));
+
 
 }
 
@@ -79,8 +86,6 @@ void testApp::draw(){
     
     ofMatrix4x4 mat;
     mat = ofMatrix4x4::newIdentityMatrix();
-
-    
     
     ofBackground(30);
     ofEnableDepthTest();
@@ -91,36 +96,30 @@ void testApp::draw(){
         ofClear(0,0,0,255);
         ofScale(1,-1,1);
 
-//        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
+//      ofRotate(ofGetFrameNum()/2, 0, 1, 0);
         // sphere
-        material.begin();
-        ofNoFill();
-        ofSetColor(255);
-        texture.getTextureReference().bind();
-        ofFill();
-        ofSetColor(255);
-        sphere.draw();
-        texture.getTextureReference().unbind();
-        material.end();
     
-        //mat.translate(ofGetWidth()/2, ofGetHeight()/2,0);
-        //mat.rotate(ofGetFrameNum()/2, 0,1,0);
-
+//        mat.translate(ofGetWidth()/2, ofGetHeight()/2,0);
+//        mat.rotate(ofGetFrameNum()/2, 0,1,0);
+    
         for (int i = 0; i < lines.size(); i++){
             
             ofPolyline temp;
             temp = lines[i].PolyLine;
             for (int j = 0; j < temp.size(); j++){
                 temp[j] = temp[j] * mat;
-                //temp[j].z *= ofMap(mouseX, 0, ofGetWidth(), -3,3, true);
+//                temp[j].z *= ofMap(mouseX, 0, ofGetWidth(), -3,3, true);
             }
             ofNoFill();
             ofSetColor(255);
             ofSetLineWidth(1);
             temp.draw();
         }
+    
+
         cam.end();
     
+        //--------outline circle
         ofPushMatrix();
         ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
         ofRotateZ(ofGetFrameNum()/2);
@@ -129,15 +128,16 @@ void testApp::draw(){
         ofSetLineWidth(ofRandom(3,4));
         ofCircle(0,0, earthSize+12);
         ofPopMatrix();
-
+    
     lineFbo.end();
     
+    
+  
     
     // --------------------------------------- shader
    
     ofDisableDepthTest();
-    
-    
+
     shader.begin();
     
     shader.setUniformTexture("tex0",lineFbo, 0 );
@@ -147,9 +147,28 @@ void testApp::draw(){
     lineFbo.draw(0,0);
     shader.end();
    
+    //----------------------------------- flags
+    ofEnableDepthTest();
+    cam.begin();
+    ofScale(1,-1,1);
+
+    material.begin();
+    texture.getTextureReference().bind();
+    ofFill();
+    ofSetColor(255);
+    sphere.draw();
+    texture.getTextureReference().unbind();
+    material.end();
+    
+    drawCity();
+    cam.end();
+    ofDisableDepthTest();
     
     ofSetColor(255);
     bot_banner.draw(0, 410);
+    
+    ofSetColor(255);
+//    gui.draw();
     
 }
 
@@ -198,3 +217,83 @@ void testApp::gotMessage(ofMessage msg){
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+
+//--------------------------------------------------------------
+void testApp::loadCity(){
+
+    //------------ load city
+	City newyork = { "new york", 40+47/60., -73 + 58/60. };
+	City tokyo = { "tokyo", 35 + 40./60, 139 + 45/60. };
+	City london = { "london", 51 + 32/60., -5./60. };
+	City shanghai = { "shanghai", 31 + 10/60., 121 + 28/60. };
+	City buenosaires = { "buenos aires", -34 + 35/60., -58 + 22/60. };
+	City melbourne = { "melbourne" , -37 + 47/60., 144 + 58/60. };
+    
+	cities.push_back( newyork );
+	cities.push_back( tokyo );
+	cities.push_back( london );
+	cities.push_back( shanghai );
+	cities.push_back( buenosaires );
+	cities.push_back( melbourne );
+    
+    //------------ load image
+    ofImage img;
+    for(int i=0; i<cities.size(); i++){
+        img.loadImage("flags/flags"+ofToString(i)+".gif");
+        flags.push_back(img);
+    }
+    
+    //------------ load angle offsit
+    ofPoint tempAngle;
+    tempAngle.set(70,138,93);
+    angle.push_back(tempAngle);
+    tempAngle.set(149,30,0);
+    angle.push_back(tempAngle);
+    tempAngle.set(59,0,36);
+    angle.push_back(tempAngle);
+    tempAngle.set(129,232,304);
+    angle.push_back(tempAngle);
+    tempAngle.set(136,45,18);
+    angle.push_back(tempAngle);
+}
+
+
+
+//--------------------------------------------------------------
+void testApp::drawCity(){
+
+		
+	ofSetColor(255);
+	for(int i = 0; i < cities.size(); i++){
+	
+		ofQuaternion latRot, longRot, spinQuat;
+		latRot.makeRotate(cities[i].latitude, 1, 0, 0);
+		longRot.makeRotate(cities[i].longitude, 0, 1, 0);
+		ofVec3f center = ofVec3f(0,0,earthSize+2);
+		ofVec3f worldPoint = latRot * longRot * spinQuat * center;
+       
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        ofPushMatrix();
+        ofTranslate(worldPoint);
+        ofRotate(angle[i].x, 1, 0, 0);
+        ofRotate(angle[i].y, 0, 1, 0);
+        ofRotate(angle[i].z, 0, 0, 1);
+        
+        flags[i].draw(0,0,20,15);
+        ofPopMatrix();
+        ofSetRectMode(OF_RECTMODE_CORNER);
+
+	}
+	
+    
+   
+}
+
+
+
+
+
+
+
+
+
