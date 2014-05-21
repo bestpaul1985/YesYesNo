@@ -11,8 +11,7 @@ void testApp::setup(){
     ofEnableAlphaBlending();
     bot_banner.loadImage("banner.png");
     
-    //line finder//
-    
+    //-------------------------------------line finder//
     image.loadImage("earthOutline.png");
     colorImage.allocate(image.width,image.height);
     grayImage.allocate(image.width,image.height);
@@ -46,8 +45,7 @@ void testApp::setup(){
         }
     }
     
-    //sphere//
-    
+    //--------------------------------------sphere//
     ofDisableArbTex();
     texture.loadImage("earthTexture.png");
     texture.getTextureReference().setTextureWrap( GL_REPEAT, GL_REPEAT );
@@ -61,6 +59,10 @@ void testApp::setup(){
     sphere.setResolution(48);
     sphere.mapTexCoordsFromTexture( texture.getTextureReference() );
     sphere.setOrientation(ofPoint(0,180,0));
+    
+    //--------------------------------------easy cam//
+    cam.setDistance(400);
+    
 
 }
 
@@ -73,30 +75,24 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-   
     
     
     ofMatrix4x4 mat;
     mat = ofMatrix4x4::newIdentityMatrix();
-    
+
     
     
     ofBackground(30);
     ofEnableDepthTest();
-    
    
     //--------------------------------------- line
     lineFbo.begin();
+        cam.begin();
         ofClear(0,0,0,255);
-    
-        ofPushMatrix();
-        ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
-    
-    
-    
+        ofScale(1,-1,1);
+
+//        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
         // sphere
-    
         material.begin();
         ofNoFill();
         ofSetColor(255);
@@ -107,22 +103,15 @@ void testApp::draw(){
         texture.getTextureReference().unbind();
         material.end();
     
-    
-        ofPopMatrix();
-    
-
-    
         //mat.translate(ofGetWidth()/2, ofGetHeight()/2,0);
-        mat.rotate(ofGetFrameNum()/2, 0,1,0);
-    
+        //mat.rotate(ofGetFrameNum()/2, 0,1,0);
 
-    
         for (int i = 0; i < lines.size(); i++){
             
             ofPolyline temp;
             temp = lines[i].PolyLine;
             for (int j = 0; j < temp.size(); j++){
-                temp[j] = temp[j] * mat + ofPoint(ofGetWidth()/2, ofGetHeight()/2);
+                temp[j] = temp[j] * mat;
                 //temp[j].z *= ofMap(mouseX, 0, ofGetWidth(), -3,3, true);
             }
             ofNoFill();
@@ -130,6 +119,7 @@ void testApp::draw(){
             ofSetLineWidth(1);
             temp.draw();
         }
+        cam.end();
     
         ofPushMatrix();
         ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
@@ -139,11 +129,15 @@ void testApp::draw(){
         ofSetLineWidth(ofRandom(3,4));
         ofCircle(0,0, earthSize+12);
         ofPopMatrix();
+
     lineFbo.end();
     
     
     // --------------------------------------- shader
+   
     ofDisableDepthTest();
+    
+    
     shader.begin();
     
     shader.setUniformTexture("tex0",lineFbo, 0 );
@@ -152,9 +146,11 @@ void testApp::draw(){
     ofSetColor(255);
     lineFbo.draw(0,0);
     shader.end();
+   
     
     ofSetColor(255);
     bot_banner.draw(0, 410);
+    
 }
 
 //--------------------------------------------------------------

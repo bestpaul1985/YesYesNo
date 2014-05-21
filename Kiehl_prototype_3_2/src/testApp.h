@@ -40,4 +40,8 @@ class testApp : public ofBaseApp{
         ofFbo       lineFbo;
         ofImage     rockImage;
         ofShader    shader;
+    
+        ofEasyCam cam;
+    
+    
 };
