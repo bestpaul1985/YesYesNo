@@ -15,4 +15,5 @@ void main(void)
     vec4 color2 = texture2DRect(tex0, st2);
     
 	gl_FragColor = vec4(color2.x, color2.y, color2.z, 1.0);
+    
 }

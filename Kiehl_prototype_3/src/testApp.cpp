@@ -73,45 +73,76 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+   
+    
+    
+    ofMatrix4x4 mat;
+    mat = ofMatrix4x4::newIdentityMatrix();
+    
+    
+    
     ofBackground(30);
     ofEnableDepthTest();
     
    
-    
+    //--------------------------------------- line
     lineFbo.begin();
-    ofClear(0,0,0,255);
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofRotate(ofGetFrameNum()/2, 0, 1, 0);
-   
-    material.begin();
-    ofNoFill();
-    ofSetColor(255);
-    texture.getTextureReference().bind();
-    ofFill();
-    ofSetColor(255);
-    sphere.draw();
-    texture.getTextureReference().unbind();
-    material.end();
-
-    for (int i = 0; i < lines.size(); i++){
+        ofClear(0,0,0,255);
+    
+        ofPushMatrix();
+        ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
+    
+    
+    
+        // sphere
+    
+        material.begin();
         ofNoFill();
         ofSetColor(255);
-        ofSetLineWidth(1);
-        lines[i].draw();
-    }
-    ofPopMatrix();
+        texture.getTextureReference().bind();
+        ofFill();
+        ofSetColor(255);
+        sphere.draw();
+        texture.getTextureReference().unbind();
+        material.end();
     
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofRotateZ(ofGetFrameNum()/2);
-    ofNoFill();
-    ofSetColor(200);
-    ofSetLineWidth(ofRandom(3,4));
-    ofCircle(0,0, earthSize+12);
-    ofPopMatrix();
     
+        ofPopMatrix();
+    
+
+    
+        //mat.translate(ofGetWidth()/2, ofGetHeight()/2,0);
+        mat.rotate(ofGetFrameNum()/2, 0,1,0);
+    
+
+    
+        for (int i = 0; i < lines.size(); i++){
+            
+            ofPolyline temp;
+            temp = lines[i].PolyLine;
+            for (int j = 0; j < temp.size(); j++){
+                temp[j] = temp[j] * mat + ofPoint(ofGetWidth()/2, ofGetHeight()/2);
+                //temp[j].z *= ofMap(mouseX, 0, ofGetWidth(), -3,3, true);
+            }
+            ofNoFill();
+            ofSetColor(255);
+            ofSetLineWidth(1);
+            temp.draw();
+        }
+    
+        ofPushMatrix();
+        ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+        ofRotateZ(ofGetFrameNum()/2);
+        ofNoFill();
+        ofSetColor(200);
+        ofSetLineWidth(ofRandom(3,4));
+        ofCircle(0,0, earthSize+12);
+        ofPopMatrix();
     lineFbo.end();
+    
+    
+    // --------------------------------------- shader
     ofDisableDepthTest();
     shader.begin();
     
