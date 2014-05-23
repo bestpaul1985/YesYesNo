@@ -105,7 +105,7 @@ void testApp::draw(){
     sphere.draw();
     texture.getTextureReference().unbind();
     material.end();
-//        ofRotate(ofGetFrameNum()/2, 0, 1, 0);
+//  ofRotate(ofGetFrameNum()/2, 0, 1, 0);
         // sphere
     
 //        mat.translate(ofGetWidth()/2, ofGetHeight()/2,0);
