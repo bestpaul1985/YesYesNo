@@ -79,7 +79,6 @@ void testApp::draw(){
     tex.draw(0, 1080, 1920, -1080);
     ofPopMatrix();
     
-    
     foreground[setNum].draw(0,0,1080,1920);
 
 }
