@@ -3,9 +3,11 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
-    screenHeight   = 1080;
-    screenWidth     =  1920;
+    screenWidth   =   1080;
+    screenHeight  =   1920;
     
+    myFbo.allocate(screenWidth, screenHeight, GL_RGBA, 4);
+
     yaml.load("camera_settings.yml");
     
     int cameraToUse;
@@ -51,6 +53,8 @@ void testApp::setup(){
         }
     }
     
+     //shader
+    loadShader();
 }
 
 //--------------------------------------------------------------
@@ -69,17 +73,29 @@ void testApp::update(){
 void testApp::draw(){
 
     
-    
     ofBackground(0);
     ofSetColor(255);
     
-    ofPushMatrix();
-    ofTranslate(1080,0);
-    ofRotateZ(90);
-    tex.draw(0, 1080, 1920, -1080);
-    ofPopMatrix();
+    myFbo.begin();
+        ofClear(0,0,0,255);
+        ofPushMatrix();
+        ofTranslate(1080,0);
+        ofRotateZ(90);
+        tex.draw(0, 1080, 1920, -1080);
+        ofPopMatrix();
+    myFbo.end();
     
-    foreground[setNum].draw(0,0,1080,1920);
+    
+    
+    shader.begin();
+        shader.setUniform2f("mouse", mouseX, mouseY);
+        ofSetColor(255);
+        myFbo.draw(0, 0);
+    shader.end();
+    
+    
+    
+    foreground[setNum].draw(0,0,screenWidth,screenHeight);
 
 }
 
@@ -88,10 +104,15 @@ void testApp::exit(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
+    
+    if (key == 'S'){
+        loadShader();
+    }
     if (key == 'z'){
         
         ofSaveScreen(ofGetTimestampString() + ".png");
-        
+        shader.setUniform2f("mouse", mouseX - ofGetWidth()/2, ofGetHeight()/2-mouseY );
+
     }
     
     if (key  =='s'){
@@ -162,4 +183,22 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+//--------------------------------------------------------------
+void testApp::loadShader(){
+    
+    #ifdef TARGET_OPENGLES
+        shader.load("shaders_gles/noise.vert","shaders_gles/noise.frag");
+    #else
+        if(ofGetGLProgrammableRenderer()){
+            shader.load("shaders_gl3/noise.vert", "shaders_gl3/noise.frag");
+        }else{
+            shader.load("shaders/noise.vert", "shaders/noise.frag");
+        }
+    #endif
+    
+    mask.loadImage("img_mask.png");
+
+    
 }

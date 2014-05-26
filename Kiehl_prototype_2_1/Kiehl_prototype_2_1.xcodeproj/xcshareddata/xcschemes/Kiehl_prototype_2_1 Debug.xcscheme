@@ -14,9 +14,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "example-ofxUVC.app"
-               BlueprintName = "example-ofxUVC"
-               ReferencedContainer = "container:example-ofxUVC.xcodeproj">
+               BuildableName = "Kiehl_prototype_2_1.app"
+               BlueprintName = "Kiehl_prototype_2_1"
+               ReferencedContainer = "container:Kiehl_prototype_2_1.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,9 +32,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example-ofxUVC.app"
-            BlueprintName = "example-ofxUVC"
-            ReferencedContainer = "container:example-ofxUVC.xcodeproj">
+            BuildableName = "Kiehl_prototype_2_1.app"
+            BlueprintName = "Kiehl_prototype_2_1"
+            ReferencedContainer = "container:Kiehl_prototype_2_1.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,9 +51,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example-ofxUVC.app"
-            BlueprintName = "example-ofxUVC"
-            ReferencedContainer = "container:example-ofxUVC.xcodeproj">
+            BuildableName = "Kiehl_prototype_2_1.app"
+            BlueprintName = "Kiehl_prototype_2_1"
+            ReferencedContainer = "container:Kiehl_prototype_2_1.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "example-ofxUVC.app"
-            BlueprintName = "example-ofxUVC"
-            ReferencedContainer = "container:example-ofxUVC.xcodeproj">
+            BuildableName = "Kiehl_prototype_2_1.app"
+            BlueprintName = "Kiehl_prototype_2_1"
+            ReferencedContainer = "container:Kiehl_prototype_2_1.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

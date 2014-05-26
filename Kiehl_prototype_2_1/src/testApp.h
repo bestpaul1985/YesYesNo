@@ -34,7 +34,9 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void exit();
+        void exit();
+        void loadShader();
+
     
     ofQTKitGrabber	vidGrabber;
 
@@ -53,4 +55,9 @@ class testApp : public ofBaseApp{
     
     vector<ofImage>  foreground;
     int setNum;
+    
+    ofShader shader;
+    ofFbo myFbo;
+    ofImage mask;
+    
 };
