@@ -59,5 +59,5 @@ class testApp : public ofBaseApp{
     ofShader shader;
     ofFbo myFbo;
     ofImage mask;
-    
+    bool bShader;
 };

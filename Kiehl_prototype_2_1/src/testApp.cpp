@@ -38,7 +38,7 @@ void testApp::setup(){
     focus = 0.5;
     
     uvcControl.useCamera(vendorId, productId, interfaceNum);
-    uvcControl.setAutoExposure(false);
+    uvcControl.setAutoExposure(true);
     controls = uvcControl.getCameraControls();
     
     //images
@@ -55,6 +55,7 @@ void testApp::setup(){
     
      //shader
     loadShader();
+    bShader = false;
 }
 
 //--------------------------------------------------------------
@@ -87,11 +88,11 @@ void testApp::draw(){
     
     
     
-    shader.begin();
-        shader.setUniform2f("mouse", mouseX, mouseY);
+    if(bShader) shader.begin();
+        if(bShader)shader.setUniform2f("mouse", mouseX, mouseY);
         ofSetColor(255);
         myFbo.draw(0, 0);
-    shader.end();
+    if(bShader) shader.end();
     
     
     
@@ -142,6 +143,11 @@ void testApp::keyPressed(int key){
     if (key == ' ' ) {
         setNum ++;
         if (setNum>foreground.size()-1) setNum = 0;
+        if (setNum >= 3) {
+            bShader = true;
+        }else{
+            bShader = false;
+        }
     }
 }
 
