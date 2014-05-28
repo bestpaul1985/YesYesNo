@@ -1,8 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
+#include "picture.h"
+#include "ofEvents.h"
 
-class ofApp : public ofBaseApp{
+class testApp : public ofBaseApp{
 
 	public:
 		void setup();
@@ -19,5 +21,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
-    int height, width;
+        int height, width;
+    
+        vector<picture> pics;
 };
