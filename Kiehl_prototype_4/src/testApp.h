@@ -20,10 +20,11 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+        void loadPicture();
+    
         int height, width;
     
         vector<picture> pics;
         vector <ofImage> images;
-
+        ofImage shadow, banner;
 };

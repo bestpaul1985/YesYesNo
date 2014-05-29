@@ -3,63 +3,78 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
-    ofBackground(60);
+    ofBackground(230);
 
     height = 1920/2;
     width = 1080/2;
     
-    int rowNum = 5;
-    int offSet = 2;
-    int imgW = (ofGetWidth() - offSet*(rowNum-1))/rowNum;
-    int imgH = imgW/3*4;
+    loadPicture();
 
-//    for (int i=0; i<num; i++) {
-//        for (int j=0; j<10; j++) {
-//            picture temp;
-//            temp.init(5*i+picW*i,5*j+picH*j, picW, picH);
-//            pics.push_back(temp);
-//        }
-//    }
-    
-    ofDirectory dir;
-    
-    int nFiles = dir.listDir("image");
-    if(nFiles) {
-        
-        for(int i=0; i<dir.numFiles(); i++) {
+    int num = 5;
+    int offSet = 1;
+    int imgW = 156/2;
+    int imgH = 186/2;
+
+    //----------------------------------SETUP PIC
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<10; j++) {
+            picture temp;
+            pics.push_back(temp);
+            pics[pics.size()-1].init(offSet*i+imgW*i,banner.height/2+offSet*j+imgH*j, imgW, imgH);
+            pics[pics.size()-1].shadow = &shadow;
+            pics[pics.size()-1].picture = &images[ofRandom(0,images.size())];
             
-            // add the image to the vector
-            string filePath = dir.getPath(i);
-            images.push_back(ofImage());
-            images.back().loadImage(filePath);
-            
-        }
-        
-    }
-    
-    int size = images.size()%rowNum;
-    for (int i=0; i<rowNum; i++) {
-        for (int j=0; j<size; i++) {
-            
-            
-            
+            cout<<ofRandom(0,images.size())<<endl;
+
         }
     }
+    
     
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+    
+    bool bPhotoSelected = false;
+    for (int i=0; i<pics.size(); i++) {
+        if (pics[i].bSelected) {
+            bPhotoSelected = true;
+            picture temp;
+            temp = pics[i];
+            pics.erase(pics.begin()+i);
+            pics.insert(pics.begin(), temp);
+            for (int j=0; j<pics.size(); j++) {
+                if (j != i) {
+                    pics[j].bFixed = true;
+                }
+            }
+            break;
+        }
+    }
+    
+    if (!bPhotoSelected) {
+        for (int j=0; j<pics.size(); j++) {
+            pics[j].bFixed = false;
+        }
+    }
+    
    
+    for (int i=pics.size()-1; i>=0; i--) {
+        pics[i].update();
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    for (int i=0; i<pics.size(); i++) {
+    for (int i=pics.size()-1; i>=0; i--) {
         pics[i].draw();
     }
+    
+    ofSetColor(255);
+    banner.draw(0, 0, banner.width/2,banner.height/2);
     
 }
 
@@ -117,3 +132,34 @@ void testApp::gotMessage(ofMessage msg){
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
 }
+
+//--------------------------------------------------------------
+void testApp::loadPicture(){
+    
+    shadow.loadImage("shadow.png");
+    banner.loadImage("banner.png");
+    
+    ofDirectory dir;
+    int nFiles = dir.listDir("image");
+    if(nFiles) {
+        for(int i=0; i<dir.numFiles(); i++) {
+            string filePath = dir.getPath(i);
+            images.push_back(ofImage());
+            images.back().loadImage(filePath);
+        }
+        
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,13 +16,27 @@ class picture{
 public:
     void init(int x, int y, int w, int h);
     void draw();
+    void update();
+
     void mousePressed(int x, int y);
     void mouseReleased(int x, int y);
     void mouseMoved(int x, int y);
 
 
-    ofColor color;
-    ofRectangle rect;
+    int frameW, frameH,curFrameW,curFrameH;
+    int offSet, curOffSet;
+    int shaW, shaH, curShaW, curShaH;
+    ofColor frameColor;
+    ofColor picColor;
+    ofColor darker;
+
+    ofPoint center,currentCenter, screenCenter;
+    float speed,pct;
+    
+    ofRectangle frame,pic;
+    ofImage *shadow;
+    ofImage *picture;
+    bool bSelected, bFixed;
     
 };
 
