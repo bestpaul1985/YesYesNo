@@ -24,4 +24,6 @@ class testApp : public ofBaseApp{
         int height, width;
     
         vector<picture> pics;
+        vector <ofImage> images;
+
 };

@@ -8,18 +8,44 @@ void testApp::setup(){
     height = 1920/2;
     width = 1080/2;
     
-    int num = 5;
-    int offSet = 5;
-    int picW = (ofGetWidth() - offSet*(num-1))/num;
-    int picH = picW/3*4;
+    int rowNum = 5;
+    int offSet = 2;
+    int imgW = (ofGetWidth() - offSet*(rowNum-1))/rowNum;
+    int imgH = imgW/3*4;
 
-    for (int i=0; i<num; i++) {
-        for (int j=0; j<10; j++) {
-            picture temp;
-            temp.init(5*i+picW*i,5*j+picH*j, picW, picH);
-            pics.push_back(temp);
+//    for (int i=0; i<num; i++) {
+//        for (int j=0; j<10; j++) {
+//            picture temp;
+//            temp.init(5*i+picW*i,5*j+picH*j, picW, picH);
+//            pics.push_back(temp);
+//        }
+//    }
+    
+    ofDirectory dir;
+    
+    int nFiles = dir.listDir("image");
+    if(nFiles) {
+        
+        for(int i=0; i<dir.numFiles(); i++) {
+            
+            // add the image to the vector
+            string filePath = dir.getPath(i);
+            images.push_back(ofImage());
+            images.back().loadImage(filePath);
+            
+        }
+        
+    }
+    
+    int size = images.size()%rowNum;
+    for (int i=0; i<rowNum; i++) {
+        for (int j=0; j<size; i++) {
+            
+            
+            
         }
     }
+    
 }
 
 //--------------------------------------------------------------
