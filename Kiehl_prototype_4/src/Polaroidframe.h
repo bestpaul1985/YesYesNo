@@ -8,17 +8,22 @@
 
 #ifndef __Kiehl_prototype_4__Polaroidframe__
 #define __Kiehl_prototype_4__Polaroidframe__
-enum FRAME_STYLE{
-    NO_FRAME_1,
-    NO_FRAME_2,
-    FRAME_1,
-    FRAME_2,
-    POLAROID
-};
+
 
 #include "ofMain.h"
 class Polaroidframe{
+    
+  
 public:
+    
+    enum FRAME_STYLE{
+        NO_FRAME_1,
+        NO_FRAME_2,
+        FRAME,
+        POLAROID
+    };
+    
+    
     Polaroidframe();
     void init(int x, int y, int W);
     void loadPic(ofImage &IMG);
@@ -29,28 +34,30 @@ public:
     void loadFont(ofTrueTypeFont &Font);
     void enableBottomBanner();
     void enableFrame();
-    void loadShadow(vector<ofImage> imgs);
-    void setStyle(FRAME_STYLE style);
+    void loadShadow(ofImage &shadow);
+    void setStyle(FRAME_STYLE Style);
     void setLevel(int Level);
     void setWidth(int W);
     
     ofPoint getPos();
     int getLevel();
-    int getWidth();
+    float getWidth();
+    int getAngle();
+    int getStyle();
     
     string picName;
     string cityName;
-    
+        
 private:
     
-    int w,h;
+    float w,h;
+    
     float scale;
 
     void drawFrames();
     void drawPic();
     void drawBottomBanner();
-
-    FRAME_STYLE style;
+    void drawShadow();
 
     ofImage *img;
     ofTrueTypeFont *font;
@@ -59,6 +66,7 @@ private:
 
     ofRectangle frame;
     ofRectangle pic;
+    ofRectangle shadowRect;
     
     int angle;
     int offSet;
@@ -75,6 +83,7 @@ private:
     
     vector<ofImage*> shadows;
 
+    int style;
 
 };
 

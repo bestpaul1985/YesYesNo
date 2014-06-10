@@ -16,6 +16,7 @@ Polaroidframe::Polaroidframe(){
     picName = "picName";
     cityName = "cityName";
     scale = 0.75;
+    w = 0;
 }
 //-------------------------------------------------------------
 void Polaroidframe::init(int x, int y, int W){
@@ -29,7 +30,7 @@ void Polaroidframe::init(int x, int y, int W){
 void Polaroidframe::update(){
     
     h = w*scale;
-
+    
     if (bFrame) {
         offSet = w/15;
         imgW = w - offSet*2;
@@ -40,12 +41,11 @@ void Polaroidframe::update(){
     }
     
     if (bBottomBanner) {
-        fontScale = ofMap(w, 0, 300, 0, 0.25);
-        h = h*1.10;
+        fontScale = ofMap(w, 0, 300, 0, 0.30);
+        h = h*1.20;
     }
     
-    
-    cout<<w<<"  "<<h<<endl;
+ 
 }
 //-------------------------------------------------------------
 void Polaroidframe::draw(){
@@ -54,7 +54,10 @@ void Polaroidframe::draw(){
     if (bFrame) drawFrames();
     if (bBottomBanner) drawBottomBanner();
     drawPic();
+    drawShadow();
     ofPopMatrix();
+    
+   
     
 }
 //-------------------------------------------------------------
@@ -70,6 +73,29 @@ void Polaroidframe::drawFrames(){
         ofRect(frame);
     }
     ofPopMatrix();
+    
+}
+
+//-------------------------------------------------------------
+void Polaroidframe::drawShadow(){
+
+    if (shadows.size()>0) {
+        
+        ofPushMatrix();
+        ofTranslate(pos);
+        ofRotateZ(angle);
+        if (POLAROID) {
+            float sw = w*1.02;
+            float sh = ofMap(sw, 0, shadows[0]->getWidth(), 0,  shadows[0]->getHeight())*1.17;
+            shadowRect.setFromCenter(0,0, sw, sh);
+            ofSetColor(255);
+            shadows[0]->draw(shadowRect);
+        }
+        ofPopMatrix();
+
+        
+    }
+   
     
 }
 
@@ -93,6 +119,8 @@ void Polaroidframe::drawPic(){
         ofRectangle(pic);
     }
     ofPopMatrix();
+    
+    
 }
 
 //-------------------------------------------------------------
@@ -141,23 +169,37 @@ void Polaroidframe::setAngle(int degree){
     angle = degree;
 }
 //-------------------------------------------------------------
-void Polaroidframe::setStyle(FRAME_STYLE style){
+void Polaroidframe::setStyle(FRAME_STYLE Style){
+    
+    style = Style;
     
     switch (style) {
         case NO_FRAME_1:{
-            scale = 0.63;
+    
+            scale = 10.0/7.0;
+            bFrame = false;
+            bBottomBanner = false;
+        }
+            break;
+            
+        case NO_FRAME_2:{
+            scale = 7.0/10.0;
+            bFrame = false;
+            bBottomBanner = false;
         }
             break;
         
-        case FRAME_1:{
-            scale = 1.33;
-            enableFrame();
+        case FRAME:{
+            scale = 3.0/2.0;
+            bFrame = true;
+            bBottomBanner = false;
+            
         }break;
             
         case POLAROID:{
-            scale = 1.4;
-            enableFrame();
-            enableBottomBanner();
+            scale = 11.0/10.0;
+            bFrame = true;
+            bBottomBanner = true;
         }break;
     }
 }
@@ -171,7 +213,7 @@ void Polaroidframe::setLevel(int Level){
 void Polaroidframe::setWidth(int W){
     
     w = W;
-    
+   
 }
 
 
@@ -192,12 +234,22 @@ ofPoint Polaroidframe::getPos(){
 }
 
 //-------------------------------------------------------------
-int Polaroidframe::getWidth(){
-    
+float Polaroidframe::getWidth(){
     return w;
-    
 }
 
+//-------------------------------------------------------------
+int Polaroidframe::getAngle(){
+    
+    return angle;
+    
+}
+//-------------------------------------------------------------
+int Polaroidframe::getStyle(){
+    
+    return style;
+    
+}
 
 /**************************************************************
  LODING
@@ -217,11 +269,10 @@ void Polaroidframe::loadFont(ofTrueTypeFont &Font){
 }
 
 //-------------------------------------------------------------
-void Polaroidframe::loadShadow(vector<ofImage> imgs){
+void Polaroidframe::loadShadow(ofImage &imgs){
 
-    for (int i=0; i<imgs.size(); i++) {
-        shadows.push_back(&imgs[i]);
-    }
+    shadows.push_back(&imgs);
+    
 }
 
 

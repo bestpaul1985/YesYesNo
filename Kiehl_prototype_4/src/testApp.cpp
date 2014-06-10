@@ -8,35 +8,57 @@ void testApp::setup(){
     loadPicture();
     font.loadFont("font/GillSans.ttc", 72, true, false, true, 0.1);
     
+    
     XML.load("mySettings.xml");
-  
+   
+    cout<<XML.getName()<<endl;
     
-        if(XML.getName() == "PHOTO" && XML.setTo("val[0]"))
-        {
-            do {
-                Polaroidframe  photo;
-                frames.push_back(photo);
-                frames.back().init(XML.getValue<int>("X"),XML.getValue<int>("Y"), XML.getValue<int>("W"));
-                frames.back().loadPic(images[1]);
-                frames.back().setAngle(0);
-                frames.back().loadFont(font);
-                frames.back().picName = "Puppy";
-                frames.back().cityName = "New York";
-                frames.back().setLevel(XML.getValue<int>("L"));
-                frames.back().setStyle(POLAROID);
+    if(XML.getName() == "PHOTO" && XML.setTo("val[0]"))
+    {
+        
+        do {
+            Polaroidframe  photo;
+            frames.push_back(photo);
+            int x = int(XML.getValue<float>("X")*ofGetWidth());
+            int y = int(XML.getValue<float>("Y")*ofGetHeight());
+            float w = float(XML.getValue<float>("W")*ofGetWidth());
+            
+            frames.back().init(x,y,w);
+            frames.back().loadPic(images[1]);
+            frames.back().setAngle(XML.getValue<int>("A"));
+            frames.back().loadFont(font);
+            frames.back().picName = "Puppy";
+            frames.back().cityName = "New York";
+            frames.back().setLevel(XML.getValue<int>("L"));
+            if (XML.getValue<int>("S") == 0) {
+                frames.back().setStyle(Polaroidframe::NO_FRAME_1);
+            }else if (XML.getValue<int>("S") == 1) {
+                frames.back().setStyle(Polaroidframe::NO_FRAME_2);
+            }else if (XML.getValue<int>("S") == 2) {
+                frames.back().setStyle(Polaroidframe::FRAME);
+            }else if (XML.getValue<int>("S") == 3) {
+                frames.back().setStyle(Polaroidframe::POLAROID);
             }
-            while(XML.setToSibling());
-            XML.setToParent();
+            
+            cout<<"1"<<endl;
         }
-    
-    cout<<frames.size()<<endl;
+        while(XML.setToSibling());
+        XML.setToParent();
+    }
 
+    Angle =0;
+    w = 0;
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
+    if (frames.size()>0) {
+        frames.back().setPos(mouseX, mouseY);
+        frames.back().setAngle(Angle);
+        frames.back().setWidth(w);
+    }
     
     for (int i=0; i<frames.size();i++){
         frames[i].update();
@@ -49,38 +71,123 @@ void testApp::draw(){
     
     
     for (int i=0; i<frames.size();i++){
-        frames[i].draw();
+            frames[i].draw();
     }
+    cout<<frames.size()<<endl;
+    
     ofSetColor(255);
     banner.draw(0, 0, banner.width/2,banner.height/2);
-    
+
+    if (frames.size()>0) {
+        string info =  "INFO : \n";
+        info += "width = "+ ofToString(frames.back().getWidth())+"\n";
+        info += "Level = "+ ofToString(frames.back().getLevel())+"\n";
+        info += "Angle = "+ ofToString(frames.back().getAngle())+"\n";
+        info += "Style = "+ ofToString(frames.back().getStyle())+"\n";
+        ofDrawBitmapString(info, 20,20);
+    }
     
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
    
-    if(key == 's')
+    if(key == 'p')
     {
-       
-//        XML.clear();
-//        XML.addChild("PHOTO");
-        XML.reset();
-        ofXml point;
-        point.addChild("val");
-        point.setTo("val");
+        XML.clear();
+        XML.addChild("PHOTO");
+        for (int i=0; i<frames.size(); i++) {
+            XML.reset();
+            ofXml point;
+            point.addChild("val");
+            point.setTo("val");
+            point.addValue("X", frames[i].getPos().x/ofGetWidth());
+            point.addValue("Y", frames[i].getPos().y/ofGetHeight());
+            point.addValue("W", frames[i].getWidth()/ofGetWidth());
+            point.addValue("L", frames[i].getLevel());
+            point.addValue("A", frames[i].getAngle());
+            point.addValue("S", frames[i].getStyle());
+            XML.addXml(point);
+        }
         
-        point.addValue("X", frame.getPos().x);
-        point.addValue("Y", frame.getPos().y);
-        point.addValue("W", frame.getWidth());
-        point.addValue("L", frame.getLevel());
-        
-        XML.addXml(point);
         
         XML.save("mySettings.xml");
         cout<< "settings saved to xml!" <<endl;
     }
     
+    
+    if(key == 't')
+    {
+        int x = 100;
+        int y = 200;
+        if(frames.size()>0){
+            w = frames.back().getWidth();
+        }
+        else{
+            w = 160;
+        }
+    
+        Polaroidframe  photo;
+        frames.push_back(photo);
+        frames.back().init(x,y,w);
+        frames.back().loadPic(images[1]);
+        frames.back().loadFont(font);
+        frames.back().loadShadow(shadows[0]);
+
+        frames.back().setAngle(0);
+        frames.back().picName = "Puppy";
+        frames.back().cityName = "New York";
+        frames.back().setLevel(0);
+        frames.back().setStyle(Polaroidframe::POLAROID);
+    }
+    
+    if (frames.size()>0) {
+        if (key == 'a') {
+            
+            Angle --;
+        }
+        
+        if (key == 'd') {
+            
+            Angle ++;
+        }
+        
+        
+        if (key == 's') {
+            
+            w -=10;
+        }
+        
+        if (key == 'w') {
+            
+            w +=10;
+        }
+        
+        if (key == '1') {
+            
+            frames.back().setStyle(Polaroidframe::NO_FRAME_1);
+            
+        }
+        
+        if (key == '2') {
+            
+            frames.back().setStyle(Polaroidframe::NO_FRAME_2);
+            
+        }
+        
+        if (key == '3') {
+            
+            frames.back().setStyle(Polaroidframe::FRAME);
+            
+        }
+        
+        if (key == '4') {
+            
+            frames.back().setStyle(Polaroidframe::POLAROID);
+            
+        }
+
+    }
 }
 
 //--------------------------------------------------------------
@@ -128,7 +235,6 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::loadPicture(){
     
-    shadow.loadImage("image/shadow.png");
     banner.loadImage("image/banner.png");
     
     ofDirectory dir;
@@ -141,34 +247,26 @@ void testApp::loadPicture(){
         }
         
     }
+    
+    nFiles = dir.listDir("image/shadows");
+    if(nFiles) {
+        for(int i=0; i<dir.numFiles(); i++) {
+            string filePath = dir.getPath(i);
+            shadows.push_back(ofImage());
+            shadows.back().loadImage(filePath);
+        }
+    }
 
+    
 }
 
 //--------------------------------------------------------------
-void testApp::setupPicture(){
+void testApp::sortPicture(){
 
-    int num = 5;
-    int offSet = 1;
-    int imgW = 156/2;
-    int imgH = 186/2;
-    
-    for (int i=0; i<8; i++) {
-        for (int j=0; j<10; j++) {
-            picture temp;
-            pics.push_back(temp);
-            pics[pics.size()-1].init(offSet*i+imgW*i,banner.height/2+offSet*j+imgH*j, imgW, imgH, 0);
-            pics[pics.size()-1].shadow = &shadow;
-            pics[pics.size()-1].picture = &images[ofRandom(0,images.size())];
-            
-//            cout<<ofRandom(0,images.size())<<endl;
-            
-        }
-    }
     
     
-
+    
 }
-
 
 
 

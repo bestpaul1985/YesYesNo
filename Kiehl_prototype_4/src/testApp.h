@@ -1,10 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "picture.h"
 #include "ofEvents.h"
 #include "Polaroidframe.h"
-
 
 class testApp : public ofBaseApp{
 
@@ -23,20 +21,21 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         void loadPicture();
+        void loadShadows();
         void setupPicture();
+        void sortPicture();
     
-    
-        vector<picture> pics;
         vector <ofImage> images;
-    
+        vector <ofImage> shadows;
+
         ofImage shadow;
         ofImage banner;
-    
-        Polaroidframe frame;
         ofTrueTypeFont font;
     
         vector<Polaroidframe> frames;
     
         ofXml XML;
-    
+        int Angle;
+        int w ;
+            
 };
