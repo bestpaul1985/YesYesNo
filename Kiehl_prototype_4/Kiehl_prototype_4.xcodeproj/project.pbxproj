@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
-		D1395DD979998DCFFA40ACAC /* ofxMSAInteractiveObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE0949C9F18BE455D5E6CD10 /* ofxMSAInteractiveObject.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
 		E45BE97C0E8CC7DD009D7055 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */; };
@@ -28,7 +27,11 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
-		F930FF6C193523BC007E315D /* picture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F930FF6A193523BC007E315D /* picture.cpp */; };
+		F9393D07194692C900F7B2F6 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9393D00194692C900F7B2F6 /* tinyxml.cpp */; };
+		F9393D08194692C900F7B2F6 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9393D02194692C900F7B2F6 /* tinyxmlerror.cpp */; };
+		F9393D09194692C900F7B2F6 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9393D03194692C900F7B2F6 /* tinyxmlparser.cpp */; };
+		F9393D0A194692C900F7B2F6 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9393D05194692C900F7B2F6 /* ofxXmlSettings.cpp */; };
+		F97417841945F792009527DA /* Polaroidframe.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97417821945F792009527DA /* Polaroidframe.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,9 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4A2C7833E609686E9ECD8A8C /* ofxMSAInteractiveObject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMSAInteractiveObject.h; path = ../../../addons/ofxMSAInteractiveObject/src/ofxMSAInteractiveObject.h; sourceTree = SOURCE_ROOT; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
-		CE0949C9F18BE455D5E6CD10 /* ofxMSAInteractiveObject.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxMSAInteractiveObject.cpp; path = ../../../addons/ofxMSAInteractiveObject/src/ofxMSAInteractiveObject.cpp; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -88,8 +89,14 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
-		F930FF6A193523BC007E315D /* picture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = picture.cpp; sourceTree = "<group>"; };
-		F930FF6B193523BC007E315D /* picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = picture.h; sourceTree = "<group>"; };
+		F9393D00194692C900F7B2F6 /* tinyxml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		F9393D01194692C900F7B2F6 /* tinyxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		F9393D02194692C900F7B2F6 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		F9393D03194692C900F7B2F6 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		F9393D05194692C900F7B2F6 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		F9393D06194692C900F7B2F6 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		F97417821945F792009527DA /* Polaroidframe.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Polaroidframe.cpp; sourceTree = "<group>"; };
+		F97417831945F792009527DA /* Polaroidframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Polaroidframe.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,27 +127,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		082C54A9DF8AC3F426D5FFF4 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				CE0949C9F18BE455D5E6CD10 /* ofxMSAInteractiveObject.cpp */,
-				4A2C7833E609686E9ECD8A8C /* ofxMSAInteractiveObject.h */,
-			);
-			name = src;
-			sourceTree = "<group>";
-		};
-		734AC65571ADBB395C126C1A /* ofxMSAInteractiveObject */ = {
-			isa = PBXGroup;
-			children = (
-				082C54A9DF8AC3F426D5FFF4 /* src */,
-			);
-			name = ofxMSAInteractiveObject;
-			sourceTree = "<group>";
-		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				734AC65571ADBB395C126C1A /* ofxMSAInteractiveObject */,
+				F9393CFE194692C900F7B2F6 /* ofxXmlSettings */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -211,8 +201,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
-				F930FF6A193523BC007E315D /* picture.cpp */,
-				F930FF6B193523BC007E315D /* picture.h */,
+				F97417821945F792009527DA /* Polaroidframe.cpp */,
+				F97417831945F792009527DA /* Polaroidframe.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -224,6 +214,35 @@
 				E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */,
 			);
 			name = openFrameworks;
+			sourceTree = "<group>";
+		};
+		F9393CFE194692C900F7B2F6 /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				F9393CFF194692C900F7B2F6 /* libs */,
+				F9393D04194692C900F7B2F6 /* src */,
+			);
+			path = ofxXmlSettings;
+			sourceTree = "<group>";
+		};
+		F9393CFF194692C900F7B2F6 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				F9393D00194692C900F7B2F6 /* tinyxml.cpp */,
+				F9393D01194692C900F7B2F6 /* tinyxml.h */,
+				F9393D02194692C900F7B2F6 /* tinyxmlerror.cpp */,
+				F9393D03194692C900F7B2F6 /* tinyxmlparser.cpp */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		F9393D04194692C900F7B2F6 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F9393D05194692C900F7B2F6 /* ofxXmlSettings.cpp */,
+				F9393D06194692C900F7B2F6 /* ofxXmlSettings.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,10 +332,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F930FF6C193523BC007E315D /* picture.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				F9393D07194692C900F7B2F6 /* tinyxml.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
-				D1395DD979998DCFFA40ACAC /* ofxMSAInteractiveObject.cpp in Sources */,
+				F9393D08194692C900F7B2F6 /* tinyxmlerror.cpp in Sources */,
+				F9393D09194692C900F7B2F6 /* tinyxmlparser.cpp in Sources */,
+				F97417841945F792009527DA /* Polaroidframe.cpp in Sources */,
+				F9393D0A194692C900F7B2F6 /* ofxXmlSettings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

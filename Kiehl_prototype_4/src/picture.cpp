@@ -10,8 +10,10 @@
 
 
 //----------------------------------------------------------------
-void picture::init(int x, int y, int w, int h){
-
+void picture::init(int x, int y, int w, int h, int FrameNum){
+    
+    frameNum = FrameNum;
+    
     offSet = 8;
     curOffSet = offSet;
     
@@ -32,7 +34,7 @@ void picture::init(int x, int y, int w, int h){
     
     bSelected = false;
     bFixed = false;
-
+    
 }
 
 //----------------------------------------------------------------

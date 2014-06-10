@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "picture.h"
 #include "ofEvents.h"
+#include "Polaroidframe.h"
+
 
 class testApp : public ofBaseApp{
 
@@ -21,10 +23,20 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         void loadPicture();
+        void setupPicture();
     
-        int height, width;
     
         vector<picture> pics;
         vector <ofImage> images;
-        ofImage shadow, banner;
+    
+        ofImage shadow;
+        ofImage banner;
+    
+        Polaroidframe frame;
+        ofTrueTypeFont font;
+    
+        vector<Polaroidframe> frames;
+    
+        ofXml XML;
+    
 };

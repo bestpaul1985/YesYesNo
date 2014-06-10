@@ -4,32 +4,33 @@
 void testApp::setup(){
 
     ofBackground(230);
-
-    height = 1920/2;
-    width = 1080/2;
     
     loadPicture();
-
-    int num = 5;
-    int offSet = 1;
-    int imgW = 156/2;
-    int imgH = 186/2;
-
-    //----------------------------------SETUP PIC
-    for (int i=0; i<8; i++) {
-        for (int j=0; j<10; j++) {
-            picture temp;
-            pics.push_back(temp);
-            pics[pics.size()-1].init(offSet*i+imgW*i,banner.height/2+offSet*j+imgH*j, imgW, imgH);
-            pics[pics.size()-1].shadow = &shadow;
-            pics[pics.size()-1].picture = &images[ofRandom(0,images.size())];
-            
-            cout<<ofRandom(0,images.size())<<endl;
-
+    font.loadFont("font/GillSans.ttc", 72, true, false, true, 0.1);
+    
+    XML.load("mySettings.xml");
+  
+    
+        if(XML.getName() == "PHOTO" && XML.setTo("val[0]"))
+        {
+            do {
+                Polaroidframe  photo;
+                frames.push_back(photo);
+                frames.back().init(XML.getValue<int>("X"),XML.getValue<int>("Y"), XML.getValue<int>("W"));
+                frames.back().loadPic(images[1]);
+                frames.back().setAngle(0);
+                frames.back().loadFont(font);
+                frames.back().picName = "Puppy";
+                frames.back().cityName = "New York";
+                frames.back().setLevel(XML.getValue<int>("L"));
+                frames.back().setStyle(POLAROID);
+            }
+            while(XML.setToSibling());
+            XML.setToParent();
         }
-    }
     
-    
+    cout<<frames.size()<<endl;
+
 }
 
 //--------------------------------------------------------------
@@ -37,50 +38,48 @@ void testApp::update(){
 
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
-    bool bPhotoSelected = false;
-    for (int i=0; i<pics.size(); i++) {
-        if (pics[i].bSelected) {
-            bPhotoSelected = true;
-            picture temp;
-            temp = pics[i];
-            pics.erase(pics.begin()+i);
-            pics.insert(pics.begin(), temp);
-            for (int j=0; j<pics.size(); j++) {
-                if (j != i) {
-                    pics[j].bFixed = true;
-                }
-            }
-            break;
-        }
+    for (int i=0; i<frames.size();i++){
+        frames[i].update();
     }
     
-    if (!bPhotoSelected) {
-        for (int j=0; j<pics.size(); j++) {
-            pics[j].bFixed = false;
-        }
-    }
-    
-   
-    for (int i=pics.size()-1; i>=0; i--) {
-        pics[i].update();
-    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    for (int i=pics.size()-1; i>=0; i--) {
-        pics[i].draw();
-    }
     
+    for (int i=0; i<frames.size();i++){
+        frames[i].draw();
+    }
     ofSetColor(255);
     banner.draw(0, 0, banner.width/2,banner.height/2);
+    
     
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+   
+    if(key == 's')
+    {
+       
+//        XML.clear();
+//        XML.addChild("PHOTO");
+        XML.reset();
+        ofXml point;
+        point.addChild("val");
+        point.setTo("val");
+        
+        point.addValue("X", frame.getPos().x);
+        point.addValue("Y", frame.getPos().y);
+        point.addValue("W", frame.getWidth());
+        point.addValue("L", frame.getLevel());
+        
+        XML.addXml(point);
+        
+        XML.save("mySettings.xml");
+        cout<< "settings saved to xml!" <<endl;
+    }
     
 }
 
@@ -92,9 +91,7 @@ void testApp::keyReleased(int key){
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
    
-    for (int i=0; i<pics.size(); i++) {
-        pics[i].mouseMoved(x,y);
-    }
+   
 }
 
 //--------------------------------------------------------------
@@ -104,18 +101,13 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-    for (int i=0; i<pics.size(); i++) {
-        pics[i].mousePressed(x,y);
-    }
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
 
-    for (int i=0; i<pics.size(); i++) {
-        pics[i].mouseReleased(x,y);
-    }
-    
+
 }
 
 //--------------------------------------------------------------
@@ -136,11 +128,11 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::loadPicture(){
     
-    shadow.loadImage("shadow.png");
-    banner.loadImage("banner.png");
+    shadow.loadImage("image/shadow.png");
+    banner.loadImage("image/banner.png");
     
     ofDirectory dir;
-    int nFiles = dir.listDir("image");
+    int nFiles = dir.listDir("image/photos");
     if(nFiles) {
         for(int i=0; i<dir.numFiles(); i++) {
             string filePath = dir.getPath(i);
@@ -152,6 +144,30 @@ void testApp::loadPicture(){
 
 }
 
+//--------------------------------------------------------------
+void testApp::setupPicture(){
+
+    int num = 5;
+    int offSet = 1;
+    int imgW = 156/2;
+    int imgH = 186/2;
+    
+    for (int i=0; i<8; i++) {
+        for (int j=0; j<10; j++) {
+            picture temp;
+            pics.push_back(temp);
+            pics[pics.size()-1].init(offSet*i+imgW*i,banner.height/2+offSet*j+imgH*j, imgW, imgH, 0);
+            pics[pics.size()-1].shadow = &shadow;
+            pics[pics.size()-1].picture = &images[ofRandom(0,images.size())];
+            
+//            cout<<ofRandom(0,images.size())<<endl;
+            
+        }
+    }
+    
+    
+
+}
 
 
 
