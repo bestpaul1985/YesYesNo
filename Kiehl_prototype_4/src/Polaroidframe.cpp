@@ -84,7 +84,7 @@ void Polaroidframe::drawShadow(){
         ofPushMatrix();
         ofTranslate(pos);
         ofRotateZ(angle);
-        if (POLAROID) {
+        if (style == POLAROID) {
             float sw = w*1.02;
             float sh = ofMap(sw, 0, shadows[0]->getWidth(), 0,  shadows[0]->getHeight())*1.17;
             shadowRect.setFromCenter(0,0, sw, sh);
@@ -93,7 +93,6 @@ void Polaroidframe::drawShadow(){
         }
         ofPopMatrix();
 
-        
     }
    
     

@@ -10,8 +10,6 @@ void testApp::setup(){
     
     
     XML.load("mySettings.xml");
-   
-    cout<<XML.getName()<<endl;
     
     if(XML.getName() == "PHOTO" && XML.setTo("val[0]"))
     {
@@ -40,7 +38,6 @@ void testApp::setup(){
                 frames.back().setStyle(Polaroidframe::POLAROID);
             }
             
-            cout<<"1"<<endl;
         }
         while(XML.setToSibling());
         XML.setToParent();
@@ -48,6 +45,7 @@ void testApp::setup(){
 
     Angle =0;
     w = 0;
+    frameStyle = 0;
 }
 
 //--------------------------------------------------------------
@@ -73,7 +71,6 @@ void testApp::draw(){
     for (int i=0; i<frames.size();i++){
             frames[i].draw();
     }
-    cout<<frames.size()<<endl;
     
     ofSetColor(255);
     banner.draw(0, 0, banner.width/2,banner.height/2);
@@ -116,7 +113,7 @@ void testApp::keyPressed(int key){
     }
     
     
-    if(key == 't')
+    if(key == 'r')
     {
         int x = 100;
         int y = 200;
@@ -140,6 +137,8 @@ void testApp::keyPressed(int key){
         frames.back().setLevel(0);
         frames.back().setStyle(Polaroidframe::POLAROID);
     }
+    
+    
     
     if (frames.size()>0) {
         if (key == 'a') {
@@ -165,25 +164,32 @@ void testApp::keyPressed(int key){
         
         if (key == '1') {
             
-            frames.back().setStyle(Polaroidframe::NO_FRAME_1);
+            frames.back().setLevel(0);
             
         }
         
         if (key == '2') {
             
-            frames.back().setStyle(Polaroidframe::NO_FRAME_2);
+            frames.back().setLevel(1);
             
         }
         
         if (key == '3') {
             
-            frames.back().setStyle(Polaroidframe::FRAME);
+            frames.back().setLevel(2);
             
         }
         
-        if (key == '4') {
+        
+        if (key == 'e') {
             
-            frames.back().setStyle(Polaroidframe::POLAROID);
+            frameStyle++;
+            if (frameStyle >3)frameStyle =0;
+            
+            if (frameStyle == 0) frames.back().setStyle(Polaroidframe::NO_FRAME_1);
+            if (frameStyle == 1) frames.back().setStyle(Polaroidframe::NO_FRAME_2);
+            if (frameStyle == 2) frames.back().setStyle(Polaroidframe::FRAME);
+            if (frameStyle == 3) frames.back().setStyle(Polaroidframe::POLAROID);
             
         }
 
