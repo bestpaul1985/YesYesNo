@@ -38,20 +38,21 @@ public:
     void setStyle(FRAME_STYLE Style);
     void setLevel(int Level);
     void setWidth(int W);
-    
+    void setImageNum(int I);
     ofPoint getPos();
     int getLevel();
     float getWidth();
     int getAngle();
     int getStyle();
-    
+    int getImageNum();
+
     string picName;
     string cityName;
         
 private:
     
     float w,h;
-    
+    int imgNun;
     float scale;
 
     void drawFrames();

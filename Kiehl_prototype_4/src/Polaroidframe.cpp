@@ -17,6 +17,7 @@ Polaroidframe::Polaroidframe(){
     cityName = "cityName";
     scale = 0.75;
     w = 0;
+    imgNun = 0;
 }
 //-------------------------------------------------------------
 void Polaroidframe::init(int x, int y, int W){
@@ -73,7 +74,7 @@ void Polaroidframe::drawFrames(){
         ofRect(frame);
     }
     ofPopMatrix();
-    
+
 }
 
 //-------------------------------------------------------------
@@ -91,10 +92,23 @@ void Polaroidframe::drawShadow(){
             ofSetColor(255);
             shadows[0]->draw(shadowRect);
         }
+        if (style == FRAME) {
+            float sw = w*1.02;
+            float sh = ofMap(sw, 0, shadows[0]->getWidth(), 0,  shadows[0]->getHeight())*1.32;
+            shadowRect.setFromCenter(0,0, sw, sh);
+            ofSetColor(255);
+            shadows[0]->draw(shadowRect);
+        }
+        if (style == NO_FRAME_1 && style == NO_FRAME_2) {
+            float sw = w*1.02;
+            float sh = ofMap(sw, 0, shadows[0]->getWidth(), 0,  shadows[0]->getHeight())*1.0;
+            shadowRect.setFromCenter(0,0, sw, sh);
+            ofSetColor(255);
+            shadows[0]->draw(shadowRect);
+        }
         ofPopMatrix();
-
     }
-   
+
     
 }
 
@@ -202,7 +216,7 @@ void Polaroidframe::setStyle(FRAME_STYLE Style){
         }break;
     }
 }
-//-------------------------------------------------------------
+
 void Polaroidframe::setLevel(int Level){
 
     level = Level;
@@ -213,6 +227,11 @@ void Polaroidframe::setWidth(int W){
     
     w = W;
    
+}
+
+void Polaroidframe::setImageNum(int I){
+
+    imgNun = I;
 }
 
 
@@ -250,6 +269,12 @@ int Polaroidframe::getStyle(){
     
 }
 
+int Polaroidframe::getImageNum(){
+    
+    return imgNun;
+    
+}
+
 /**************************************************************
  LODING
  **************************************************************/
@@ -271,7 +296,7 @@ void Polaroidframe::loadFont(ofTrueTypeFont &Font){
 void Polaroidframe::loadShadow(ofImage &imgs){
 
     shadows.push_back(&imgs);
-    
+
 }
 
 

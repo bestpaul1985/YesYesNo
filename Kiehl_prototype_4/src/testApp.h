@@ -36,6 +36,6 @@ class testApp : public ofBaseApp{
     
         ofXml XML;
         int Angle;
-        int w ;
+        int frameWidth ;
         int frameStyle;
 };
