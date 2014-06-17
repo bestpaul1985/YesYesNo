@@ -79,7 +79,7 @@ void testApp::update(){
     for (int i=0; i<drawFrames.size(); i++) {
         if (drawFrames[i].getTransition() == Polaroidframe::OUT_WINDOW) {
             drawFrames[i].loadPic(images[ofRandom(images.size())]);
-            drawFrames[i].setTransition(Polaroidframe::GET_IN, drawFrames[i].orgPos, ofRandom(10, 15));
+            drawFrames[i].setTransition(Polaroidframe::GET_IN, drawFrames[i].orgPos, ofRandom(14, 15));
         }
     }
     
@@ -150,8 +150,8 @@ void testApp::keyPressed(int key){
     if(key == OF_KEY_LEFT){
         for (int i=0; i<drawFrames.size(); i++) {
             drawFrames[i].setTransition(Polaroidframe::GET_OUT,
-                                        ofPoint(-drawFrames[i].getWidth()*2,drawFrames[i].getPos().y),
-                                        ofRandom(10, 15));
+                                        ofPoint(-drawFrames[i].getWidth()*1.2, ofGetHeight()/2),
+                                        ofRandom(14, 20));
         }
     }
     
