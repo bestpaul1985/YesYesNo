@@ -11,7 +11,7 @@ typedef struct {
 } City;
 
 
-class testApp : public ofBaseApp{
+class testApp : páublic ofBaseApp{
 
 	public:
 		void setup();
