@@ -27,6 +27,7 @@ Polaroidframe::Polaroidframe(){
     color.set(255,0);
     vel.set(0,0);
     damping = 0.05f;
+    anima = READY;
 }
 //-------------------------------------------------------------
 void Polaroidframe::init(int x, int y, int W){
@@ -68,18 +69,50 @@ void Polaroidframe::animation(){
 
     float temPct;
     if (bMousePressed) {
-        pct = 0.98 * pct + 0.02 * 1.0;
-        temPct = powf(pct, 1.5);
-        if (pct>1) {
-            pct = 1;
+        
+        switch (anima) {
+            case READY:{
+            
+                if(ofGetElapsedTimeMillis() - timer < 200 ){
+                    angle += ofRandom(-3,3);
+                }else{
+                    anima = GO;
+                }
+            }
+                break;
+            case GO:{
+                
+                pct = 0.90 * pct + 0.10 * 1.0;
+                temPct = powf(pct, 1.5);
+                if (pct>0.975) {
+                    pct = 0;
+                    anima = STOP;
+                }
+                w = (1-temPct)*orgW + temPct*desW*1.3;
+                cout<<pct<<endl;
+
+            }
+                break;
+            case STOP:{
+                
+                pct = 0.85 * pct + 0.15 * 1.0;
+                temPct = powf(pct,5);
+                if (pct>0.99) {
+                    pct = 1;
+                }
+                w = (1-temPct)*desW*1.3 + temPct*desW;
+                
+                cout<<pct<<endl;
+            }
+                break;
+ 
         }
-        w = (1-temPct)*orgW + temPct*desW;
-      
+        
     }else{
         pct *= 0.98;
         temPct = powf(pct, 1.5);
         w = (1-temPct)*orgW + temPct*desW;
-       
+        anima = READY;
     }
     
 
@@ -295,6 +328,7 @@ void Polaroidframe::mousePressed(int x, int y){
     
     if (bSelected) {
         bMousePressed = !bMousePressed;
+        timer = ofGetElapsedTimeMillis();
     }else{
         bColorChange = !bColorChange;
     }

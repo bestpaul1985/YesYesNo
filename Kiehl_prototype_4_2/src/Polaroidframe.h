@@ -30,6 +30,12 @@ public:
         DONE
     };
     
+    enum ANIMATION{
+        READY,
+        GO,
+        STOP
+    };
+    
     Polaroidframe();
     void init(int x, int y, int W);
     void loadPic(ofImage &IMG);
@@ -122,8 +128,8 @@ private:
 
     int style;
     TRANSITION trans;
-
-
+    ANIMATION  anima;
+    float timer;
 
 };
 
