@@ -50,6 +50,8 @@ class ofApp : public ofBaseApp{
     
         ofColor buttonColor;
         ofTexture grabPhoto;
+        vector<ofTexture> savePhoto;
+
     
         ofPoint lutPos;
         ofPoint photoPos;

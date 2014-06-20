@@ -47,16 +47,25 @@ void ofApp::draw(){
         font.drawString(number, ofGetWidth()/2-font.stringWidth(number)/2, ofGetHeight()/2+font.stringHeight(number)/2);
     }
     
-    int graW = 100;
-    int graH = 100;
+    int graW = 360;
+    int graH = 480;
    
-    grabPhoto.loadData(lutImg.getPixels(), lutImg.getWidth(), lutImg.getHeight(), GL_RGB);
+    grabPhoto.loadScreenData(ofGetWidth()/2-graW/2, ofGetHeight()/2-graH/2, graW, graH);
     
+    ofSetColor(200);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+
     ofPushMatrix();
-    ofTranslate(100,100);
+    ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
     ofSetColor(255);
     grabPhoto.draw(-graW/2,-graH/2,graW,graH);
 	ofPopMatrix();
+    
+
+    for (int i=0; i<savePhoto.size(); i++) {
+        ofSetColor(255);
+        savePhoto[i].draw(0,0,100,100);
+    }
 }
 
 //--------------------------------------------------------------
@@ -104,21 +113,11 @@ void ofApp::takePhoto(){
             
         case TAKE_PHOTO:{
           
-            unsigned char *lutPix = lutImg.getPixels();
-            unsigned char *photoPix = photo.getPixels();
-
-            for (int i=0; i<lutImg.width; i++) {
-                for (int j = 0; j<lutImg.height; j++) {
-                    
-                    int ii = j * lutImg.width + i;
-                    ofColor colro = ofColor( lutPix[ii*3], lutPix[ii*3+1], lutPix[ii*3+2] );
-
-                    photoPix[ ii * 3 ] = colro.r;
-                    photoPix[ ii * 3 + 1] = colro.g;
-                    photoPix[ ii * 3 + 2] = colro.b;
-                }
-            }
-            photo.update();
+            ofTexture tempTexture;
+            savePhoto.push_back(tempTexture);
+            savePhoto.back().allocate(grabPhoto.getTextureData());
+            savePhoto.back().unbind();
+            
             action = STAND_BY;
         }
         break;
@@ -247,8 +246,6 @@ void ofApp::loadImages(){
 
     logoImg.loadImage("image/logo.png");
     frameImg.loadImage("image/frame.png");
-    
-    
     
 
 }
