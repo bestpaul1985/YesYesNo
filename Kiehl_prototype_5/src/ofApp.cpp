@@ -5,6 +5,21 @@ void ofApp::setup(){
 
     logoImg.loadImage("image/logo.png");
     frameImg.loadImage("image/frame.png");
+   
+    dir.allowExt("cube");
+	dir.listDir("LUTs/");
+    dir.sort();
+    if (dir.size()) {
+        dirLoadIndex=4;
+		loadLUT(dir.getPath(dirLoadIndex));
+    }
+    
+    lutImg.allocate(640, 480, OF_IMAGE_COLOR);
+    vidGrabber.setVerbose(true);
+	vidGrabber.initGrabber(640,480);
+    
+    thumbPos.set(ofGetWidth()-200,50);
+	lutPos.set(ofGetWidth()/2,ofGetHeight()/2, 0);
     
     ofBackground(0);
 	ofSetColor(255);
@@ -16,18 +31,15 @@ void ofApp::setup(){
     timer = ofGetElapsedTimeMillis();
     
     font.loadFont("verdana.ttf", 70);
-    takePhotoIndex = 0;
+    takePhotoCounter = 0;
     action = STAND_BY;
     
-    
-    grabPhoto.allocate(400, 500, GL_RGB);
-    
-    
+    photo.allocate(lutImg.getWidth(), lutImg.getHeight(), OF_IMAGE_COLOR);
+    photoPos.set(50,50);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
 
     vidGrabber.update();
     
@@ -35,8 +47,6 @@ void ofApp::update(){
         applyLUT(vidGrabber.getPixelsRef());
     }
     
-//    grabPhoto.loadScreenData(ofGetWidth()/2,ofGetHeight()/2,300,300);
-
     
     takePhoto();
     
@@ -52,16 +62,18 @@ void ofApp::draw(){
     ofPopMatrix();
     
     ofSetColor(255);
+    ofRect(thumbPos.x-3, thumbPos.y-3, 166, 126);
     vidGrabber.draw(thumbPos.x+160, thumbPos.y, -160, 120);
 
     ofSetColor(255);
-//    grabPhoto.draw(200,200,200,200);
+    ofRect(photoPos.x-3, photoPos.y-3, 166, 126);
+    photo.draw(photoPos.x+160, photoPos.y, -160, 120);
     
     ofSetColor(buttonColor);
     ofCircle(buttonPos, buttonRadius);
     
     ofSetColor(255);
-    string number = ofToString(takePhotoIndex);
+    string number = ofToString(takePhotoCounter);
     font.drawString(number, ofGetWidth()/2-font.stringWidth(number)/2, ofGetHeight()/2+font.stringHeight(number)/2);
 }
 
@@ -91,12 +103,12 @@ void ofApp::takePhoto(){
     switch (action) {
         case COUNTDOWN:{
             if (ofGetElapsedTimeMillis() - timer > 1000 ) {
-                takePhotoIndex ++;
+                takePhotoCounter ++;
                 timer = ofGetElapsedTimeMillis();
             }
             
-            if (takePhotoIndex > 3) {
-                takePhotoIndex = 0;
+            if (takePhotoCounter > 3) {
+                takePhotoCounter = 0;
                 action = TAKE_PHOTO;
             }
             
@@ -105,26 +117,26 @@ void ofApp::takePhoto(){
             
         case TAKE_PHOTO:{
           
-//            unsigned char *lutPix = lutImg.getPixels();
-//            unsigned char *photoPix = photo.getPixels();
-//
-//            for (int i=0; i<lutImg.width; i++) {
-//                for (int j = 0; j<lutImg.height; j++) {
-//                    
-//                    int ii = j * lutImg.width + i;
-//                    ofColor colro = ofColor( lutPix[ii*3], lutPix[ii*3+1], lutPix[ii*3+2] );
-//
-//                    photoPix[ ii * 3 ] = colro.r;
-//                    photoPix[ ii * 3 + 1] = colro.g;
-//                    photoPix[ ii * 3 + 2] = colro.b;
-//                }
-//            }
-//            photo.update();
-//            action = STAND_BY;
+            unsigned char *lutPix = lutImg.getPixels();
+            unsigned char *photoPix = photo.getPixels();
+
+            for (int i=0; i<lutImg.width; i++) {
+                for (int j = 0; j<lutImg.height; j++) {
+                    
+                    int ii = j * lutImg.width + i;
+                    ofColor colro = ofColor( lutPix[ii*3], lutPix[ii*3+1], lutPix[ii*3+2] );
+
+                    photoPix[ ii * 3 ] = colro.r;
+                    photoPix[ ii * 3 + 1] = colro.g;
+                    photoPix[ ii * 3 + 2] = colro.b;
+                }
+            }
+            photo.update();
+            action = STAND_BY;
         }
         break;
             
-            cout<<takePhotoIndex<<endl;
+            cout<<takePhotoCounter<<endl;
 
     }
 }
@@ -240,26 +252,4 @@ void ofApp::applyLUT(ofPixelsRef pix){
 		lutImg.update();
 	}
 }
-//--------------------------------------------------------------
-void ofApp::setupLUT(){
-   
-    dir.allowExt("cube");
-	dir.listDir("LUTs/");
-    dir.sort();
-    if (dir.size()) {
-        dirLoadIndex=4;
-		loadLUT(dir.getPath(dirLoadIndex));
-    }
-    
-    lutImg.allocate(640, 480, OF_IMAGE_COLOR);
-    vidGrabber.setVerbose(true);
-	vidGrabber.initGrabber(640,480);
-    
-    thumbPos.set(ofGetWidth()-200,50);
-	lutPos.set(ofGetWidth()/2,ofGetHeight()/2, 0);
-
-    
-
-}
-
 
