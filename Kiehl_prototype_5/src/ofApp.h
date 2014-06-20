@@ -17,7 +17,6 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -27,32 +26,37 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    void takePhoto();
-    void loadLUT(string path);
-	void applyLUT(ofPixelsRef pix);
+   
+        void takePhoto();
+        void loadLUT(string path);
+        void applyLUT(ofPixelsRef pix);
+        void setupLUT();
+
     
-    int dirLoadIndex;
-	ofDirectory dir;
-    ofImage logoImg;
-    ofImage frameImg;
-    ofVideoGrabber vidGrabber;
-	ofPoint thumbPos;
-    
-    ofPoint lutPos;
-	ofVec3f lut[32][32][32];
-    ofImage lutImg;
+    int                 dirLoadIndex;
+    int                 takePhotoIndex;
+    ofVideoGrabber      vidGrabber;
+
+    float buttonRadius;
+    float timer;
+
+    ofTrueTypeFont      font;
+	ofDirectory         dir;
+    PHOTO_ACTION        action;
+
+    ofImage             logoImg;
+    ofImage             frameImg;
+    ofImage             lutImg;
+
+    ofTexture           grabPhoto;
+	
+    ofColor             buttonColor;
+    ofVec3f             lut[32][32][32];
+    ofPoint             thumbPos;
+    ofPoint             lutPos;
+    ofPoint             buttonPos;
+    ofPoint             photoPos;
+
     bool doLUT;
     bool LUTloaded;
-    
-    ofPoint buttonPos;
-    float buttonRadius;
-    ofColor buttonColor;
-
-    float timer;
-    ofTrueTypeFont font;
-    int takePhotoCounter;
-    
-    PHOTO_ACTION action;
-    ofImage photo;
-    ofPoint photoPos;
 };
