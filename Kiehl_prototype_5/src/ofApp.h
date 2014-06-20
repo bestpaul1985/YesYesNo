@@ -27,32 +27,36 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    void takePhoto();
-    void loadLUT(string path);
-	void applyLUT(ofPixelsRef pix);
-    
-    int dirLoadIndex;
-	ofDirectory dir;
-    ofImage logoImg;
-    ofImage frameImg;
-    ofVideoGrabber vidGrabber;
-	ofPoint thumbPos;
-    
-    ofPoint lutPos;
-	ofVec3f lut[32][32][32];
-    ofImage lutImg;
-    bool doLUT;
-    bool LUTloaded;
-    
-    ofPoint buttonPos;
-    float buttonRadius;
-    ofColor buttonColor;
+        void takePhoto();
+        void loadLUT(string path);
+        void applyLUT(ofPixelsRef pix);
+        void setupLUT();
+        void loadImages();
+   
+        ofVideoGrabber vidGrabber;
+        PHOTO_ACTION action;
+        ofTrueTypeFont font;
 
-    float timer;
-    ofTrueTypeFont font;
-    int takePhotoCounter;
+        ofDirectory dir;
+        ofImage logoImg;
+        ofImage lutImg;
+        ofImage frameImg;
+        ofImage photo;
+
+        int dirLoadIndex;
+        int takePhotoIndex;
     
-    PHOTO_ACTION action;
-    ofImage photo;
-    ofPoint photoPos;
+        float timer;
+    
+        ofColor buttonColor;
+        ofTexture grabPhoto;
+    
+        ofPoint lutPos;
+        ofPoint photoPos;
+        ofPoint thumbPos;
+        ofVec3f lut[32][32][32];
+
+        bool doLUT;
+        bool LUTloaded;
+    
 };

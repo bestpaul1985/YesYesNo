@@ -3,39 +3,18 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    logoImg.loadImage("image/logo.png");
-    frameImg.loadImage("image/frame.png");
-   
-    dir.allowExt("cube");
-	dir.listDir("LUTs/");
-    dir.sort();
-    if (dir.size()) {
-        dirLoadIndex=4;
-		loadLUT(dir.getPath(dirLoadIndex));
-    }
-    
-    lutImg.allocate(640, 480, OF_IMAGE_COLOR);
+    ofBackground(0);
     vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(640,480);
-    
-    thumbPos.set(ofGetWidth()-200,50);
-	lutPos.set(ofGetWidth()/2,ofGetHeight()/2, 0);
-    
-    ofBackground(0);
-	ofSetColor(255);
-    
-    buttonPos.set(ofGetWidth()/2,ofGetHeight()-100);
-    buttonRadius = 30;
-    buttonColor.set(255);
+    loadImages();
+    setupLUT();
     
     timer = ofGetElapsedTimeMillis();
-    
     font.loadFont("verdana.ttf", 70);
-    takePhotoCounter = 0;
+    takePhotoIndex = 0;
     action = STAND_BY;
     
-    photo.allocate(lutImg.getWidth(), lutImg.getHeight(), OF_IMAGE_COLOR);
-    photoPos.set(50,50);
+    grabPhoto.allocate(lutImg.getWidth(), lutImg.getHeight(), GL_RGB);
 }
 
 //--------------------------------------------------------------
@@ -61,20 +40,23 @@ void ofApp::draw(){
     lutImg.draw(lutImg.getWidth()/2,-lutImg.getHeight()/2,-lutImg.getWidth(),lutImg.getHeight());
     ofPopMatrix();
     
-    ofSetColor(255);
-    ofRect(thumbPos.x-3, thumbPos.y-3, 166, 126);
-    vidGrabber.draw(thumbPos.x+160, thumbPos.y, -160, 120);
-
-    ofSetColor(255);
-    ofRect(photoPos.x-3, photoPos.y-3, 166, 126);
-    photo.draw(photoPos.x+160, photoPos.y, -160, 120);
     
-    ofSetColor(buttonColor);
-    ofCircle(buttonPos, buttonRadius);
+    if(action != STAND_BY){
+        ofSetColor(255);
+        string number = ofToString(takePhotoIndex);
+        font.drawString(number, ofGetWidth()/2-font.stringWidth(number)/2, ofGetHeight()/2+font.stringHeight(number)/2);
+    }
     
+    int graW = 100;
+    int graH = 100;
+   
+    grabPhoto.loadData(lutImg.getPixels(), lutImg.getWidth(), lutImg.getHeight(), GL_RGB);
+    
+    ofPushMatrix();
+    ofTranslate(100,100);
     ofSetColor(255);
-    string number = ofToString(takePhotoCounter);
-    font.drawString(number, ofGetWidth()/2-font.stringWidth(number)/2, ofGetHeight()/2+font.stringHeight(number)/2);
+    grabPhoto.draw(-graW/2,-graH/2,graW,graH);
+	ofPopMatrix();
 }
 
 //--------------------------------------------------------------
@@ -96,6 +78,11 @@ void ofApp::keyPressed(int key){
         loadLUT(dir.getPath(dirLoadIndex));
     }
     
+    if(key == ' '){
+        if (action == STAND_BY) {
+            action = COUNTDOWN;
+        }
+    }
 }
 //--------------------------------------------------------------
 void ofApp::takePhoto(){
@@ -103,12 +90,12 @@ void ofApp::takePhoto(){
     switch (action) {
         case COUNTDOWN:{
             if (ofGetElapsedTimeMillis() - timer > 1000 ) {
-                takePhotoCounter ++;
+                takePhotoIndex ++;
                 timer = ofGetElapsedTimeMillis();
             }
             
-            if (takePhotoCounter > 3) {
-                takePhotoCounter = 0;
+            if (takePhotoIndex > 3) {
+                takePhotoIndex = 0;
                 action = TAKE_PHOTO;
             }
             
@@ -136,7 +123,6 @@ void ofApp::takePhoto(){
         }
         break;
             
-            cout<<takePhotoCounter<<endl;
 
     }
 }
@@ -148,12 +134,7 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
 
-    ofPoint mouse(x,y);
-    if (mouse.distance(buttonPos)<=buttonRadius) {
-        buttonColor.set(200);
-    }else{
-        buttonColor.set(255);
-    }
+    
 }
 
 //--------------------------------------------------------------
@@ -164,21 +145,13 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 
-    ofPoint mouse(x,y);
-    if (mouse.distance(buttonPos)<=buttonRadius) {
-        buttonColor.set(30);
-    }
+   
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
-    ofPoint mouse(x,y);
-    if (mouse.distance(buttonPos)<=buttonRadius) {
-        buttonColor.set(255);
-        timer = ofGetElapsedTimeMillis();
-        action = COUNTDOWN;
-    }
+  
 }
 
 //--------------------------------------------------------------
@@ -252,4 +225,32 @@ void ofApp::applyLUT(ofPixelsRef pix){
 		lutImg.update();
 	}
 }
+
+//--------------------------------------------------------------
+void ofApp::setupLUT(){
+
+    dir.allowExt("cube");
+	dir.listDir("LUTs/");
+    dir.sort();
+    if (dir.size()) {
+        dirLoadIndex=4;
+		loadLUT(dir.getPath(dirLoadIndex));
+    }
+    
+    lutImg.allocate(640, 480, OF_IMAGE_COLOR);
+    lutPos.set(ofGetWidth()/2,ofGetHeight()/2);
+
+}
+
+//--------------------------------------------------------------
+void ofApp::loadImages(){
+
+    logoImg.loadImage("image/logo.png");
+    frameImg.loadImage("image/frame.png");
+    
+    
+    
+
+}
+
 
