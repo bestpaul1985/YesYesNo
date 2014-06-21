@@ -4,6 +4,8 @@
 void ofApp::setup(){
 
     ofBackground(0);
+    ofEnableAlphaBlending();
+
     vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(640,480);
     loadImages();
@@ -14,7 +16,9 @@ void ofApp::setup(){
     takePhotoIndex = 0;
     action = STAND_BY;
     
-    grabPhoto.allocate(lutImg.getWidth(), lutImg.getHeight(), GL_RGB);
+//    grabTexture.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(),GL_RGB);
+//    grabPhoto.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(), OF_IMAGE_COLOR_ALPHA);
+
 }
 
 //--------------------------------------------------------------
@@ -33,39 +37,48 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    
+    ofClear(0,0,0,255);
     ofPushMatrix();
     ofTranslate(lutPos);
     ofSetColor(255);
     lutImg.draw(lutImg.getWidth()/2,-lutImg.getHeight()/2,-lutImg.getWidth(),lutImg.getHeight());
     ofPopMatrix();
     
+    int textureW = 360;
+    int textureH = 480;
+    grabTexture.loadScreenData(ofGetWidth()/2-textureW/2, ofGetHeight()/2-textureH/2, textureW, textureH);
+    ofSetColor(0);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
     
     if(action != STAND_BY){
         ofSetColor(255);
         string number = ofToString(takePhotoIndex);
         font.drawString(number, ofGetWidth()/2-font.stringWidth(number)/2, ofGetHeight()/2+font.stringHeight(number)/2);
     }
-    
-    int graW = 360;
-    int graH = 480;
    
-    grabPhoto.loadScreenData(ofGetWidth()/2-graW/2, ofGetHeight()/2-graH/2, graW, graH);
-    
-    ofSetColor(200);
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-
+   
     ofPushMatrix();
-    ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofSetColor(255);
-    grabPhoto.draw(-graW/2,-graH/2,graW,graH);
-	ofPopMatrix();
+    grabTexture.draw(-frameImg.getWidth()/6,-frameImg.getHeight()/6,frameImg.getWidth()/3,frameImg.getHeight()/3);
+    float W = ofMap(frameImg.getHeight()/3, 0, grabPhoto.getHeight(), 0, grabPhoto.getWidth());
+    grabPhoto.draw(W/2, -frameImg.getHeight()/6, -W, frameImg.getHeight()/3);
+    frameImg.draw(-frameImg.getWidth()/6,-frameImg.getHeight()/6,frameImg.getWidth()/3,frameImg.getHeight()/3);
+    ofPopMatrix();
     
-
-    for (int i=0; i<savePhoto.size(); i++) {
-        ofSetColor(255);
-        savePhoto[i].draw(0,0,100,100);
-    }
+    ofSetColor(255);
+    logoImg.draw(ofGetWidth()/2-logoImg.getWidth()/4, 50, logoImg.getWidth()/2, logoImg.getHeight()/2);
+    
+    cout<<mouseX<<" "<<mouseY<<endl;
+    
+    ofSetColor(255);
+    string text;
+    text = ofToString(takePhotoIndex);
+    float fontW = font.stringWidth(text);
+    float fontH = font.stringHeight(text);
+    if(action == COUNTDOWN) font.drawString(text, ofGetWidth()/2-fontW/2, ofGetHeight()/2 + fontH/2);
+    
 }
 
 //--------------------------------------------------------------
@@ -112,13 +125,34 @@ void ofApp::takePhoto(){
         break;
             
         case TAKE_PHOTO:{
-          
-            ofTexture tempTexture;
-            savePhoto.push_back(tempTexture);
-            savePhoto.back().allocate(grabPhoto.getTextureData());
-            savePhoto.back().unbind();
             
+            unsigned char *vedioPix = lutImg.getPixels();
+            unsigned char *imagePix = grabPhoto.getPixels();
+            
+            for (int i=0; i<lutImg.getWidth(); i++) {
+                for (int j=0; j<lutImg.getHeight(); j++) {
+                    
+                    int ii = j*lutImg.getWidth()+i;
+                    
+                    if (i >= 160 && i<= 480) {
+                        ofColor color = ofColor( vedioPix[ii*3], vedioPix[ii*3+1], vedioPix[ii*3+2], 255);
+                        imagePix[ii*4]= color.r;
+                        imagePix[ii*4+1]= color.g;
+                        imagePix[ii*4+2]= color.b;
+                        imagePix[ii*4+3]= color.a;
+                    }else{
+                        ofColor color(0,0);
+                        imagePix[ii*4]= color.r;
+                        imagePix[ii*4+1]= color.g;
+                        imagePix[ii*4+2]= color.b;
+                        imagePix[ii*4+3]= color.a;
+                    }
+                }
+            }
+            grabPhoto.update();
             action = STAND_BY;
+            
+            
         }
         break;
             
@@ -244,7 +278,7 @@ void ofApp::setupLUT(){
 //--------------------------------------------------------------
 void ofApp::loadImages(){
 
-    logoImg.loadImage("image/logo.png");
+    logoImg.loadImage("image/kiehlsLogo.png");
     frameImg.loadImage("image/frame.png");
     
 

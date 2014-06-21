@@ -40,18 +40,19 @@ class ofApp : public ofBaseApp{
         ofDirectory dir;
         ofImage logoImg;
         ofImage lutImg;
-        ofImage frameImg;
         ofImage photo;
+    
+//        ofImage grabPhoto;
+//        ofTexture grabTexture;
+//        ofImage frameImg;
+
 
         int dirLoadIndex;
         int takePhotoIndex;
+        int picW;
+        int picH;
     
         float timer;
-    
-        ofColor buttonColor;
-        ofTexture grabPhoto;
-        vector<ofTexture> savePhoto;
-
     
         ofPoint lutPos;
         ofPoint photoPos;
@@ -60,5 +61,6 @@ class ofApp : public ofBaseApp{
 
         bool doLUT;
         bool LUTloaded;
+    
     
 };
