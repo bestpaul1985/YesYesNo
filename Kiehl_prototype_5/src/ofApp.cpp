@@ -12,25 +12,31 @@ void ofApp::setup(){
     setupLUT();
     
     timer = ofGetElapsedTimeMillis();
-    font.loadFont("verdana.ttf", 70);
-    takePhotoIndex = 0;
+    font.loadFont("verdana.ttf", 100);
+    takePhotoIndex = -1;
+    counterIndex = 0;
     action = STAND_BY;
     
-//    grabTexture.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(),GL_RGB);
-//    grabPhoto.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(), OF_IMAGE_COLOR_ALPHA);
+    grabTexture.allocate(vidGrabber.getWidth(), vidGrabber.getHeight(),GL_RGB);
+    
+    for(int i=0; i<6; i++){
+        float scale = 1.3;
+        photoFrame temFrame;
+        frames.push_back(temFrame);
+        frames.back().initial( 0, frameImg.getHeight()/3 *scale * (i%3-1), lutImg, frameImg, grabTexture, scale);
+    }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-    vidGrabber.update();
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
+    vidGrabber.update();
     if (vidGrabber.isFrameNew()){
         applyLUT(vidGrabber.getPixelsRef());
     }
-    
-    
     takePhoto();
     
 }
@@ -51,33 +57,45 @@ void ofApp::draw(){
     ofSetColor(0);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     
-    if(action != STAND_BY){
-        ofSetColor(255);
-        string number = ofToString(takePhotoIndex);
-        font.drawString(number, ofGetWidth()/2-font.stringWidth(number)/2, ofGetHeight()/2+font.stringHeight(number)/2);
-    }
-   
-   
+    //-------------------------frames
+    
     ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetColor(255);
-    grabTexture.draw(-frameImg.getWidth()/6,-frameImg.getHeight()/6,frameImg.getWidth()/3,frameImg.getHeight()/3);
-    float W = ofMap(frameImg.getHeight()/3, 0, grabPhoto.getHeight(), 0, grabPhoto.getWidth());
-    grabPhoto.draw(W/2, -frameImg.getHeight()/6, -W, frameImg.getHeight()/3);
-    frameImg.draw(-frameImg.getWidth()/6,-frameImg.getHeight()/6,frameImg.getWidth()/3,frameImg.getHeight()/3);
+        ofTranslate(ofGetWidth()/2+50, ofGetHeight()/2+50);
+        ofPushMatrix();
+        ofTranslate(-110, 10);
+        ofRotate(-10);
+        for (int i=3; i<6; i++) {
+            frames[i].draw();
+        }
+        ofPopMatrix();
+    
+        ofPushMatrix();
+        ofTranslate(0, 0);
+        ofRotate(0);
+        for (int i=0; i<3; i++) {
+            frames[i].draw();
+        }
+        ofPopMatrix();
     ofPopMatrix();
     
+    //-------------------------logo
     ofSetColor(255);
-    logoImg.draw(ofGetWidth()/2-logoImg.getWidth()/4, 50, logoImg.getWidth()/2, logoImg.getHeight()/2);
+    logoImg.draw(ofGetWidth()/2-logoImg.getWidth()/5, 50, logoImg.getWidth()/2.5, logoImg.getHeight()/2.5);
     
-    cout<<mouseX<<" "<<mouseY<<endl;
+    if(action == COUNTDOWN) {
+        ofSetColor(30,100);
+        ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    }else if(action == TAKE_PHOTO) {
+        ofSetColor(255,200);
+        ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    }
     
     ofSetColor(255);
     string text;
-    text = ofToString(takePhotoIndex);
+    text = ofToString(counterIndex);
     float fontW = font.stringWidth(text);
     float fontH = font.stringHeight(text);
-    if(action == COUNTDOWN) font.drawString(text, ofGetWidth()/2-fontW/2, ofGetHeight()/2 + fontH/2);
+    if(action == COUNTDOWN) font.drawString(text, ofGetWidth()/2-fontW/2, ofGetHeight()/2);
     
 }
 
@@ -111,13 +129,13 @@ void ofApp::takePhoto(){
 
     switch (action) {
         case COUNTDOWN:{
-            if (ofGetElapsedTimeMillis() - timer > 1000 ) {
-                takePhotoIndex ++;
+            if (ofGetElapsedTimeMillis() - timer > 500 ) {
+                counterIndex ++;
                 timer = ofGetElapsedTimeMillis();
             }
             
-            if (takePhotoIndex > 3) {
-                takePhotoIndex = 0;
+            if (counterIndex > 3) {
+                counterIndex = 0;
                 action = TAKE_PHOTO;
             }
             
@@ -126,32 +144,14 @@ void ofApp::takePhoto(){
             
         case TAKE_PHOTO:{
             
-            unsigned char *vedioPix = lutImg.getPixels();
-            unsigned char *imagePix = grabPhoto.getPixels();
-            
-            for (int i=0; i<lutImg.getWidth(); i++) {
-                for (int j=0; j<lutImg.getHeight(); j++) {
-                    
-                    int ii = j*lutImg.getWidth()+i;
-                    
-                    if (i >= 160 && i<= 480) {
-                        ofColor color = ofColor( vedioPix[ii*3], vedioPix[ii*3+1], vedioPix[ii*3+2], 255);
-                        imagePix[ii*4]= color.r;
-                        imagePix[ii*4+1]= color.g;
-                        imagePix[ii*4+2]= color.b;
-                        imagePix[ii*4+3]= color.a;
-                    }else{
-                        ofColor color(0,0);
-                        imagePix[ii*4]= color.r;
-                        imagePix[ii*4+1]= color.g;
-                        imagePix[ii*4+2]= color.b;
-                        imagePix[ii*4+3]= color.a;
-                    }
-                }
+            takePhotoIndex ++;
+            if (takePhotoIndex > 5) {
+                takePhotoIndex = 0;
             }
-            grabPhoto.update();
-            action = STAND_BY;
             
+            frames[takePhotoIndex].update();
+            
+            action = STAND_BY;
             
         }
         break;
@@ -280,7 +280,6 @@ void ofApp::loadImages(){
 
     logoImg.loadImage("image/kiehlsLogo.png");
     frameImg.loadImage("image/frame.png");
-    
 
 }
 

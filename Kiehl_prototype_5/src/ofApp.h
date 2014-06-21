@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "photoFrame.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -40,17 +42,14 @@ class ofApp : public ofBaseApp{
         ofDirectory dir;
         ofImage logoImg;
         ofImage lutImg;
-        ofImage photo;
     
-//        ofImage grabPhoto;
-//        ofTexture grabTexture;
-//        ofImage frameImg;
+        ofTexture grabTexture;
+        ofImage frameImg;
 
 
         int dirLoadIndex;
+        int counterIndex;
         int takePhotoIndex;
-        int picW;
-        int picH;
     
         float timer;
     
@@ -62,5 +61,7 @@ class ofApp : public ofBaseApp{
         bool doLUT;
         bool LUTloaded;
     
+        vector<photoFrame> frames;
     
 };
+
