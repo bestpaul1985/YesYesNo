@@ -95,7 +95,7 @@ void ofApp::draw(){
     text = ofToString(counterIndex);
     float fontW = font.stringWidth(text);
     float fontH = font.stringHeight(text);
-    if(action == COUNTDOWN) font.drawString(text, ofGetWidth()/2-fontW/2, ofGetHeight()/2);
+    if(action == COUNTDOWN && takePhotoIndex == -1) font.drawString(text, ofGetWidth()/2-fontW/2, ofGetHeight()/2+100);
     
 }
 
@@ -121,6 +121,9 @@ void ofApp::keyPressed(int key){
     if(key == ' '){
         if (action == STAND_BY) {
             action = COUNTDOWN;
+            for (int i=0; i<frames.size(); i++) {
+                frames[i].reset();
+            }
         }
     }
 }
@@ -129,7 +132,10 @@ void ofApp::takePhoto(){
 
     switch (action) {
         case COUNTDOWN:{
-            if (ofGetElapsedTimeMillis() - timer > 500 ) {
+            if (takePhotoIndex  == -1 && ofGetElapsedTimeMillis() - timer > 1000 ) {
+                counterIndex ++;
+                timer = ofGetElapsedTimeMillis();
+            }else if(takePhotoIndex  != -1 && ofGetElapsedTimeMillis() - timer > 200 ){
                 counterIndex ++;
                 timer = ofGetElapsedTimeMillis();
             }
@@ -145,13 +151,14 @@ void ofApp::takePhoto(){
         case TAKE_PHOTO:{
             
             takePhotoIndex ++;
-            if (takePhotoIndex > 5) {
-                takePhotoIndex = 0;
+            if (takePhotoIndex > 4) {
+                frames[takePhotoIndex].update();
+                takePhotoIndex = -1;
+                action = STAND_BY;
+            }else{
+                frames[takePhotoIndex].update();
+                action = COUNTDOWN;
             }
-            
-            frames[takePhotoIndex].update();
-            
-            action = STAND_BY;
             
         }
         break;

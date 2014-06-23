@@ -16,7 +16,7 @@ public:
     void initial(int x, int y, ofImage &LUT, ofImage &Frame, ofTexture &Texture, float Scale);
     void update();
     void draw();
-    
+    void reset();
     ofPoint     getPos;
     ofImage     *lutImg;
     ofImage     *frameImg;

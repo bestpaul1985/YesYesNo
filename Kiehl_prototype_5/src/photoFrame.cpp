@@ -28,6 +28,8 @@ void photoFrame::initial(int x, int y, ofImage &LUT, ofImage &Frame, ofTexture &
             imagePix[ii*4+3]= color.a;
         }
     }
+    grabPhoto.update();
+
 }
 
 //-----------------------------------------------------------------
@@ -74,6 +76,29 @@ void photoFrame::draw(){
     
     
 }
+
+//-----------------------------------------------------------------
+void photoFrame::reset(){
+
+    grabPhoto.clear();
+    grabPhoto.allocate(lutImg->getWidth(), lutImg->getHeight(), OF_IMAGE_COLOR_ALPHA);
+    unsigned char *imagePix = grabPhoto.getPixels();
+    for (int i=0; i<lutImg->getWidth(); i++) {
+        for (int j=0; j<lutImg->getHeight(); j++) {
+            int ii = j*lutImg->getWidth()+i;
+            ofColor color(0,0);
+            imagePix[ii*4]= color.r;
+            imagePix[ii*4+1]= color.g;
+            imagePix[ii*4+2]= color.b;
+            imagePix[ii*4+3]= color.a;
+        }
+    }
+    grabPhoto.update();
+
+}
+
+
+
 
 
 
