@@ -3,21 +3,21 @@
 #include "ofMain.h"
 #include "scene01.h"
 #include "scene02.h"
+#include "scene03.h"
+#include "scene04.h"
 
 enum STATUS{
     
     DISPLAY_PHOTO,
     TAKE_PHOTO,
-    SIGN_IT
+    SIGN_IT,
+    DRESS_PHOTO,
 };
 
 
 class ofApp : public ofBaseApp{
 
 	public:
-    
-   
- 
     
 		void setup();
 		void update();
@@ -34,13 +34,10 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
         void reset();
     
-   
-
-    
         scene01             myScene01;
         scene02             myScene02;
+        scene03             myScene03;
+        scene04             myScene04;
         STATUS              status;
- //-----------------------------------------------
-    
 
 };

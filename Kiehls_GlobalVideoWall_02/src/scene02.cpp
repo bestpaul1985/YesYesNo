@@ -1,10 +1,3 @@
-//
-//  scene02.cpp
-//  Kiehls_GlobalVideoWall_01
-//
-//  Created by Peng Cheng on 8/9/14.
-//
-//
 
 #include "scene02.h"
 
@@ -12,11 +5,12 @@
 void scene02::setup(){
     
     photoAction = STAND_BY;
-    counter = 0;
+    counter = -1;
     
     camWidth = 960;
     camHeight = 540;
     
+    //---------------------------LUT
     dir.allowExt("cube");
 	dir.listDir("LUTs/");
 	dir.sort();
@@ -38,6 +32,7 @@ void scene02::setup(){
         }
 	}
     
+    //------------------------------video grabber
 	vidGrabber.setDeviceID(1);
 	vidGrabber.setDesiredFrameRate(60);
     
@@ -47,16 +42,20 @@ void scene02::setup(){
     grabWidth = 520;
     grabHeight = 520;
     
-    videoInverted 	= new unsigned char[grabWidth*grabHeight*3];
+    photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
     
+    //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
     countImage[0].loadImage("number1.png");
     countImage[1].loadImage("number2.png");
     countImage[2].loadImage("number3.png");
-    
     color.set(255,0);
     
+    //----------------------shader
+    shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
+    myFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
+    shaderFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
 }
 
 //--------------------------------------------------------------
@@ -68,25 +67,7 @@ void scene02::update(){
         
     }
     
-    int totalPixels = camWidth*camHeight*3;
-    int k = 0;
-    unsigned char * pixels = lutImg.getPixels();
-    for (int i = 0; i < camWidth; i++){
-        for (int j=0; j<camHeight; j++) {
-            
-            if (i > ((camWidth - grabWidth)*0.5f)  && i <= ((camWidth - grabWidth)*0.5f + grabWidth) && j > (camHeight-grabHeight)*0.5f && j <= ((camHeight-grabHeight)*0.5f+grabHeight)) {
-                int ii = j * camWidth + i;
-                videoInverted[k * 3] = pixels[ii * 3];
-                videoInverted[k * 3 + 1] = pixels[ii * 3 + 1];
-                videoInverted[k * 3 + 2] = pixels[ii * 3 + 2];
-                k ++;
-            }
-            
-        }
-        
-    }
-    //            cout<< k <<endl;
-    grabTexture.loadData(videoInverted, grabWidth,grabHeight, GL_RGB);
+  
     
     if (photoAction == COUNT_DOWN) {
         
@@ -117,19 +98,13 @@ void scene02::update(){
 //--------------------------------------------------------------
 
 void scene02::draw(){
+    myFbo.begin();
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f, 0);
     ofRotateZ(90);
     ofSetColor(255);
     lutImg.draw(lutPos.x, lutPos.y, camWidth, -camHeight);
-    ofPopMatrix();
-    
-    
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
-    ofSetColor(220);
-    grabTexture.draw(-grabTexture.getWidth()/2, -grabTexture.getHeight()/2);
     ofPopMatrix();
     
     ofPushMatrix();
@@ -141,16 +116,55 @@ void scene02::draw(){
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, 100);
-    if (counter>=0 && counter<3) {
-        
+    if (counter>=0 && counter<=2) {
         float size = 0.2f;
         countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
     }
     ofPopMatrix();
     
+    myFbo.end();
+    
+//    shaderFbo.begin();
+    shader.begin();
+    shader.setUniform2f("mouse", mouseX, mouseY);
+    ofSetColor(255);
+    myFbo.draw(0, 0);
+    shader.end();
+//    shaderFbo.end();
+
+//    ofSetColor(255);
+//    shaderFbo.draw(0,0);
+    //----------------------------------------- grab cam data
+    
+    int k = 0;
+    ofPixels pix;
+    myFbo.readToPixels(pix);
+    
+    for (int i = 0; i < shaderFbo.getWidth(); i++){
+        for (int j=0; j< shaderFbo.getHeight(); j++) {
+            
+            if (i > ((shaderFbo.getWidth() - grabWidth)*0.5f)  && i <= ((shaderFbo.getWidth() - grabWidth)*0.5f + grabWidth) && j > (shaderFbo.getHeight()-grabHeight)*0.5f && j <= ((shaderFbo.getHeight()-grabHeight)*0.5f+grabHeight)) {
+                int ii = j * camWidth + i;
+                ofColor c = pix.getColor(i, j);
+                photoData[k * 3] = c.r;
+                photoData[k * 3 + 1] = c.g;
+                photoData[k * 3 + 2] = c.b;
+                k ++;
+            }
+        }
+    }
+    grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
+    
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
+    ofRotateZ(90);
+    ofSetColor(255);
+    grabTexture.draw(-grabTexture.getWidth()/2, grabTexture.getHeight()/2, grabTexture.getWidth(), -grabTexture.getHeight());
+    ofPopMatrix();
+    
     ofSetColor(color);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
-    
+
     
 }
 
@@ -291,7 +305,7 @@ void scene02::applyLUT(ofPixelsRef pix){
 //--------------------------------------------------------------
 void scene02::reset(){
     
-    photoAction = STAND_BY;
+    photoAction = COUNT_DOWN;
     counter = -1;
     color.set(255,0);
     

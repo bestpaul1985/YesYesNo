@@ -1,13 +1,3 @@
-//
-//  scene02.h
-//  Kiehls_GlobalVideoWall_01
-//
-//  Created by Peng Cheng on 8/9/14.
-//
-//
-
-#ifndef __Kiehls_GlobalVideoWall_01__scene02__
-#define __Kiehls_GlobalVideoWall_01__scene02__
 
 #include "ofMain.h"
 
@@ -43,12 +33,13 @@ public:
     int                 grabWidth;
     int                 grabHeight;
     
-    unsigned char * 	videoInverted;
+    unsigned char * 	photoData;
     
     
     PHOTO_ACTION        photoAction;
     ofVideoGrabber 		vidGrabber;
     ofTexture           grabTexture;
+
     int                 dirLoadIndex;
     ofDirectory         dir;
     ofPoint             lutPos;
@@ -64,7 +55,8 @@ public:
     int                 counter;
     
     ofColor             color;
+    
+    ofShader            shader;
+    ofFbo               myFbo;
+    ofFbo               shaderFbo;
 };
-
-
-#endif /* defined(__Kiehls_GlobalVideoWall_01__scene02__) */
