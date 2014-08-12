@@ -188,19 +188,18 @@ void scene02::draw(){
 //    shaderFbo.begin();
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
-//    ofPushMatrix();
-//    int fboW = ofGetHeight();
-//    int fboH = ofGetWidth();
-//    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-//    ofRotateZ(90);
-//    ofSetColor(255);
-//    myFbo.draw( -fboW*0.50f,  -fboH*0.50f, fboW, fboH);
-//    ofPopMatrix();
+    ofPushMatrix();
+    int fboW = ofGetHeight();
+    int fboH = ofGetWidth();
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+    ofSetColor(255);
+    myFbo.draw( -fboW*0.50f,  -fboH*0.50f, fboW, fboH);
+    ofPopMatrix();
 //    shader.end();
 //    shaderFbo.end();
 
-    ofSetColor(255);
-    shaderFbo.draw(0,0);
+//    ofSetColor(255);
+//    shaderFbo.draw(0,0);
     //----------------------------------------- grab cam data
     
 //    int k = 0;
