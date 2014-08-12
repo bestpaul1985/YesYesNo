@@ -9,12 +9,10 @@ void photo::init(int x, int y){
     condition = display;
     #ifdef _USE_4k_SCREEN
     sScale = ofRandom(3,4);
-    closeButtoRect.setFromCenter(600,-700,closeButton->getWidth(), closeButton->getHeight());
     sScale_Goal_1= 0.8;
     sScale_Goal_2= 1.0;
     #else
     sScale = ofRandom(11,13);
-    closeButtoRect.setFromCenter(600,-700,closeButton->getWidth(), closeButton->getHeight());
     sScale_Goal_1= 3.0;
     sScale_Goal_2= 4.0;
     #endif
@@ -60,8 +58,12 @@ void photo::draw(){
         ofSetColor(255);
         closeButton->draw(closeButtonRect);
     }
-    ofPopMatrix();
     
+   
+    ofPopMatrix();
+    ofSetColor(255,0,220);
+    ofCircle(closeButtonRect.getCenter(), 100 );
+   
 }
 
 //--------------------------------------------------------------
