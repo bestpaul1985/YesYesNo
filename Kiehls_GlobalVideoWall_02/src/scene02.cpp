@@ -138,18 +138,26 @@ void scene02::update(){
 
 void scene02::draw(){
   
+#ifdef _USE_4k_SCREEN
+    int width = camWidth;
+    int height = camHeight;
+
+#else
+    int width = ofGetWidth();
+    int height = ofGetHeight();
+#endif
     
 //    myFbo.begin();
     
     ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f, 0);
+    ofTranslate(width*0.5f, height*0.5f, 0);
     ofRotateZ(90);
     ofSetColor(255);
     lutImg.draw(lutPos.x, lutPos.y, camWidth, -camHeight);
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+300);
+    ofTranslate(width*0.5f, height*0.5f+300);
     ofSetColor(255);
     float size = 0.3f;
     motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
