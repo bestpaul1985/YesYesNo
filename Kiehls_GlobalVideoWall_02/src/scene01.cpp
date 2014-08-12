@@ -26,8 +26,8 @@ void scene01::setup(){
     targetPos = ofPoint(2160/2,3840/2);
     dragPoint = targetPos;
     
-    for (int i=0; i<20; i++) {
-        for (int j=0; j<100; j++) {
+    for (int i=0; i<80; i++) {
+        for (int j=0; j<20; j++) {
             photo temPhoto;
             photos.push_back(temPhoto);
             photos.back().init(140*j + (i%2)*ofRandom(50,60),140*i);
