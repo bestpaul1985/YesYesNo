@@ -159,12 +159,13 @@ void scene02::draw(){
     int height = ofGetHeight();
 #endif
     
-    myFbo.begin();
+//    myFbo.begin();
     
     ofPushMatrix();
     ofTranslate(width*0.5f, height*0.5f, 0);
+    ofRotateZ(90);
     ofSetColor(255);
-    lutImg.draw(lutPos.x, lutPos.y, camWidth, -camHeight);
+    lutImg.draw(-camWidth*0.5f, -camHeight*0.5f, camWidth, camHeight);
     ofPopMatrix();
     
     ofPushMatrix();
@@ -183,19 +184,19 @@ void scene02::draw(){
     }
     ofPopMatrix();
     
-    myFbo.end();
+//    myFbo.end();
     
 //    shaderFbo.begin();
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
-    ofPushMatrix();
-    int fboW = ofGetHeight();
-    int fboH = ofGetWidth();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofRotateZ(90);
-    ofSetColor(255);
-    myFbo.draw( -fboW*0.50f,  -fboH*0.50f, fboW, fboH);
-    ofPopMatrix();
+//    ofPushMatrix();
+//    int fboW = ofGetHeight();
+//    int fboH = ofGetWidth();
+//    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//    ofRotateZ(90);
+//    ofSetColor(255);
+//    myFbo.draw( -fboW*0.50f,  -fboH*0.50f, fboW, fboH);
+//    ofPopMatrix();
 //    shader.end();
 //    shaderFbo.end();
 
