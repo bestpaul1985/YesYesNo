@@ -159,7 +159,7 @@ void scene02::draw(){
     int height = ofGetHeight();
 #endif
     
-//    myFbo.begin();
+    myFbo.begin();
     
     ofPushMatrix();
     ofTranslate(width*0.5f, height*0.5f, 0);
@@ -169,6 +169,7 @@ void scene02::draw(){
     
     ofPushMatrix();
     ofTranslate(width*0.5f, height*0.5f+300);
+    ofRotateZ(90);
     ofSetColor(255);
     float size = 0.3f;
     motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
@@ -182,13 +183,13 @@ void scene02::draw(){
     }
     ofPopMatrix();
     
-//    myFbo.end();
+    myFbo.end();
     
 //    shaderFbo.begin();
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
-//    ofSetColor(255);
-//    myFbo.draw(0, 0);
+    ofSetColor(255);
+    myFbo.draw(0, 0);
 //    shader.end();
 //    shaderFbo.end();
 
