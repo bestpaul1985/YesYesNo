@@ -247,7 +247,7 @@ void scene02::draw(){
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(width/2, 100);
+    ofTranslate(ofGetWidth()/2, 200);
     if (counter>=0 && counter<=2) {
         float size = 1.0f;
         countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
