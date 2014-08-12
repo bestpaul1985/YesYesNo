@@ -9,7 +9,7 @@ void photo::init(int x, int y){
     condition = display;
     #ifdef _USE_4k_SCREEN
     sScale = ofRandom(3,4);
-    closeButto_Pos.set(600,-600);
+    closeButto_Pos.set(600,-700);
     sScale_Goal_1= 0.8;
     sScale_Goal_2= 1.0;
     #else
@@ -81,6 +81,8 @@ void photo::mousePressed(int x, int y, ofPoint centerPos, ofPoint targetPos){
         if ( dis < closeButton->getWidth()/2) {
             animation = zoomin_1;
         }
+        
+        cout<<dis<<endl;
     }
 }
 
@@ -94,7 +96,6 @@ void photo::anim(){
                 sScale = sScale_Goal_1;
                 animation = zoomout_2;
             }
-            cout<<sScale<<"   1"<<endl;
         }break;
             
         case zoomout_2:{
@@ -103,7 +104,6 @@ void photo::anim(){
                 sScale = sScale_Goal_2;
                 animation = stop;
             }
-            cout<<sScale<<"   222222"<<endl;
 
         }break;
             
