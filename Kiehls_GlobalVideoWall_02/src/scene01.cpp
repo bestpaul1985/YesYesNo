@@ -30,7 +30,7 @@ void scene01::setup(){
         for (int j=0; j<20; j++) {
             photo temPhoto;
             photos.push_back(temPhoto);
-            photos.back().init(140*j + (i%2)*ofRandom(50,60),140*i);
+            photos.back().init(240*j + (i%2)*ofRandom(50,60),240*i);
             photos.back().pic = &frame;
             photos.back().closeButton = &closeIcon;
         }
