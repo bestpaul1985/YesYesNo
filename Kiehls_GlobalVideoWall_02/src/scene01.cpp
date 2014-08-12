@@ -20,7 +20,7 @@ void scene01::setup(){
     narrow.loadImage("narrow.png");
     
     #ifdef _USE_4k_SCREEN
-        createOwnRect.setFromCenter(2160/2+500,3840/2+700, createOwn.getWidth()*2, createOwn.getHeight()*2);
+        createOwnRect.setFromCenter(2160/2+500,3840/2+900, createOwn.getWidth()*2, createOwn.getHeight()*2);
         zoomTimer = ofGetElapsedTimeMillis() - 3000;
         screenZ = -1000;
         centerPos = ofPoint(2160/2,3840/2);
