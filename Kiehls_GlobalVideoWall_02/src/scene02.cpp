@@ -219,7 +219,7 @@ void scene02::draw(){
     ofRotateZ(90);
     ofSetColor(255);
 
-    float scale =  ofGetHeight()/grabTexture.getHeight();
+    float scale =  ofGetWidth()/grabTexture.getHeight();
     grabTexture.draw(-grabTexture.getWidth()/2*scale, -grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, grabTexture.getHeight()*scale);
     ofPopMatrix();
     
