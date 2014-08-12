@@ -5,7 +5,7 @@
 void scene02::setup(){
     
     photoAction = STAND_BY;
-    counter = -1;
+    counter = 0;
     
     camWidth = 960;
     camHeight = 540;
