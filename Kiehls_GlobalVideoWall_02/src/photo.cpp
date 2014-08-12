@@ -104,7 +104,6 @@ void photo::anim(){
                 sScale = sScale_Goal_2;
                 animation = stop;
             }
-
         }break;
             
         case zoomin_1:{

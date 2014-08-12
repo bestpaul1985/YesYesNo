@@ -48,7 +48,6 @@ void scene01::setup(){
 
 //--------------------------------------------------------------
 void scene01::update(){
-    cout<<action<<endl;
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
