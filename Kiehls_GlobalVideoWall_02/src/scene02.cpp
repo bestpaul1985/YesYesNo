@@ -19,8 +19,8 @@ void scene02::setup(){
 	}
     
     #ifdef _USE_4k_SCREEN
-    camWidth = ofGetWidth();
-    camHeight = ofGetHeight();
+    camWidth = 960;
+    camHeight = 540;
     
     dir.allowExt("cube");
 	dir.listDir("LUTs/");
@@ -71,8 +71,8 @@ void scene02::setup(){
     
     //----------------------shader
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
-    myFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
-    shaderFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
+    myFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
+    shaderFbo.allocate(camWidth,camHeight, GL_RGBA, 4);
     
 
 }
