@@ -9,20 +9,14 @@ void photo::init(int x, int y){
     condition = display;
     #ifdef _USE_4k_SCREEN
     sScale = ofRandom(3,4);
-<<<<<<< HEAD
-=======
-   
->>>>>>> FETCH_HEAD
     sScale_Goal_1= 0.8;
     sScale_Goal_2= 1.0;
+    closeButton_Pos.set(600,-700);
     #else
     sScale = ofRandom(11,13);
-<<<<<<< HEAD
-=======
-    
->>>>>>> FETCH_HEAD
     sScale_Goal_1= 3.0;
     sScale_Goal_2= 4.0;
+    closeButton_Pos.set(600,-700);
     #endif
     oldScale = sScale;
     animation = initial;
@@ -62,16 +56,13 @@ void photo::draw(){
     ofRotateZ(angle);
     ofSetColor(255);
     pic->draw(-picW/2, -picH/2, picW, picH);
-    if(animation == stop){
-        ofSetColor(255);
-        closeButton->draw(closeButtonRect);
-    }
-    
-   
     ofPopMatrix();
     ofSetColor(255,0,220);
-    ofCircle(closeButtonRect.getCenter(), 100 );
-   
+    
+    if(animation == stop){
+        ofSetColor(255);
+        closeButton->draw(closeButton_Pos);
+    }
 }
 
 //--------------------------------------------------------------
@@ -89,17 +80,7 @@ void photo::mousePressed(int x, int y, ofPoint centerPos, ofPoint targetPos){
             animation = zoomout_1;
         }
     }
-    
-    
-    if (condition == seleced) {
-        rect.set(posX+closeButtonRect.getPosition().x, posY+closeButtonRect.getPosition().y, closeButton->getWidth(), closeButton->getHeight());
-        float dis = rect.getCenter().distance(mousePos);
-        if ( dis < closeButton->getWidth()/2) {
-            animation = zoomin_1;
-        }
-        
-        cout<<dis<<endl;
-    }
+
 }
 
 //--------------------------------------------------------------

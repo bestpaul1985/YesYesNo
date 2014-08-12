@@ -31,7 +31,7 @@ public:
     PHOTO_TYPE condition;
     PHOTO_ANIMATION animation;
     
-    ofRectangle closeButtonRect;
+    ofPoint closeButton_Pos;
     
     float angle;
     float sScale, oldScale;

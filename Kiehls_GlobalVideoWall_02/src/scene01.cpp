@@ -18,27 +18,44 @@ void scene01::setup(){
     moreMoto.loadImage("moreMoto.png");
     createOwn.loadImage("createOwn.png");
     narrow.loadImage("narrow.png");
-   
     
-    createOwnRect.setFromCenter(2160/2+500,3840/2+500, createOwn.getWidth(), createOwn.getHeight());
-    
-    
-    zoomTimer = ofGetElapsedTimeMillis() - 3000;
-    screenZ = -1000;
-    
-    centerPos = ofPoint(2160/2,3840/2);
-    targetPos = ofPoint(2160/2,3840/2);
-    dragPoint = targetPos;
-    
-    for (int i=0; i<80; i++) {
-        for (int j=0; j<20; j++) {
-            photo temPhoto;
-            photos.push_back(temPhoto);
-            photos.back().init(540*j + (i%2)*ofRandom(40,60),540*i);
-            photos.back().pic = &frame;
-            photos.back().closeButton = &closeIcon;
+    #ifdef _USE_4k_SCREEN
+        createOwnRect.setFromCenter(2160/2+500,3840/2+500, createOwn.getWidth()*2, createOwn.getHeight()*2);
+        zoomTimer = ofGetElapsedTimeMillis() - 3000;
+        screenZ = -1000;
+        centerPos = ofPoint(2160/2,3840/2);
+        targetPos = ofPoint(2160/2,3840/2);
+        dragPoint = targetPos;
+        for (int i=0; i<80; i++) {
+            for (int j=0; j<20; j++) {
+                photo temPhoto;
+                photos.push_back(temPhoto);
+                photos.back().init(540*j + (i%2)*ofRandom(40,60),540*i);
+                photos.back().pic = &frame;
+                photos.back().closeButton = &closeIcon;
+            }
         }
-    }
+
+    #else
+        createOwnRect.setFromCenter(2160/2+500,3840/2+500, createOwn.getWidth(), createOwn.getHeight());
+        zoomTimer = ofGetElapsedTimeMillis() - 3000;
+        screenZ = -2000;
+        centerPos = ofPoint(2160/8,3840/8);
+        targetPos = ofPoint(2160/8,3840/8);
+        dragPoint = targetPos;
+        for (int i=0; i<80; i++) {
+            for (int j=0; j<20; j++) {
+                photo temPhoto;
+                photos.push_back(temPhoto);
+                photos.back().init(130*j + (i%2)*ofRandom(40,60),130*i);
+                photos.back().pic = &frame;
+                photos.back().closeButton = &closeIcon;
+            }
+        }
+    #endif
+
+    
+   
     
     action = STAND_BY;
     bFixed = false;
