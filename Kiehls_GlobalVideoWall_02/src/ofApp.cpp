@@ -94,7 +94,7 @@ void ofApp::draw(){
         }break;
     }
     ofSetColor(0);
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 1000,1000);
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 100,100);
 }
 
 //--------------------------------------------------------------

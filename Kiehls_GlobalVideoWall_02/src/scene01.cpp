@@ -67,7 +67,6 @@ void scene01::setup(){
 //--------------------------------------------------------------
 void scene01::update(){
     
-    ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
     for (int i=0; i<photos.size(); i++) {
         photos[i].update();
