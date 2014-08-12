@@ -19,6 +19,10 @@ void scene01::setup(){
     createOwn.loadImage("createOwn.png");
     narrow.loadImage("narrow.png");
    
+    
+    createOwnRect.setFromCenter(2160/2+500,3840/2+500, createOwn.getWidth(), createOwn.getHeight());
+    
+    
     zoomTimer = ofGetElapsedTimeMillis() - 3000;
     screenZ = -1000;
     
@@ -139,8 +143,7 @@ void scene01::draw(){
     for (int i=0; i<photos.size(); i++) {
         if (photos[i].animation == photo::stop) {
             ofSetColor(255);
-
-            createOwn.draw(70, 700);
+            createOwn.draw(createOwnRect);
             moreMoto.draw(290, 700);
             break;
         }

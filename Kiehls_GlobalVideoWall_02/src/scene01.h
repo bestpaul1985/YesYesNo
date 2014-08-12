@@ -35,6 +35,8 @@ public:
     ofImage         createOwn;
     ofImage         narrow;
     
+    ofRectangle     createOwnRect;
+    
     vector<photo>   photos;
     float           zoomTimer;
 

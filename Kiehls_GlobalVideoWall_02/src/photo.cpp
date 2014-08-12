@@ -42,7 +42,7 @@ void photo::draw(){
     pic->draw(-picW/2, -picH/2, picW, picH);
     if(animation == stop){
         ofSetColor(255);
-        closeButton->draw(130,-170);
+        closeButton->draw(300,-300);
     }
     ofPopMatrix();
     
