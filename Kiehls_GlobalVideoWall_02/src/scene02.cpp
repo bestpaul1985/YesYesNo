@@ -189,7 +189,7 @@ void scene02::draw(){
     int fboW = ofGetWidth();
     int fboH = ofGetHeight();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetColor(255);
+    ofSetColor(200);
     myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
     ofPopMatrix();
 
@@ -216,8 +216,9 @@ void scene02::draw(){
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
-    ofSetColor(255);
     ofRotateZ(90);
+    ofSetColor(255);
+
     float scale =  ofGetHeight()/grabTexture.getHeight();
     grabTexture.draw(-grabTexture.getWidth()/2*scale, -grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, grabTexture.getHeight()*scale);
     ofPopMatrix();
