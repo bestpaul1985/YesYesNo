@@ -6,51 +6,28 @@ void scene02::setup(){
     
     photoAction = STAND_BY;
     counter = -1;
-    
-    #ifdef _USE_4k_SCREEN
+#ifdef _USE_4k_SCREEN
     camWidth = 960;
     camHeight = 540;
-    
-    dir.allowExt("cube");
-	dir.listDir("LUTs/");
-	dir.sort();
-    dirLoadIndex=0;
-    loadLUT(dir.getPath(dirLoadIndex));
-	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
-    lutPos.set(-lutImg.getWidth()*0.5f, lutImg.getHeight()*0.5f, 0);
-   
-    vector<ofVideoDevice> devices = vidGrabber.listDevices();
-	
-    for(int i = 0; i < devices.size(); i++){
-		cout << devices[i].id << ": " << devices[i].deviceName;
-        if( devices[i].bAvailable ){
-            cout << endl;
-        }else{
-            cout << " - unavailable " << endl;
-        }
-	}
-    vidGrabber.setDeviceID(0);
-	vidGrabber.setDesiredFrameRate(60);
-	vidGrabber.setVerbose(true);
-	vidGrabber.initGrabber(camWidth,camHeight);
-    grabWidth = 520;
-    grabHeight = 520;
-    photoData 	= new unsigned char[grabWidth*grabHeight*3];
-    grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
-    
-    #else
+
+#else
     camWidth = 960;
     camHeight = 540;
+
+#endif
+    
     //---------------------------LUT
     dir.allowExt("cube");
 	dir.listDir("LUTs/");
 	dir.sort();
     dirLoadIndex=0;
     loadLUT(dir.getPath(dirLoadIndex));
+	
 	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
     lutPos.set(-lutImg.getWidth()*0.5f, lutImg.getHeight()*0.5f, 0);
     
-    vector<ofVideoDevice> devices = vidGrabber.listDevices();
+    //we can now get back a list of devices.
+	vector<ofVideoDevice> devices = vidGrabber.listDevices();
 	
     for(int i = 0; i < devices.size(); i++){
 		cout << devices[i].id << ": " << devices[i].deviceName;
@@ -60,30 +37,31 @@ void scene02::setup(){
             cout << " - unavailable " << endl;
         }
 	}
-	vidGrabber.setDeviceID(-1);
+    
+    //------------------------------video grabber
+	vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(60);
+    
 	vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(camWidth,camHeight);
+    
     grabWidth = 520;
     grabHeight = 520;
+    
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
     
- 
-    #endif
-   
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
     countImage[0].loadImage("number1.png");
     countImage[1].loadImage("number2.png");
     countImage[2].loadImage("number3.png");
+    color.set(255,0);
     
     //----------------------shader
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
-    myFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
-    shaderFbo.allocate(camWidth,camHeight, GL_RGBA, 4);
-    
-
+    myFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
+    shaderFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
 }
 
 //--------------------------------------------------------------
