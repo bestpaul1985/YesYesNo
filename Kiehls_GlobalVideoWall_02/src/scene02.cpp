@@ -164,14 +164,14 @@ void scene02::draw(){
     ofTranslate(height*0.5f, width*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
-    lutImg.draw(-camWidth*0.5f, -camHeight*0.5f, camWidth, camHeight);
+    lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
     ofPopMatrix();
     
     myFbo.end();
     
 //    shaderFbo.begin();
 //    shader.begin();
-    shader.setUniform2f("mouse", mouseX, mouseY);
+//    shader.setUniform2f("mouse", mouseX, mouseY);
     ofSetColor(255);
     myFbo.draw(0,0);
 //    shader.end();
