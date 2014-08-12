@@ -221,7 +221,7 @@ void scene02::draw(){
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
-    float scale =  ofGetWidth()/camHeight;
+    float scale =  4;
     grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
     ofPopMatrix();
     
