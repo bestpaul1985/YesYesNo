@@ -68,7 +68,8 @@ void photo::mousePressed(int x, int y, ofPoint centerPos, ofPoint targetPos){
     
     if (condition == seleced) {
         rect.set(posX+130, posY-170, closeButton->getWidth(), closeButton->getHeight());
-        if (rect.inside(x, y)) {
+        float dis = rect.getCenter().distance(mousePos);
+        if ( dis < closeButton->getWidth()/2) {
             animation = zoomin_1;
         }
     }

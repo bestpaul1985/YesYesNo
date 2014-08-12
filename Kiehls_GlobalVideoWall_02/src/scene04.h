@@ -2,6 +2,14 @@
 
 class scene04 : public ofBaseApp{
 public:
+    enum ACTION{
+        DRASS_UP,
+        SOCIAL_PROP,
+        SOCIAL_NO_PROP,
+        SIGN_UP,
+        DONE
+    };
+    
     void setup();
     void update();
     void draw();
@@ -24,10 +32,20 @@ public:
     int                 photoWidth;
     int                 photoHeight;
     
-    ofRectangle         buttonRect;
-    ofImage             buttonImg;
-    
+    ofRectangle         buttonRect01;
+    ofRectangle         buttonRect02;
+    ofRectangle         buttonRect03;
+    ofRectangle         buttonRect04;
+
+    ofImage             buttonImg01;
+    ofImage             buttonImg02;
+    ofImage             buttonImg03;
+    ofImage             buttonImg04;
+
     ofRectangle         propRect;
     ofImage             propImage;
-
+    ofPoint             propTraget;
+    bool                bSelected;
+    
+    ACTION              action;
 };

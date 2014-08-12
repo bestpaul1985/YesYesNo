@@ -187,6 +187,14 @@ void scene02::keyPressed(int key){
             }
             loadLUT(dir.getPath(dirLoadIndex));
             break;
+            
+        case ' ':
+           
+            if (photoAction == STAND_BY) {
+                photoAction = COUNT_DOWN;
+            }
+            
+            break;
     }
 
     
@@ -305,7 +313,7 @@ void scene02::applyLUT(ofPixelsRef pix){
 //--------------------------------------------------------------
 void scene02::reset(){
     
-    photoAction = COUNT_DOWN;
+    photoAction = STAND_BY;
     counter = -1;
     color.set(255,0);
     

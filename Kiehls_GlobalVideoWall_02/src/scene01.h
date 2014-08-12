@@ -7,18 +7,14 @@ class scene01 : public ofBaseApp {
 public:
     enum ACTION{
         
+        STAND_BY,
+        ACTIVED,
+        SELECTED,
         CHOOSE_PHOTO,
         MORE_PHOTO,
         MAKE_PHOTO
     };
     
-    enum MOUSE_ACTION{
-        PRESS,
-        DRAG,
-        MOVE,
-        RELESE,
-        NONE
-    };
     void setup();
     void update();
     void draw();
@@ -33,26 +29,27 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     void reset();
-    
     ofImage         frame;
     ofImage         closeIcon;
     ofImage         moreMoto;
     ofImage         createOwn;
-    
+    ofImage         narrow;
     
     vector<photo>   photos;
-    bool            bSelected;
-    bool            bDrag;
-    bool            bPressed;
     float           zoomTimer;
-    int             screenZ;
+
+    float           screenZ;
+    bool            bFixed;
+    bool            bDrag;
+    bool            bNarrow;
+
     
     ofPoint         centerPos;
     ofPoint         targetPos;
+    
     ofPoint         lastMouse;
     ofPoint         dragPoint;
     ACTION          action;
-    MOUSE_ACTION    mouseAction;
     
 
 };

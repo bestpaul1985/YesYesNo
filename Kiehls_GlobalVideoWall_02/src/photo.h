@@ -30,7 +30,7 @@ public:
     ofPoint pos;
     PHOTO_TYPE condition;
     PHOTO_ANIMATION animation;
-
+    
     
     float angle;
     float sScale, oldScale;

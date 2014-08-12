@@ -32,7 +32,7 @@ void scene03::draw(){
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
     ofRotateZ(90);
     ofSetColor(255);
-    photo.draw(-photoWidth*0.5f, -photoHeight*0.5f,photoWidth,photoHeight);
+    photo.draw(-photoWidth*0.5f, photoHeight*0.5f,photoWidth,-photoHeight);
     ofPopMatrix();
     
     ofPushMatrix();
@@ -152,7 +152,6 @@ void scene03::draw(){
         ofFill();
         meshes[i].draw();
     }
-
 }
 
 //--------------------------------------------------------------
@@ -186,10 +185,12 @@ void scene03::mousePressed(int x, int y, int button){
     ofRectangle sign;
     ofRectangle retake;
     
-    sign.setFromCenter(sing_it_01_Pos, sing_it_01.getWidth(), sing_it_01.getHeight());
     retake.setFromCenter(sing_it_02_Pos, sing_it_02.getWidth(), sing_it_02.getHeight());
     
-    if (sign.inside(x, y)) {
+    ofPoint org = sing_it_01_Pos;
+    ofPoint mousePos(x,y);
+    float dis = org.distance(mousePos);
+    if (dis<sing_it_01.getWidth()/2) {
         bSign = true;
     }
     

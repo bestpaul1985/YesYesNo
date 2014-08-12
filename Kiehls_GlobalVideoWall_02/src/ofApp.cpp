@@ -10,7 +10,7 @@ void ofApp::setup(){
     myScene02.setup();
     myScene03.setup();
     myScene04.setup();
-    status =DISPLAY_PHOTO;
+    status = DISPLAY_PHOTO;
     //--------------------------------------
 
 }
@@ -25,7 +25,8 @@ void ofApp::update(){
             if (myScene01.action == scene01::MAKE_PHOTO) {
                 status = TAKE_PHOTO;
                 myScene02.photoTimer = ofGetElapsedTimeMillis();
-                myScene02.photoAction = scene02::COUNT_DOWN;
+                myScene02.photoAction = scene02::STAND_BY;
+                myScene01.reset();
             }
         }break;
             
@@ -55,9 +56,12 @@ void ofApp::update(){
         }break;
             
         case DRESS_PHOTO:{
-            
             myScene04.update();
-        
+            if(myScene04.action == scene04::DONE){
+                status = DISPLAY_PHOTO;
+                myScene04.reset();
+            }
+            
         }break;
     }
 
@@ -150,7 +154,8 @@ void ofApp::mouseDragged(int x, int y, int button){
         }break;
         case DRESS_PHOTO:{
             
-            
+            myScene04.mouseDragged(x, y, button);
+
         }break;
     }
 
@@ -178,8 +183,8 @@ void ofApp::mousePressed(int x, int y, int button){
         }break;
         case DRESS_PHOTO:{
             
+            myScene04.mousePressed(x, y, button);
 
-            
         }break;
     }
 
@@ -231,7 +236,6 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 //--------------------------------------------------------------
-
 void ofApp::reset(){
 
 }
