@@ -90,18 +90,21 @@ void photo::anim(){
     switch(animation){
         case zoomout_1:{
             sScale = 0.80 * sScale + 0.20 *sScale_Goal_1;
-            if (sScale < sScale_Goal_1*0.85f) {
+            if (sScale < sScale_Goal_1*0.90f) {
                 sScale = sScale_Goal_1;
                 animation = zoomout_2;
             }
+            cout<<sScale<<"   1"<<endl;
         }break;
             
         case zoomout_2:{
             sScale = 0.80 * sScale + 0.20 *sScale_Goal_2;
-            if (sScale > sScale_Goal_2*0.85f) {
+            if (sScale > sScale_Goal_2*0.90f) {
                 sScale = sScale_Goal_2;
                 animation = stop;
             }
+            cout<<sScale<<"   2"<<endl;
+
         }break;
             
         case zoomin_1:{
