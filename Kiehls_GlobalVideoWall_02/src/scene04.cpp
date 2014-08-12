@@ -2,9 +2,16 @@
 
 //--------------------------------------------------------------
 void scene04::setup(){
+    
+#ifdef _USE_4k_SCREEN
+    frame.setFromCenter(0,0,1200,1350);
+    photoWidth = 1000;
+    photoHeight = 1000;
+#else
+    frame.setFromCenter(0,0,400,450);
     photoWidth = 350;
     photoHeight = 350;
-    frame.setFromCenter(0,0,400,450);
+#endif
     buttonImg01.loadImage("dress_01.png");
     buttonRect01.setFromCenter(ofGetWidth()/2-120,ofGetHeight()/2+280, buttonImg01.getWidth(), buttonImg01.getHeight());
     buttonImg02.loadImage("dress_02.png");
