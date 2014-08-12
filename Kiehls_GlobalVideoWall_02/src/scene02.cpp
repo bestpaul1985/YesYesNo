@@ -5,7 +5,7 @@
 void scene02::setup(){
     
     photoAction = STAND_BY;
-    counter = 0;
+    counter = -1;
     
     camWidth = 960;
     camHeight = 540;
@@ -33,7 +33,7 @@ void scene02::setup(){
 	}
     
     //------------------------------video grabber
-	vidGrabber.setDeviceID(1);
+	vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(60);
     
 	vidGrabber.setVerbose(true);
