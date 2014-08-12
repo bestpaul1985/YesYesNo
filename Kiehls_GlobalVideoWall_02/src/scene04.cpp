@@ -4,18 +4,18 @@
 void scene04::setup(){
     
 #ifdef _USE_4k_SCREEN
-    frame.setFromCenter(0,0,1200,1350);
-    photoWidth = 1000;
-    photoHeight = 1000;
-    float sacle = 2;
+    frame.setFromCenter(0,0,1700,1850);
+    photoWidth = 1500;
+    photoHeight = 1500;
+    
     buttonImg01.loadImage("dress_01.png");
-    buttonRect01.setFromCenter(ofGetWidth()/2-120,ofGetHeight()/2+280, buttonImg01.getWidth()*sacle, buttonImg01.getHeight()*sacle);
+    buttonRect01.setFromCenter(ofGetWidth()/2-120,ofGetHeight()/2+280, buttonImg01.getWidth(), buttonImg01.getHeight());
     buttonImg02.loadImage("dress_02.png");
-    buttonRect02.setFromCenter(ofGetWidth()/2+120,ofGetHeight()/2+280, buttonImg02.getWidth()*sacle, buttonImg02.getHeight()*sacle);
+    buttonRect02.setFromCenter(ofGetWidth()/2+120,ofGetHeight()/2+280, buttonImg02.getWidth(), buttonImg02.getHeight());
     buttonImg03.loadImage("dress_03.png");
-    buttonRect03.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg03.getWidth()*sacle, buttonImg03.getHeight()*sacle);
+    buttonRect03.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg03.getWidth(), buttonImg03.getHeight());
     buttonImg04.loadImage("dress_04.png");
-    buttonRect04.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg04.getWidth()*sacle, buttonImg04.getHeight()*sacle);
+    buttonRect04.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg04.getWidth(), buttonImg04.getHeight());
     
     propImage.loadImage("helmet.png");
     propRect.setFromCenter(500, 500, propImage.getWidth(), propImage.getHeight());

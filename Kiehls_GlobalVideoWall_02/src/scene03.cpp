@@ -4,9 +4,9 @@
 void scene03::setup(){
     
 #ifdef _USE_4k_SCREEN
-    frame.setFromCenter(0,0,1200,1350);
-    photoWidth = 1000;
-    photoHeight = 1000;
+    frame.setFromCenter(0,0,1700,1850);
+    photoWidth = 1500;
+    photoHeight = 1500;
     
     sing_it_01.loadImage("sing_it_01.png");
     sing_it_02.loadImage("sing_it_02.png");
