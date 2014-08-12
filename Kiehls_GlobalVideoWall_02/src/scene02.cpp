@@ -189,8 +189,8 @@ void scene02::draw(){
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
     ofPushMatrix();
-    int fboW = ofGetWidth();
-    int fboH = ofGetHeight();
+    int fboW = ofGetHeight();
+    int fboH = ofGetWidth();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofRotateZ(90);
     ofSetColor(255);
