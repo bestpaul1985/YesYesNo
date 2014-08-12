@@ -20,7 +20,7 @@ void scene01::setup(){
     narrow.loadImage("narrow.png");
    
     zoomTimer = ofGetElapsedTimeMillis() - 3000;
-    screenZ = -200;
+    screenZ = -1000;
     
     centerPos = ofPoint(2160/2,3840/2);
     targetPos = ofPoint(2160/2,3840/2);

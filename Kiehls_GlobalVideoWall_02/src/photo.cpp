@@ -7,7 +7,7 @@ void photo::init(int x, int y){
     pos.set(x,y);
     angle = ofRandom(-5,5);
     condition = display;
-    sScale = ofRandom(6,8);
+    sScale = ofRandom(2,4);
     oldScale = sScale;
     animation = initial;
     

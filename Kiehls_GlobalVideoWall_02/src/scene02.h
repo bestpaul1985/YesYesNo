@@ -24,8 +24,8 @@ public:
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
         void reset();
-    void loadLUT(string path);
-    void applyLUT(ofPixelsRef pix);
+        void loadLUT(string path);
+        void applyLUT(ofPixelsRef pix);
     
     
     int 				camWidth;
