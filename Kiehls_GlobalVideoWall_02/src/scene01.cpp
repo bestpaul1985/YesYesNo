@@ -30,7 +30,7 @@ void scene01::setup(){
         for (int j=0; j<20; j++) {
             photo temPhoto;
             photos.push_back(temPhoto);
-            photos.back().init(540*j + (i%2)*ofRandom(50,100),540*i);
+            photos.back().init(540*j + (i%2)*ofRandom(40,60),540*i);
             photos.back().pic = &frame;
             photos.back().closeButton = &closeIcon;
         }
@@ -57,13 +57,13 @@ void scene01::update(){
         }break;
         case ACTIVED:{
             if (ofGetElapsedTimeMillis()-zoomTimer > 2000) {
-                screenZ = 0.92 * screenZ + 0.08 * -200;
+                screenZ = 0.92 * screenZ + 0.08 * -1000;
                 bFixed = false;
                 bDrag = false;
                 bNarrow = false;
-                if (screenZ < -187) {
+                if (screenZ < -957) {
                     action = STAND_BY;
-                    screenZ = -200;
+                    screenZ = -1000;
                 }
             }else{
                 screenZ = 0.90 * screenZ + 0.10 * 0;
