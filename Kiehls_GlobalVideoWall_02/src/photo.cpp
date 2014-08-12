@@ -11,12 +11,10 @@ void photo::init(int x, int y){
     sScale = ofRandom(3,4);
     sScale_Goal_1= 0.8;
     sScale_Goal_2= 1.0;
-    closeButton_Pos.set(600,-700);
     #else
     sScale = ofRandom(11,13);
     sScale_Goal_1= 3.0;
     sScale_Goal_2= 4.0;
-    closeButton_Pos.set(600,-700);
     #endif
     oldScale = sScale;
     animation = initial;
@@ -53,11 +51,7 @@ void photo::draw(){
     pic->draw(-picW/2, -picH/2, picW, picH);
     ofPopMatrix();
     ofSetColor(255,0,220);
-    
-    if(animation == stop){
-        ofSetColor(255);
-        closeButton->draw(closeButton_Pos);
-    }
+
 }
 
 //--------------------------------------------------------------

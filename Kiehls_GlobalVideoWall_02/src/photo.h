@@ -26,7 +26,6 @@ public:
     void mousePressed(int x, int y, ofPoint centerPos, ofPoint targetPos);
 
     ofImage *pic;
-    ofImage *closeButton;
     ofPoint pos;
     PHOTO_TYPE condition;
     PHOTO_ANIMATION animation;

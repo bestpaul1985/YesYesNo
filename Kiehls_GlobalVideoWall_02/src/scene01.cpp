@@ -20,7 +20,7 @@ void scene01::setup(){
     narrow.loadImage("narrow.png");
     
     #ifdef _USE_4k_SCREEN
-        createOwnRect.setFromCenter(2160/2+500,3840/2+500, createOwn.getWidth()*2, createOwn.getHeight()*2);
+        createOwnRect.setFromCenter(2160/2+500,3840/2+700, createOwn.getWidth()*2, createOwn.getHeight()*2);
         zoomTimer = ofGetElapsedTimeMillis() - 3000;
         screenZ = -1000;
         centerPos = ofPoint(2160/2,3840/2);
@@ -32,7 +32,6 @@ void scene01::setup(){
                 photos.push_back(temPhoto);
                 photos.back().init(540*j + (i%2)*ofRandom(40,60),540*i);
                 photos.back().pic = &frame;
-                photos.back().closeButton = &closeIcon;
             }
         }
 
@@ -49,7 +48,6 @@ void scene01::setup(){
                 photos.push_back(temPhoto);
                 photos.back().init(130*j + (i%2)*ofRandom(40,60),130*i);
                 photos.back().pic = &frame;
-                photos.back().closeButton = &closeIcon;
             }
         }
     #endif
