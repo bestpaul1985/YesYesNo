@@ -214,6 +214,9 @@ void scene02::draw(){
     }
     grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
     
+  
+    
+#ifdef _USE_4k_SCREEN
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
@@ -221,6 +224,17 @@ void scene02::draw(){
     float scale =  ofGetWidth()/camHeight;
     grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
     ofPopMatrix();
+    
+    cout<<scale<<endl;
+    
+#else
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
+    ofRotateZ(90);
+    ofSetColor(255);
+    grabTexture.draw(-grabTexture.getWidth()/2, grabTexture.getHeight()/2, grabTexture.getWidth(), -grabTexture.getHeight());
+    ofPopMatrix();
+#endif
     
     ofSetColor(color);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
