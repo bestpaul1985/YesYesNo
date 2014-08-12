@@ -7,17 +7,6 @@ void scene02::setup(){
     photoAction = STAND_BY;
     counter = -1;
     
-    vector<ofVideoDevice> devices = vidGrabber.listDevices();
-	
-    for(int i = 0; i < devices.size(); i++){
-		cout << devices[i].id << ": " << devices[i].deviceName;
-        if( devices[i].bAvailable ){
-            cout << endl;
-        }else{
-            cout << " - unavailable " << endl;
-        }
-	}
-    
     #ifdef _USE_4k_SCREEN
     camWidth = 960;
     camHeight = 540;
@@ -30,6 +19,16 @@ void scene02::setup(){
 	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
     lutPos.set(-lutImg.getWidth()*0.5f, lutImg.getHeight()*0.5f, 0);
    
+    vector<ofVideoDevice> devices = vidGrabber.listDevices();
+	
+    for(int i = 0; i < devices.size(); i++){
+		cout << devices[i].id << ": " << devices[i].deviceName;
+        if( devices[i].bAvailable ){
+            cout << endl;
+        }else{
+            cout << " - unavailable " << endl;
+        }
+	}
     vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(60);
 	vidGrabber.setVerbose(true);
@@ -51,6 +50,16 @@ void scene02::setup(){
 	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
     lutPos.set(-lutImg.getWidth()*0.5f, lutImg.getHeight()*0.5f, 0);
     
+    vector<ofVideoDevice> devices = vidGrabber.listDevices();
+	
+    for(int i = 0; i < devices.size(); i++){
+		cout << devices[i].id << ": " << devices[i].deviceName;
+        if( devices[i].bAvailable ){
+            cout << endl;
+        }else{
+            cout << " - unavailable " << endl;
+        }
+	}
 	vidGrabber.setDeviceID(-1);
 	vidGrabber.setDesiredFrameRate(60);
 	vidGrabber.setVerbose(true);
