@@ -22,8 +22,8 @@ void scene01::setup(){
     zoomTimer = ofGetElapsedTimeMillis() - 3000;
     screenZ = -200;
     
-    centerPos = ofPoint(2160/8,3840/8);
-    targetPos = ofPoint(2160/8,3840/8);
+    centerPos = ofPoint(2160/2,3840/2);
+    targetPos = ofPoint(2160/2,3840/2);
     dragPoint = targetPos;
     
     for (int i=0; i<10; i++) {
