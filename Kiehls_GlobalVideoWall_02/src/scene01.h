@@ -38,7 +38,10 @@ public:
     ofImage         narrow;
     
     ofRectangle     createOwnRect;
-    
+    ofRectangle     moreMotoRect;
+    ofRectangle     closeIconRext;
+
+
     vector<photo>   photos;
     float           zoomTimer;
 
