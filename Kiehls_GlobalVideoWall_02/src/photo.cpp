@@ -80,17 +80,17 @@ void photo::anim(){
     
     switch(animation){
         case zoomout_1:{
-            sScale = 0.80 * sScale + 0.20 *3.5;
-            if (sScale < 3.60) {
-                sScale = 3.50;
+            sScale = 0.80 * sScale + 0.20 *0.8;
+            if (sScale < 0.85) {
+                sScale = 0.80;
                 animation = zoomout_2;
             }
         }break;
             
         case zoomout_2:{
-            sScale = 0.80 * sScale + 0.20 *4;
-            if (sScale > 3.9) {
-                sScale = 4;
+            sScale = 0.80 * sScale + 0.20 *1;
+            if (sScale > 0.95) {
+                sScale = 1;
                 animation = stop;
             }
         }break;
