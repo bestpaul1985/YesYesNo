@@ -247,7 +247,11 @@ void scene02::draw(){
     ofPopMatrix();
     
     ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, 300);
+#ifdef _USE_4k_SCREEN
+    ofTranslate(ofGetWidth()/2, 400);
+#else
+    ofTranslate(ofGetWidth()/2, 100);
+#endif
     if (counter>=0 && counter<=2) {
         float size = 1.0f;
         countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
