@@ -7,7 +7,17 @@ void photo::init(int x, int y){
     pos.set(x,y);
     angle = ofRandom(-5,5);
     condition = display;
+    #ifdef _USE_4k_SCREEN
     sScale = ofRandom(3,4);
+    closeButto_Pos.set(600,-600);
+    sScale_Goal_1= 0.8;
+    sScale_Goal_2= 1.0;
+    #else
+    sScale = ofRandom(11,13);
+    closeButto_Pos.set(170,-130);
+    sScale_Goal_1= 3.0;
+    sScale_Goal_2= 4.0;
+    #endif
     oldScale = sScale;
     animation = initial;
     
@@ -42,10 +52,9 @@ void photo::draw(){
     pic->draw(-picW/2, -picH/2, picW, picH);
     if(animation == stop){
         ofSetColor(255);
-        closeButton->draw(300,-300);
+        closeButton->draw(closeButto_Pos);
     }
     ofPopMatrix();
-    
     
 }
 
@@ -67,7 +76,7 @@ void photo::mousePressed(int x, int y, ofPoint centerPos, ofPoint targetPos){
     
     
     if (condition == seleced) {
-        rect.set(posX+130, posY-170, closeButton->getWidth(), closeButton->getHeight());
+        rect.set(posX+closeButto_Pos.x, posY+closeButto_Pos.y, closeButton->getWidth(), closeButton->getHeight());
         float dis = rect.getCenter().distance(mousePos);
         if ( dis < closeButton->getWidth()/2) {
             animation = zoomin_1;
@@ -80,24 +89,24 @@ void photo::anim(){
     
     switch(animation){
         case zoomout_1:{
-            sScale = 0.80 * sScale + 0.20 *0.8;
-            if (sScale < 0.85) {
-                sScale = 0.80;
+            sScale = 0.80 * sScale + 0.20 *sScale_Goal_1;
+            if (sScale < sScale_Goal_1*0.9f) {
+                sScale = sScale_Goal_1;
                 animation = zoomout_2;
             }
         }break;
             
         case zoomout_2:{
-            sScale = 0.80 * sScale + 0.20 *1;
-            if (sScale > 0.95) {
-                sScale = 1;
+            sScale = 0.80 * sScale + 0.20 *sScale_Goal_2;
+            if (sScale > sScale_Goal_2*0.9f) {
+                sScale = sScale_Goal_2;
                 animation = stop;
             }
         }break;
             
         case zoomin_1:{
             sScale = 0.90 * sScale + 0.10 *oldScale;
-            if (oldScale - sScale < 0.5) {
+            if (oldScale - sScale < oldScale*0.050f) {
                 sScale = oldScale;
                 condition = display;
             }
