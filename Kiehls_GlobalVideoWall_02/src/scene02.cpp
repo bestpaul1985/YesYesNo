@@ -7,8 +7,8 @@ void scene02::setup(){
     photoAction = STAND_BY;
     counter = -1;
 #ifdef _USE_4k_SCREEN
-    camWidth = 960;
-    camHeight = 540;
+    camWidth = 1280;
+    camHeight = 720;
     //---------------------------LUT
     dir.allowExt("cube");
 	dir.listDir("LUTs/");
@@ -151,7 +151,6 @@ void scene02::draw(){
     
     ofPushMatrix();
     ofTranslate(width*0.5f, height*0.5f, 0);
-    ofRotateZ(90);
     ofSetColor(255);
     lutImg.draw(lutPos.x, lutPos.y, camWidth, -camHeight);
     ofPopMatrix();
