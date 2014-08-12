@@ -240,7 +240,7 @@ void scene02::draw(){
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
 
     ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+800);
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
     ofSetColor(255);
     float size = 1.0f;
     motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
