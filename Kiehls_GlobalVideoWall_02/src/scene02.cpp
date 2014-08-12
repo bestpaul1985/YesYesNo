@@ -42,6 +42,18 @@ void scene02::setup(){
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
     
+    //------------------------taking photo
+    motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
+    countImage[0].loadImage("number1.png");
+    countImage[1].loadImage("number2.png");
+    countImage[2].loadImage("number3.png");
+    color.set(255,0);
+    
+    //----------------------shader
+    shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
+    myFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
+    shaderFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
+    
 #else
     camWidth = 960;
     camHeight = 540;
