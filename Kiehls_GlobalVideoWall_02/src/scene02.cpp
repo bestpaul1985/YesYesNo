@@ -9,11 +9,11 @@ void scene02::setup(){
 #ifdef _USE_4k_SCREEN
     camWidth = 960;
     camHeight = 540;
-
+    
 #else
     camWidth = 960;
     camHeight = 540;
-
+    
 #endif
     
     //---------------------------LUT
@@ -28,7 +28,6 @@ void scene02::setup(){
     
     //we can now get back a list of devices.
 	vector<ofVideoDevice> devices = vidGrabber.listDevices();
-	
     for(int i = 0; i < devices.size(); i++){
 		cout << devices[i].id << ": " << devices[i].deviceName;
         if( devices[i].bAvailable ){
@@ -60,8 +59,8 @@ void scene02::setup(){
     
     //----------------------shader
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
-    myFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
-    shaderFbo.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA, 4);
+    myFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
+    shaderFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
 }
 
 //--------------------------------------------------------------

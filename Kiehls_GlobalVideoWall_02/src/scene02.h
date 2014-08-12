@@ -9,7 +9,6 @@ public:
         COUNT_DOWN,
         TAKING,
         DONE
-        
     };
 		void setup();
 		void update();
