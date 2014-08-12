@@ -71,6 +71,7 @@ void ofApp::update(){
 
 void ofApp::draw(){
     
+    
     switch (status) {
         case DISPLAY_PHOTO:{
             myScene01.draw();
@@ -119,6 +120,8 @@ void ofApp::keyPressed(int key){
         }break;
     }
     
+    ofSetColor(0);
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 100,100);
 }
 
 //--------------------------------------------------------------

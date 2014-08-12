@@ -51,8 +51,8 @@ void scene02::setup(){
     
     //----------------------shader
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
-    myFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
-    shaderFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
+    myFbo.allocate(camHeight,camWidth, GL_RGBA, 4);
+    shaderFbo.allocate(camHeight, camWidth, GL_RGBA, 4);
     
 #else
     camWidth = 960;
