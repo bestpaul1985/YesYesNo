@@ -1,5 +1,6 @@
 
 #include "ofMain.h"
+#define _USE_4k_SCREEN
 
 class scene03 : public ofBaseApp{
     

@@ -7,11 +7,24 @@ void scene04::setup(){
     frame.setFromCenter(0,0,1200,1350);
     photoWidth = 1000;
     photoHeight = 1000;
+    float sacle = 2;
+    buttonImg01.loadImage("dress_01.png");
+    buttonRect01.setFromCenter(ofGetWidth()/2-120,ofGetHeight()/2+280, buttonImg01.getWidth()*sacle, buttonImg01.getHeight()*sacle);
+    buttonImg02.loadImage("dress_02.png");
+    buttonRect02.setFromCenter(ofGetWidth()/2+120,ofGetHeight()/2+280, buttonImg02.getWidth()*sacle, buttonImg02.getHeight()*sacle);
+    buttonImg03.loadImage("dress_03.png");
+    buttonRect03.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg03.getWidth()*sacle, buttonImg03.getHeight()*sacle);
+    buttonImg04.loadImage("dress_04.png");
+    buttonRect04.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg04.getWidth()*sacle, buttonImg04.getHeight()*sacle);
+    
+    propImage.loadImage("helmet.png");
+    propRect.setFromCenter(500, 500, propImage.getWidth(), propImage.getHeight());
+    propTraget = propRect.getCenter();
 #else
     frame.setFromCenter(0,0,400,450);
     photoWidth = 350;
     photoHeight = 350;
-#endif
+    
     buttonImg01.loadImage("dress_01.png");
     buttonRect01.setFromCenter(ofGetWidth()/2-120,ofGetHeight()/2+280, buttonImg01.getWidth(), buttonImg01.getHeight());
     buttonImg02.loadImage("dress_02.png");
@@ -20,10 +33,12 @@ void scene04::setup(){
     buttonRect03.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg03.getWidth(), buttonImg03.getHeight());
     buttonImg04.loadImage("dress_04.png");
     buttonRect04.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg04.getWidth(), buttonImg04.getHeight());
-
+    
     propImage.loadImage("helmet.png");
     propRect.setFromCenter(100, 100, propImage.getWidth()/5, propImage.getHeight()/5);
     propTraget = propRect.getCenter();
+#endif
+  
 }
 
 //--------------------------------------------------------------
