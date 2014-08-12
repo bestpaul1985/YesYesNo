@@ -188,8 +188,12 @@ void scene02::draw(){
 //    shaderFbo.begin();
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
+    ofPushMatrix();
+    ofTranslate(0, 0);
+    ofRotateZ(90);
     ofSetColor(255);
-    myFbo.draw(0, 0);
+    myFbo.draw(0, 0,ofGetHeight(),ofGetWidth());
+    ofPopMatrix();
 //    shader.end();
 //    shaderFbo.end();
 
