@@ -45,11 +45,6 @@ void photo::update(){
 //--------------------------------------------------------------
 void photo::draw(){
 
-    #ifdef _USE_4k_SCREEN
-    closeButtonRect.setFromCenter(600,-700,closeButton->getWidth(), closeButton->getHeight());
-    #else
-    closeButtonRect.setFromCenter(600,-700,closeButton->getWidth(), closeButton->getHeight());
-    #endif
     
     ofPushMatrix();
     ofTranslate(pos);
