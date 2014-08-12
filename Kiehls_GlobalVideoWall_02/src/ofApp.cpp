@@ -93,7 +93,8 @@ void ofApp::draw(){
 
         }break;
     }
-  
+    ofSetColor(0);
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 1000,1000);
 }
 
 //--------------------------------------------------------------
@@ -120,8 +121,7 @@ void ofApp::keyPressed(int key){
         }break;
     }
     
-    ofSetColor(0);
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 100,100);
+   
 }
 
 //--------------------------------------------------------------
