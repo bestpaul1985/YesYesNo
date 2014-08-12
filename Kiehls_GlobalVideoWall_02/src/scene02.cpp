@@ -196,7 +196,7 @@ void scene02::draw(){
         for (int j=0; j< shaderFbo.getHeight(); j++) {
             
             if (i > ((shaderFbo.getWidth() - grabWidth)*0.5f)  && i <= ((shaderFbo.getWidth() - grabWidth)*0.5f + grabWidth) && j > (shaderFbo.getHeight()-grabHeight)*0.5f && j <= ((shaderFbo.getHeight()-grabHeight)*0.5f+grabHeight)) {
-                int ii = j * camWidth + i;
+                int ii = j * camHeight + i;
                 ofColor c = pix.getColor(i, j);
                 photoData[k * 3] = c.r;
                 photoData[k * 3 + 1] = c.g;
