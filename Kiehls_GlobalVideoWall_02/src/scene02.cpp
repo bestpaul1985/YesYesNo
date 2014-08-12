@@ -182,7 +182,7 @@ void scene02::draw(){
     int fboH = ofGetHeight();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofSetColor(255);
-    shaderFbo.draw(0,0);
+    shaderFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
     ofPopMatrix();
 
 
