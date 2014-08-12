@@ -101,6 +101,7 @@ void scene02::setup(){
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
     myFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
     shaderFbo.allocate(camWidth, camHeight, GL_RGBA, 4);
+    
 #endif
     
   
@@ -117,8 +118,6 @@ void scene02::update(){
         applyLUT(vidGrabber.getPixelsRef());
         
     }
-    
-  
     
     if (photoAction == COUNT_DOWN) {
         
@@ -166,21 +165,6 @@ void scene02::draw(){
     ofRotateZ(90);
     ofSetColor(255);
     lutImg.draw(-camWidth*0.5f, -camHeight*0.5f, camWidth, camHeight);
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(width*0.5f, height*0.5f+300);
-    ofSetColor(255);
-    float size = 0.3f;
-    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
-    ofPopMatrix();
-    
-    ofPushMatrix();
-    ofTranslate(width/2, 100);
-    if (counter>=0 && counter<=2) {
-        float size = 0.2f;
-        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
-    }
     ofPopMatrix();
     
     myFbo.end();
@@ -231,7 +215,21 @@ void scene02::draw(){
 //    ofSetColor(color);
 //    ofRect(0, 0, ofGetWidth(), ofGetHeight());
 
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+300);
+    ofSetColor(255);
+    float size = 1.0f;
+    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
+    ofPopMatrix();
     
+    ofPushMatrix();
+    ofTranslate(width/2, 100);
+    if (counter>=0 && counter<=2) {
+        float size = 1.0f;
+        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
+    }
+    ofPopMatrix();
+
 }
 
 //--------------------------------------------------------------
