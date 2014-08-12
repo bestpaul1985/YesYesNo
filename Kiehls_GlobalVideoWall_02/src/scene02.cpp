@@ -189,7 +189,7 @@ void scene02::draw(){
     int fboW = ofGetWidth();
     int fboH = ofGetHeight();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetColor(200);
+    ofSetColor(100);
     myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
     ofPopMatrix();
 
