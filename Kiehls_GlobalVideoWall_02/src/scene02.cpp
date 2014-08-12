@@ -19,21 +19,23 @@ void scene02::setup(){
 	}
     
     #ifdef _USE_4k_SCREEN
+    camWidth = ofGetWidth();
+    camHeight = ofGetHeight();
     
     dir.allowExt("cube");
 	dir.listDir("LUTs/");
 	dir.sort();
     dirLoadIndex=0;
     loadLUT(dir.getPath(dirLoadIndex));
-	lutImg.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
+	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
     lutPos.set(-lutImg.getWidth()*0.5f, lutImg.getHeight()*0.5f, 0);
    
     vidGrabber.setDeviceID(0);
 	vidGrabber.setDesiredFrameRate(60);
 	vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(camWidth,camHeight);
-    grabWidth = 1200;
-    grabHeight = 1200;
+    grabWidth = 520;
+    grabHeight = 520;
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
     
