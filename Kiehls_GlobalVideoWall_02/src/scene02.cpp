@@ -169,21 +169,21 @@ void scene02::draw(){
     
     myFbo.end();
     
-    shaderFbo.begin();
-    shader.begin();
+//    shaderFbo.begin();
+//    shader.begin();
     shader.setUniform2f("mouse", mouseX, mouseY);
     ofSetColor(255);
     myFbo.draw(0,0);
-    shader.end();
-    shaderFbo.end();
+//    shader.end();
+//    shaderFbo.end();
 
-    ofPushMatrix();
-    int fboW = ofGetWidth();
-    int fboH = ofGetHeight();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetColor(255);
-    shaderFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
-    ofPopMatrix();
+//    ofPushMatrix();
+//    int fboW = ofGetWidth();
+//    int fboH = ofGetHeight();
+//    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//    ofSetColor(255);
+//    shaderFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
+//    ofPopMatrix();
 
 
     //----------------------------------------- grab cam data
@@ -209,9 +209,9 @@ void scene02::draw(){
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
+    ofRotateZ(90);
     ofSetColor(255);
-    float scale = ofGetWidth()/camHeight;
-    grabTexture.draw(-grabTexture.getWidth()*scale/2, grabTexture.getHeight()*scale/2, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
+    grabTexture.draw(-grabTexture.getWidth()/2, grabTexture.getHeight()/2, grabTexture.getWidth(), -grabTexture.getHeight());
     ofPopMatrix();
     
     ofSetColor(color);
