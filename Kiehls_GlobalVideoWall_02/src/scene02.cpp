@@ -189,7 +189,7 @@ void scene02::draw(){
     int fboW = ofGetWidth();
     int fboH = ofGetHeight();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetColor(100);
+    ofSetColor(220);
     myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
     ofPopMatrix();
 
@@ -203,7 +203,7 @@ void scene02::draw(){
         for (int j=0; j< shaderFbo.getHeight(); j++) {
             
             if (i > ((shaderFbo.getWidth() - grabWidth)*0.5f)  && i <= ((shaderFbo.getWidth() - grabWidth)*0.5f + grabWidth) && j > (shaderFbo.getHeight()-grabHeight)*0.5f && j <= ((shaderFbo.getHeight()-grabHeight)*0.5f+grabHeight)) {
-                int ii = j * shaderFbo.getWidth() + i;
+                int ii = j * shaderFbo.getHeight() + i;
                 ofColor c = pix.getColor(i, j);
                 photoData[k * 3] = c.r;
                 photoData[k * 3 + 1] = c.g;
@@ -218,7 +218,6 @@ void scene02::draw(){
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
-
     float scale =  ofGetWidth()/grabTexture.getHeight();
     grabTexture.draw(-grabTexture.getWidth()/2*scale, -grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, grabTexture.getHeight()*scale);
     ofPopMatrix();
