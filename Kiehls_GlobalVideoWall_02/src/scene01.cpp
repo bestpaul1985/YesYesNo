@@ -21,6 +21,9 @@ void scene01::setup(){
     
     #ifdef _USE_4k_SCREEN
         createOwnRect.setFromCenter(2160/2+500,3840/2+900, createOwn.getWidth()*2, createOwn.getHeight()*2);
+        moreMotoRect.setFromCenter(2160/2-500,3840/2+900, moreMotoRect.getWidth()*2, moreMotoRect.getHeight()*2);
+        closeIconRext.setFromCenter(2160/2-500,3840/2-700, moreMotoRect.getWidth()*2, moreMotoRect.getHeight()*2);
+
         zoomTimer = ofGetElapsedTimeMillis() - 3000;
         screenZ = -1000;
         centerPos = ofPoint(2160/2,3840/2);
@@ -158,7 +161,7 @@ void scene01::draw(){
         if (photos[i].animation == photo::stop) {
             ofSetColor(255);
             createOwn.draw(createOwnRect);
-            moreMoto.draw(290, 700);
+            moreMoto.draw(moreMotoRect);
             break;
         }
     }
@@ -270,16 +273,11 @@ void scene01::mouseReleased(int x, int y, int button){
                     
                     photos[i].mousePressed(x, y, centerPos, targetPos);
                    
-                    ofRectangle rectMoreMoto;
-                    ofRectangle rectCreateOwn;
-                    rectMoreMoto.set(70, 700,moreMoto.getWidth(), moreMoto.getHeight());
-                    rectCreateOwn.set(290, 700, createOwn.getWidth(), createOwn.getHeight());
-                    
-                    if (rectMoreMoto.inside(x, y)) {
+                    if (moreMotoRect.inside(x, y)) {
                         action = MORE_PHOTO;
                         photos[i].animation = photo::zoomin_1;
                     }
-                    if (rectCreateOwn.inside(x, y)) {
+                    if (createOwnRect.inside(x, y)) {
                         action = MAKE_PHOTO;
                         photos[i].animation = photo::zoomin_1;
                     }
