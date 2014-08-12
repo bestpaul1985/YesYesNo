@@ -39,7 +39,7 @@ public:
     
     ofRectangle     createOwnRect;
     ofRectangle     moreMotoRect;
-    ofRectangle     closeIconRext;
+    ofRectangle     closeIconRect;
 
 
     vector<photo>   photos;

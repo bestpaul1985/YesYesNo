@@ -22,7 +22,7 @@ void scene01::setup(){
     #ifdef _USE_4k_SCREEN
         createOwnRect.setFromCenter(2160/2+500,3840/2+900, createOwn.getWidth()*2, createOwn.getHeight()*2);
         moreMotoRect.setFromCenter(2160/2-500,3840/2+900, moreMotoRect.getWidth()*2, moreMotoRect.getHeight()*2);
-        closeIconRext.setFromCenter(2160/2-500,3840/2-700, moreMotoRect.getWidth()*2, moreMotoRect.getHeight()*2);
+        closeIconRect.setFromCenter(2160/2-500,3840/2-700, moreMotoRect.getWidth()*2, moreMotoRect.getHeight()*2);
 
         zoomTimer = ofGetElapsedTimeMillis() - 3000;
         screenZ = -1000;
@@ -162,6 +162,7 @@ void scene01::draw(){
             ofSetColor(255);
             createOwn.draw(createOwnRect);
             moreMoto.draw(moreMotoRect);
+            closeIcon.draw(closeIconRect);
             break;
         }
     }
