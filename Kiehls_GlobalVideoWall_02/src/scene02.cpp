@@ -162,7 +162,7 @@ void scene02::draw(){
 //    myFbo.begin();
     
     ofPushMatrix();
-    ofTranslate(0, 0);
+    ofTranslate(height*0.5f, width*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
     lutImg.draw(-camWidth*0.5f, -camHeight*0.5f, camWidth, camHeight);
