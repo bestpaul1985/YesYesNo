@@ -36,8 +36,8 @@ void scene02::setup(){
 	vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(camWidth,camHeight);
     
-    grabWidth = 1000;
-    grabHeight = 1000;
+    grabWidth = 680;
+    grabHeight = 680;
     
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
@@ -218,7 +218,7 @@ void scene02::draw(){
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
 
     ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+300);
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+800);
     ofSetColor(255);
     float size = 1.0f;
     motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
