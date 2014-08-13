@@ -39,7 +39,6 @@ void scene02::setup(){
     grabWidth = 720;
     grabHeight = 720;
     
-    photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);
     
     
@@ -177,19 +176,12 @@ void scene02::draw(){
 
     
 #ifdef _USE_4k_SCREEN
-//    ofPushMatrix();
-//    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
-//    ofRotateZ(90);
-//    ofSetColor(255);
-//    float scale = ofGetWidth()/myFbo.getWidth();
-//    grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
-//    ofPopMatrix();
     
     ofSetColor(255);
     float scale = 3;
     myFbo.getTextureReference().drawSubsection(0, 500, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
-    grabTexture.loadScreenData(0, 500, 2160, 2160);
+    grabTexture.loadScreenData(0, 500, 500, 500);
     grabTexture.draw(0, 0, 500, 500);
     
 #else

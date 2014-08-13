@@ -33,8 +33,6 @@ public:
     int                 grabWidth;
     int                 grabHeight;
     
-    unsigned char * 	photoData;
-    
     
     PHOTO_ACTION        photoAction;
     ofVideoGrabber 		vidGrabber;
