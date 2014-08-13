@@ -89,7 +89,7 @@ void scene02::setup(){
     grabHeight = 520;
     
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
-    grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
+    grabTexture.allocate(2160, 2160,GL_RGB);
     
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
