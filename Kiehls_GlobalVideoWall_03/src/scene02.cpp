@@ -117,6 +117,10 @@ void scene02::update(){
 //        ofPixels blah =kinect.getRgbPixels();
 //        applyLUT(blah);
         grabTexture.loadData(kinect.getRgbPixels());
+        ofPixels pix;
+        grabTexture.readToPixels(pix);
+        applyLUT(pix);
+
     }
     
     if (photoAction == COUNT_DOWN) {
@@ -145,7 +149,6 @@ void scene02::update(){
     vidGrabber.update();
     if (vidGrabber.isFrameNew()){
         applyLUT(vidGrabber.getPixelsRef());
-        
     }
     
     if (photoAction == COUNT_DOWN) {
@@ -184,19 +187,19 @@ void scene02::draw(){
     int width = camWidth;
     int height = camHeight;
     
-//    myFbo.begin();
-//    
-//    ofPushMatrix();
-//    ofTranslate(height*0.5f, width*0.5f);
-//    ofRotateZ(90);
-//    ofSetColor(255);
-//    lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
-//    ofPopMatrix();
-//    
-//    myFbo.end();
+    myFbo.begin();
     
-//    ofSetColor(255);
-//    myFbo.draw(0, 0);
+    ofPushMatrix();
+    ofTranslate(height*0.5f, width*0.5f);
+    ofRotateZ(90);
+    ofSetColor(255);
+    lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
+    ofPopMatrix();
+    
+    myFbo.end();
+    
+    ofSetColor(255);
+    myFbo.draw(0, 0);
     
 //    ofRect(0, 0, ofGetWidth(), ofGetHeight());
 //    ofSetColor(255);
@@ -221,8 +224,6 @@ void scene02::draw(){
 //    }
 //    ofPopMatrix();
     
-    ofSetColor(255);
-    grabTexture.draw(0,0);
     
 #else
     int width = ofGetWidth();
