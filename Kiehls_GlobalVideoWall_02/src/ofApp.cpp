@@ -28,6 +28,12 @@ void ofApp::update(){
                 myScene02.photoAction = scene02::STAND_BY;
                 myScene01.reset();
             }
+            
+            if (myScene01.action == scene01::MORE_PHOTO) {
+                myScene01.reset();
+            }
+
+            
         }break;
             
         case TAKE_PHOTO:{
