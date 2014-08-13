@@ -8,8 +8,8 @@ void scene03::setup(){
     photoWidth = 1500;
     photoHeight = 1500;
     
-    sing_it_01.loadImage("sing_it_01.png");
-    sing_it_02.loadImage("sing_it_02.png");
+    sing_it_01.loadImage("images/sing_it.png");
+    sing_it_02.loadImage("images/retake.png");
     sing_it_01_Pos.set(ofGetWidth()/2-170, ofGetHeight()/2+130);
     sing_it_02_Pos.set( ofGetWidth()/2, ofGetHeight()/2+300);
 #else

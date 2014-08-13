@@ -13,13 +13,14 @@ void scene01::setup(){
     ofEnableAlphaBlending();
     
     ofBackground(230, 231, 232);
-    frame.loadImage("images/frame.png");
-    closeIcon.loadImage("closeImg.png");
-    moreMoto.loadImage("moreMoto.png");
-    createOwn.loadImage("createOwn.png");
-    narrow.loadImage("narrow.png");
+ 
     
     #ifdef _USE_4k_SCREEN
+        frame.loadImage("images/frame.png");
+        closeIcon.loadImage("images/closeImg.png");
+        moreMoto.loadImage("images/more.png");
+        createOwn.loadImage("images/make_your_own.png");
+        narrow.loadImage("images/narrow.png");
         createOwnRect.setFromCenter(2160/2+500,3840/2+900, createOwn.getWidth()*2, createOwn.getHeight()*2);
         moreMotoRect.setFromCenter(2160/2-500,3840/2+900, moreMoto.getWidth()*2, moreMoto.getHeight()*2);
         closeIconRect.setFromCenter(2160/2+700,3840/2-700, closeIcon.getWidth()*2, closeIcon.getHeight()*2);
@@ -39,6 +40,11 @@ void scene01::setup(){
         }
 
     #else
+        frame.loadImage("images/frame.png");
+        closeIcon.loadImage("closeImg.png");
+        moreMoto.loadImage("moreMoto.png");
+        createOwn.loadImage("createOwn.png");
+        narrow.loadImage("narrow.png");
         createOwnRect.setFromCenter(2160/2+500,3840/2+500, createOwn.getWidth(), createOwn.getHeight());
         zoomTimer = ofGetElapsedTimeMillis() - 3000;
         screenZ = -2000;

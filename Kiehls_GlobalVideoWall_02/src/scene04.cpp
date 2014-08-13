@@ -8,9 +8,9 @@ void scene04::setup(){
     photoWidth = 1500;
     photoHeight = 1500;
     
-    buttonImg01.loadImage("dress_01.png");
+    buttonImg01.loadImage("images/skip.png");
     buttonRect01.setFromCenter(ofGetWidth()/2-120,ofGetHeight()/2+280, buttonImg01.getWidth(), buttonImg01.getHeight());
-    buttonImg02.loadImage("dress_02.png");
+    buttonImg02.loadImage("images/ok.png");
     buttonRect02.setFromCenter(ofGetWidth()/2+120,ofGetHeight()/2+280, buttonImg02.getWidth(), buttonImg02.getHeight());
     buttonImg03.loadImage("dress_03.png");
     buttonRect03.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg03.getWidth(), buttonImg03.getHeight());
