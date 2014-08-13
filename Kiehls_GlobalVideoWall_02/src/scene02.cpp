@@ -216,9 +216,11 @@ void scene02::draw(){
 //    }
 //    grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
     
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofSetColor(255);
-    myFbo.getTextureReference().drawSubsection(0, 0, grabWidth, grabWidth, 0, 0, grabWidth, grabWidth);
-  
+    myFbo.getTextureReference().drawSubsection(-grabWidth*0.5f, -grabWidth*0.5f, grabWidth, grabWidth, 0, 0, grabWidth, grabWidth);
+    ofPopMatrix();
     
 #ifdef _USE_4k_SCREEN
 //    ofPushMatrix();
