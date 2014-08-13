@@ -40,7 +40,7 @@ void scene02::setup(){
     grabHeight = 680;
     
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
-    grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
+    grabTexture.allocate(camWidth, camHeight,GL_RGB);
     
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
@@ -169,6 +169,10 @@ void scene02::draw(){
     
     myFbo.end();
     
+    ofSetColor(255);
+    myFbo.getTextureReference().drawSubsection(0, 0, grabWidth, grabHeight, camWidth-grabWidth, camHeight-grabHeight, grabWidth, grabHeight);
+    
+    
 //    shaderFbo.begin();
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
@@ -193,6 +197,19 @@ void scene02::draw(){
     myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
     ofPopMatrix();
 
+  #ifdef _USE_4k_SCREEN
+
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
+    ofRotateZ(90);
+    ofSetColor(255);
+    float scale = ofGetWidth()/myFbo.getWidth();
+    grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
+    ofPopMatrix();
+    
+    cout<<scale<<endl;
+    
+#else
     //----------------------------------------- grab cam data
     
     int k = 0;
@@ -214,20 +231,10 @@ void scene02::draw(){
     }
     grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
     
-  
     
-#ifdef _USE_4k_SCREEN
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
-    ofRotateZ(90);
-    ofSetColor(255);
-    float scale = ofGetWidth()/myFbo.getWidth();
-    grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
-    ofPopMatrix();
     
-    cout<<scale<<endl;
     
-#else
+
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
