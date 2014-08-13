@@ -180,8 +180,8 @@ void scene02::draw(){
     
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     ofSetColor(255);
-    float scale = 3;
-    myFbo.getTextureReference().drawSubsection(0, 500, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
+    float scale = 2.5;
+    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 500, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
 #else
     ofPushMatrix();
