@@ -37,8 +37,8 @@ void scene02::setup(){
         }
 	}
     
-    grabWidth = 720;
-    grabHeight = 720;
+    grabWidth = 1080;
+    grabHeight = 1080;
     
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
@@ -201,28 +201,28 @@ void scene02::draw(){
     ofSetColor(255);
     myFbo.draw(0, 0);
     
-//    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-//    ofSetColor(255);
-//    float scale = 2.5;
-//    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(255);
+    float scale = 1.5;
+    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
-//    ofSetColor(color);
-//    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-//    
-//    ofPushMatrix();
-//    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
-//    ofSetColor(255);
-//    float size = 1.0f;
-//    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
-//    ofPopMatrix();
-//    
-//    ofPushMatrix();
-//    ofTranslate(ofGetWidth()/2, 400);
-//    if (counter>=0 && counter<=2) {
-//        float size = 1.0f;
-//        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
-//    }
-//    ofPopMatrix();
+    ofSetColor(color);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
+    ofSetColor(255);
+    float size = 1.0f;
+    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
+    ofPopMatrix();
+
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()/2, 400);
+    if (counter>=0 && counter<=2) {
+        float size = 1.0f;
+        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
+    }
+    ofPopMatrix();
     
     
 #else
