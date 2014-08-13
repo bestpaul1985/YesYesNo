@@ -15,8 +15,8 @@ void scene02::setup(){
     
     kinect.open();
 
-    camWidth = 1280;
-    camHeight = 720;
+    camWidth = 1980;
+    camHeight = 1080;
     //---------------------------LUT
     dir.allowExt("cube");
 	dir.listDir("LUTs/");
@@ -27,7 +27,6 @@ void scene02::setup(){
 	lutImg.allocate(camWidth, camHeight, OF_IMAGE_COLOR);
     lutPos.set(-lutImg.getWidth()*0.5f, lutImg.getHeight()*0.5f, 0);
     
-    //we can now get back a list of devices.
 	vector<ofVideoDevice> devices = vidGrabber.listDevices();
     for(int i = 0; i < devices.size(); i++){
 		cout << devices[i].id << ": " << devices[i].deviceName;
@@ -37,18 +36,9 @@ void scene02::setup(){
             cout << " - unavailable " << endl;
         }
 	}
-    //------------------------------video grabber
-	vidGrabber.setDeviceID(0);
-	vidGrabber.setDesiredFrameRate(60);
-    
-	vidGrabber.setVerbose(true);
-	vidGrabber.initGrabber(camWidth,camHeight);
     
     grabWidth = 720;
     grabHeight = 720;
-    
-    grabTexture.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);
-    
     
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
@@ -60,7 +50,6 @@ void scene02::setup(){
     //----------------------shader
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
     myFbo.allocate(camHeight,camWidth, GL_RGBA, 4);
-
     shaderFbo.allocate(camHeight, camWidth, GL_RGBA, 4);
     
 #else
@@ -123,9 +112,11 @@ void scene02::setup(){
 void scene02::update(){
 #ifdef _USE_4k_SCREEN
     kinect.update();
+    
     if( kinect.isFrameNew() ){
-        ofPixels blah =kinect.getRgbPixels();
-        applyLUT(blah);
+//        ofPixels blah =kinect.getRgbPixels();
+//        applyLUT(blah);
+        grabTexture.loadData(kinect.getRgbPixels());
     }
     
     if (photoAction == COUNT_DOWN) {
@@ -192,11 +183,50 @@ void scene02::draw(){
 #ifdef _USE_4k_SCREEN
     int width = camWidth;
     int height = camHeight;
-
+    
+//    myFbo.begin();
+//    
+//    ofPushMatrix();
+//    ofTranslate(height*0.5f, width*0.5f);
+//    ofRotateZ(90);
+//    ofSetColor(255);
+//    lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
+//    ofPopMatrix();
+//    
+//    myFbo.end();
+    
+//    ofSetColor(255);
+//    myFbo.draw(0, 0);
+    
+//    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+//    ofSetColor(255);
+//    float scale = 2.5;
+//    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
+    
+//    ofSetColor(color);
+//    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+//    
+//    ofPushMatrix();
+//    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
+//    ofSetColor(255);
+//    float size = 1.0f;
+//    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
+//    ofPopMatrix();
+//    
+//    ofPushMatrix();
+//    ofTranslate(ofGetWidth()/2, 400);
+//    if (counter>=0 && counter<=2) {
+//        float size = 1.0f;
+//        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
+//    }
+//    ofPopMatrix();
+    
+    ofSetColor(255);
+    grabTexture.draw(0,0);
+    
 #else
     int width = ofGetWidth();
     int height = ofGetHeight();
-#endif
     
     myFbo.begin();
     
@@ -209,32 +239,19 @@ void scene02::draw(){
     
     myFbo.end();
     
-    
     ofSetColor(255);
     myFbo.draw(0, 0);
-
     
-#ifdef _USE_4k_SCREEN
-    
-    grabTexture.loadScreenData(0, 0, grabWidth, grabHeight);
-    
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-    ofSetColor(255);
-    float scale = 2.5;
-    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
-    
-#else
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
     grabTexture.draw(-grabTexture.getWidth()/2, grabTexture.getHeight()/2, grabTexture.getWidth(), -grabTexture.getHeight());
     ofPopMatrix();
-#endif
     
     ofSetColor(color);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
-
+    
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
     ofSetColor(255);
@@ -243,16 +260,14 @@ void scene02::draw(){
     ofPopMatrix();
     
     ofPushMatrix();
-#ifdef _USE_4k_SCREEN
-    ofTranslate(ofGetWidth()/2, 400);
-#else
     ofTranslate(ofGetWidth()/2, 100);
-#endif
     if (counter>=0 && counter<=2) {
         float size = 1.0f;
         countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
     }
     ofPopMatrix();
+#endif
+    
 
 }
 
