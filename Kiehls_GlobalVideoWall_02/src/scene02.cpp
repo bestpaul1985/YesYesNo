@@ -185,14 +185,16 @@ void scene02::draw(){
 //    shaderFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
 //    ofPopMatrix();
 
-    ofPushMatrix();
-    int fboW = ofGetWidth();
-    int fboH = ofGetHeight();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
-    ofSetColor(220);
-    myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
-    ofPopMatrix();
+//    ofPushMatrix();
+//    int fboW = ofGetWidth();
+//    int fboH = ofGetHeight();
+//    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//    ofSetColor(220);
+//    myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
+//    ofPopMatrix();
 
+    ofSetColor(255);
+    myFbo.draw(0, 0);
     //----------------------------------------- grab cam data
     
 //    int k = 0;
@@ -215,19 +217,17 @@ void scene02::draw(){
 //    grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
     
     ofSetColor(255);
-    myFbo.getTextureReference().drawSubsection(0, 0, 100, 100, 0, 0, 100, 100);
+    myFbo.getTextureReference().drawSubsection(0, 0, grabWidth, grabWidth, 0, 0, grabWidth, grabWidth);
   
     
 #ifdef _USE_4k_SCREEN
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
-    ofRotateZ(90);
-    ofSetColor(255);
-    float scale = ofGetWidth()/myFbo.getWidth();
-    grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
-    ofPopMatrix();
-    
-    cout<<scale<<endl;
+//    ofPushMatrix();
+//    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
+//    ofRotateZ(90);
+//    ofSetColor(255);
+//    float scale = ofGetWidth()/myFbo.getWidth();
+//    grabTexture.draw(-grabTexture.getWidth()/2*scale, grabTexture.getHeight()/2*scale, grabTexture.getWidth()*scale, -grabTexture.getHeight()*scale);
+//    ofPopMatrix();
     
 #else
     ofPushMatrix();
