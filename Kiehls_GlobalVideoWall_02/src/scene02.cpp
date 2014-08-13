@@ -40,7 +40,7 @@ void scene02::setup(){
     grabHeight = 720;
     
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
-    grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
+    grabTexture.allocate(ofGetWidth(), ofGetHeight(),GL_RGB);
     
     
     //------------------------taking photo
