@@ -40,7 +40,7 @@ void scene02::setup(){
     grabHeight = 680;
     
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
-    grabTexture.allocate(camWidth, camHeight,GL_RGB);
+    grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
     
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
@@ -169,10 +169,6 @@ void scene02::draw(){
     
     myFbo.end();
     
-    ofSetColor(255);
-    myFbo.getTextureReference().drawSubsection(0, 0, grabWidth, grabHeight, camWidth-grabWidth, camHeight-grabHeight, grabWidth, grabHeight);
-    
-    
 //    shaderFbo.begin();
 //    shader.begin();
 //    shader.setUniform2f("mouse", mouseX, mouseY);
@@ -197,8 +193,30 @@ void scene02::draw(){
     myFbo.draw(-fboW*0.50f,-fboH*0.50f,fboW,fboH);
     ofPopMatrix();
 
-  #ifdef _USE_4k_SCREEN
-
+    //----------------------------------------- grab cam data
+    
+//    int k = 0;
+//    ofPixels pix;
+//    myFbo.readToPixels(pix);
+//    
+//    for (int i = 0; i < shaderFbo.getWidth(); i++){
+//        for (int j=0; j< shaderFbo.getHeight(); j++) {
+//            
+//            if (i > ((shaderFbo.getWidth() - grabWidth)*0.5f)  && i <= ((shaderFbo.getWidth() - grabWidth)*0.5f + grabWidth) && j > (shaderFbo.getHeight()-grabHeight)*0.5f && j <= ((shaderFbo.getHeight()-grabHeight)*0.5f+grabHeight)) {
+//                int ii = j * shaderFbo.getHeight() + i;
+//                ofColor c = pix.getColor(i, j);
+//                photoData[k * 3] = c.r;
+//                photoData[k * 3 + 1] = c.g;
+//                photoData[k * 3 + 2] = c.b;
+//                k ++;
+//            }
+//        }
+//    }
+//    grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
+    
+  
+    
+#ifdef _USE_4k_SCREEN
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
@@ -210,31 +228,6 @@ void scene02::draw(){
     cout<<scale<<endl;
     
 #else
-    //----------------------------------------- grab cam data
-    
-    int k = 0;
-    ofPixels pix;
-    myFbo.readToPixels(pix);
-    
-    for (int i = 0; i < shaderFbo.getWidth(); i++){
-        for (int j=0; j< shaderFbo.getHeight(); j++) {
-            
-            if (i > ((shaderFbo.getWidth() - grabWidth)*0.5f)  && i <= ((shaderFbo.getWidth() - grabWidth)*0.5f + grabWidth) && j > (shaderFbo.getHeight()-grabHeight)*0.5f && j <= ((shaderFbo.getHeight()-grabHeight)*0.5f+grabHeight)) {
-                int ii = j * shaderFbo.getHeight() + i;
-                ofColor c = pix.getColor(i, j);
-                photoData[k * 3] = c.r;
-                photoData[k * 3 + 1] = c.g;
-                photoData[k * 3 + 2] = c.b;
-                k ++;
-            }
-        }
-    }
-    grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
-    
-    
-    
-    
-
     ofPushMatrix();
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f);
     ofRotateZ(90);
@@ -250,7 +243,7 @@ void scene02::draw(){
     ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
     ofSetColor(255);
     float size = 1.0f;
-//    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
+    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
     ofPopMatrix();
     
     ofPushMatrix();
