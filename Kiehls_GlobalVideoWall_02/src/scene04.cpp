@@ -87,7 +87,7 @@ void scene04::draw(){
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
-    ofRotateZ(90);
+//    ofRotateZ(90);
     ofSetColor(255);
     photo.draw(-photoWidth*0.5f, photoHeight*0.5f,photoWidth,-photoHeight);
     ofPopMatrix();

@@ -176,13 +176,12 @@ void scene02::draw(){
     
 #ifdef _USE_4k_SCREEN
     
-    grabTexture.loadScreenData(0, 0, grabWidth, grabWidth);
-
+    grabTexture.loadScreenData(1, 1, grabWidth-1, grabWidth-1);
+    
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
     ofSetColor(255);
     float scale = 3;
     myFbo.getTextureReference().drawSubsection(0, 500, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
-    grabTexture.draw(0, 0, 500, 500);
-
     
 #else
     ofPushMatrix();
