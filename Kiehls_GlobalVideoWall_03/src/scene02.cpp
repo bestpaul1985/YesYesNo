@@ -15,7 +15,7 @@ void scene02::setup(){
     
     kinect.open();
 
-    camWidth = 1980;
+    camWidth = 1920;
     camHeight = 1080;
     //---------------------------LUT
     dir.allowExt("cube");
