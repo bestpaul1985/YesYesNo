@@ -220,7 +220,8 @@ void scene02::draw(){
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofSetColor(255);
     float scale = ofGetWidth()/myFbo.getWidth();
-    myFbo.getTextureReference().drawSubsection(-grabWidth*0.5f*scale, -grabWidth*0.5f*scale, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth*scale, grabWidth*scale);
+    ofScale(scale, scale);
+    myFbo.getTextureReference().drawSubsection(-grabWidth*0.5f, -grabWidth*0.5f, grabWidth, grabWidth, 0, 0, grabWidth, grabWidth);
     ofPopMatrix();
     
 #ifdef _USE_4k_SCREEN
