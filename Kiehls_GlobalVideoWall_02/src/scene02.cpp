@@ -36,8 +36,8 @@ void scene02::setup(){
 	vidGrabber.setVerbose(true);
 	vidGrabber.initGrabber(camWidth,camHeight);
     
-    grabWidth = 680;
-    grabHeight = 680;
+    grabWidth = 720;
+    grabHeight = 720;
     
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
@@ -219,7 +219,8 @@ void scene02::draw(){
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofSetColor(255);
-    myFbo.getTextureReference().drawSubsection(-grabWidth*0.5f, -grabWidth*0.5f, grabWidth, grabWidth, 0, 0, grabWidth, grabWidth);
+    float scale = ofGetWidth()/myFbo.getWidth();
+    myFbo.getTextureReference().drawSubsection(-grabWidth*0.5f*scale, -grabWidth*0.5f*scale, grabWidth, grabWidth, 0, 0, grabWidth*scale, grabWidth*scale);
     ofPopMatrix();
     
 #ifdef _USE_4k_SCREEN
