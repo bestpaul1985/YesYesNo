@@ -181,7 +181,7 @@ void scene02::draw(){
     float scale = 3;
     myFbo.getTextureReference().drawSubsection(0, 500, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
-    grabTexture.loadScreenData(0, 500, 500, 500);
+    grabTexture.loadScreenData(0, 500, 2160, 2160);
     grabTexture.draw(0, 0, 500, 500);
     
 #else
