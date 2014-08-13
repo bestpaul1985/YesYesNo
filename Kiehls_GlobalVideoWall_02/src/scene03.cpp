@@ -41,6 +41,13 @@ void scene03::draw(){
     ofPopMatrix();
     
     ofPushMatrix();
+#ifdef _USE_4k_SCREEN
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-125);
+
+#else
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
+
+#endif
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
     ofRotateZ(90);
     ofSetColor(255);
