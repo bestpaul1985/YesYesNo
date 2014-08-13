@@ -52,6 +52,10 @@ void scene02::setup(){
     //----------------------shader
     shader.load("photobooth_shaders/noise.vert", "photobooth_shaders/noise.frag");
     myFbo.allocate(camHeight,camWidth, GL_RGBA, 4);
+    myFbo.begin();
+    ofClear(0,0,0,255);
+    myFbo.end();
+    
     shaderFbo.allocate(camHeight, camWidth, GL_RGBA, 4);
     
 #else
