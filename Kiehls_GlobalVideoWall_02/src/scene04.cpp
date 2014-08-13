@@ -87,7 +87,7 @@ void scene04::draw(){
     
     ofPushMatrix();
 #ifdef _USE_4k_SCREEN
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-150);
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-75);
 #else
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
 #endif
