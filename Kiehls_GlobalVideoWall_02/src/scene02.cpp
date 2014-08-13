@@ -138,7 +138,7 @@ void scene02::update(){
     
     if (photoAction == TAKING) {
         if (ofGetElapsedTimeMillis() - photoTimer > 50) {
-            grabTexture.loadScreenData(0, 0, 33, 33);
+            grabTexture.loadScreenData(0, 500, 2160, 2160);
             photoAction = DONE;
         }
     }
