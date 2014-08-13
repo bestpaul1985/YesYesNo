@@ -42,6 +42,7 @@ void scene02::setup(){
     photoData 	= new unsigned char[grabWidth*grabHeight*3];
     grabTexture.allocate(grabWidth, grabHeight,GL_RGB);
     
+    
     //------------------------taking photo
     motor.loadImage("images/DL1000A_L4_RED_FRONT.png");
     countImage[0].loadImage("number1.png");
@@ -137,6 +138,7 @@ void scene02::update(){
     
     if (photoAction == TAKING) {
         if (ofGetElapsedTimeMillis() - photoTimer > 50) {
+            grabTexture.loadScreenData(0, 0, 33, 33);
             photoAction = DONE;
         }
     }
@@ -174,12 +176,9 @@ void scene02::draw(){
 //    myFbo.draw(0, 0);
     //----------------------------------------- grab cam data
 
-    ofPushMatrix();
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofSetColor(255);
     float scale = ofGetWidth()/myFbo.getWidth();
-    myFbo.getTextureReference().drawSubsection(-grabWidth*0.5f*scale, -grabWidth*0.5f*scale, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
-    ofPopMatrix();
+    myFbo.getTextureReference().drawSubsection(0,0, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
 #ifdef _USE_4k_SCREEN
 //    ofPushMatrix();
