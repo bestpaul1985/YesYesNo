@@ -10,8 +10,8 @@ void scene03::setup(){
     
     sing_it_01.loadImage("images/sing_it.png");
     sing_it_02.loadImage("images/retake.png");
-    sing_it_01_Pos.set(ofGetWidth()/2-170, ofGetHeight()/2+130);
-    sing_it_02_Pos.set( ofGetWidth()/2, ofGetHeight()/2+300);
+    sing_it_01_Pos.set(ofGetWidth()/2-500, ofGetHeight()/2+500);
+    sing_it_02_Pos.set(ofGetWidth()/2, ofGetHeight()/2+700);
 #else
     frame.setFromCenter(0,0,400,450);
     photoWidth = 350;
