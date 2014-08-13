@@ -42,11 +42,10 @@ void scene03::draw(){
     
     ofPushMatrix();
 #ifdef _USE_4k_SCREEN
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-125);
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-150);
 #else
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
 #endif
-//    ofRotateZ(90);
     ofSetColor(255);
     photo.draw(-photoWidth*0.5f, -photoHeight*0.5f,photoWidth,photoHeight);
     ofPopMatrix();
