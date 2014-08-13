@@ -21,8 +21,8 @@ void scene01::setup(){
         moreMoto.loadImage("images/more.png");
         createOwn.loadImage("images/make_your_own.png");
         narrow.loadImage("images/narrow.png");
-        createOwnRect.setFromCenter(2160/2+500,3840/2+900, createOwn.getWidth(), createOwn.getHeight());
-        moreMotoRect.setFromCenter(2160/2-500,3840/2+900, moreMoto.getWidth(), moreMoto.getHeight());
+        createOwnRect.setFromCenter(2160/2+500,3840/2+1100, createOwn.getWidth(), createOwn.getHeight());
+        moreMotoRect.setFromCenter(2160/2-500,3840/2+1100, moreMoto.getWidth(), moreMoto.getHeight());
         closeIconRect.setFromCenter(2160/2+700,3840/2-700, closeIcon.getWidth(), closeIcon.getHeight());
 
         zoomTimer = ofGetElapsedTimeMillis() - 3000;
