@@ -214,6 +214,8 @@ void scene02::draw(){
 //    }
 //    grabTexture.loadData(photoData, grabWidth,grabHeight, GL_RGB);
     
+    ofSetColor(255);
+    myFbo.getTextureReference().drawSubsection(0, 0, 100, 100, 0, 0, 100, 100);
   
     
 #ifdef _USE_4k_SCREEN
