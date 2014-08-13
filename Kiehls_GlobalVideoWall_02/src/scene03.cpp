@@ -10,8 +10,8 @@ void scene03::setup(){
     
     sing_it_01.loadImage("images/sing_it.png");
     sing_it_02.loadImage("images/retake.png");
-    sing_it_01_Pos.set(ofGetWidth()/2-500, ofGetHeight()/2+500);
-    sing_it_02_Pos.set(ofGetWidth()/2, ofGetHeight()/2+700);
+    sing_it_01_Pos.set(ofGetWidth()/2-500, ofGetHeight()/2+800);
+    sing_it_02_Pos.set(ofGetWidth()/2, ofGetHeight()/2+1100);
 #else
     frame.setFromCenter(0,0,400,450);
     photoWidth = 350;
@@ -43,12 +43,9 @@ void scene03::draw(){
     ofPushMatrix();
 #ifdef _USE_4k_SCREEN
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-125);
-
 #else
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
-
 #endif
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
     ofRotateZ(90);
     ofSetColor(255);
     photo.draw(-photoWidth*0.5f, photoHeight*0.5f,photoWidth,-photoHeight);
