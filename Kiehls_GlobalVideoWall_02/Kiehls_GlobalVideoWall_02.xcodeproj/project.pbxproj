@@ -472,6 +472,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+					"$(PROJECT_DIR)/ofxKinectV2/libs/libusb/lib/osx",
+					"$(PROJECT_DIR)/ofxOpenCv/libs/opencv/lib/osx",
 				);
 				PRODUCT_NAME = Kiehls_GlobalVideoWall_02Debug;
 				WRAPPER_EXTENSION = app;
@@ -557,6 +559,8 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					"$(PROJECT_DIR)/ofxKinectV2/libs/libusb/lib/osx",
+					"$(PROJECT_DIR)/ofxOpenCv/libs/opencv/lib/osx",
 				);
 				PRODUCT_NAME = Kiehls_GlobalVideoWall_02;
 				WRAPPER_EXTENSION = app;
