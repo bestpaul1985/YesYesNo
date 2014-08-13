@@ -176,7 +176,7 @@ void scene02::draw(){
     
 #ifdef _USE_4k_SCREEN
     
-    grabTexture.loadScreenData(1, 1, grabWidth-1, grabWidth-1);
+    grabTexture.loadScreenData(0, 0, grabWidth, grabHeight);
     
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     ofSetColor(255);
