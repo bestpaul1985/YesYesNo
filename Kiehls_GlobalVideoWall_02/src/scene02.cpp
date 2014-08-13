@@ -177,7 +177,7 @@ void scene02::draw(){
     //----------------------------------------- grab cam data
 
     ofSetColor(255);
-    float scale = 2.5;
+    float scale = 3;
     myFbo.getTextureReference().drawSubsection(0, 500, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
 #ifdef _USE_4k_SCREEN
