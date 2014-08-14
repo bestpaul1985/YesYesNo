@@ -108,14 +108,7 @@ void scene02::update(){
     
      ps3eye.update();
     if( ps3eye.isFrameNew() ){
-//        ofPixels blah =kinect.getRgbPixels();
-//        applyLUT(blah);
-        
-        grabTexture.loadData(ps3eye.getPixelsRef());
-        //ofPixels pix;
-        //grabTexture.readToPixels(pix);
-        //applyLUT(pix);
-
+        applyLUT(ps3eye.getPixelsRef());
     }
     
     if (photoAction == COUNT_DOWN) {
@@ -184,43 +177,41 @@ void scene02::draw(){
   
 #ifdef _USE_4k_SCREEN
   
-//    myFbo.begin();
+    myFbo.begin();
     
     ofPushMatrix();
     ofTranslate(camHeight*0.5f, camWidth*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
-    grabTexture.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
-    //lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
+    lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
     ofPopMatrix();
+    myFbo.end();
     
-//    myFbo.end();
+    ofSetColor(255);
+    myFbo.draw(0, 0);
     
-//    ofSetColor(255);
-//    myFbo.draw(0, 0);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(255);
+    float scale = 1.5;
+    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
-//    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-//    ofSetColor(255);
-//    float scale = 1.5;
-//    myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
-//    
-//    ofSetColor(color);
-//    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-//
-//    ofPushMatrix();
-//    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
-//    ofSetColor(255);
-//    float size = 1.0f;
-//    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
-//    ofPopMatrix();
-//
-//    ofPushMatrix();
-//    ofTranslate(ofGetWidth()/2, 400);
-//    if (counter>=0 && counter<=2) {
-//        float size = 1.0f;
-//        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
-//    }
-//    ofPopMatrix();
+    ofSetColor(color);
+    ofRect(0, 0, ofGetWidth(), ofGetHeight());
+
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()*0.5f, ofGetHeight()*0.5f+900);
+    ofSetColor(255);
+    float size = 1.0f;
+    motor.draw(-motor.getWidth()*size/2, -motor.getHeight()*size/2, motor.getWidth()*size, motor.getHeight()*size);
+    ofPopMatrix();
+
+    ofPushMatrix();
+    ofTranslate(ofGetWidth()/2, 400);
+    if (counter>=0 && counter<=2) {
+        float size = 1.0f;
+        countImage[counter].draw(-countImage[counter].getWidth()*size/2, -countImage[counter].getHeight()*size/2, countImage[counter].getWidth()*size, countImage[counter].getHeight()*size);
+    }
+    ofPopMatrix();
     
     
 #else
