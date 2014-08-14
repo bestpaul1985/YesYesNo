@@ -1,12 +1,13 @@
 
 #include "ofMain.h"
-#include "baseScene.h"
+#include "photo.h"
+
+#define _USE_4k_SCREEN
 
 
-class displayScene : public baseScene {
-	
+class scene01 : public ofBaseApp {
+
 public:
-    
     enum ACTION{
         
         STAND_BY,
@@ -17,11 +18,20 @@ public:
         MAKE_PHOTO
     };
     
-	void setup();
-	void update();
-	void draw();
-
+    void setup();
+    void update();
+    void draw();
     
+    void keyPressed(int key);
+    void keyReleased(int key);
+    void mouseMoved(int x, int y );
+    void mouseDragged(int x, int y, int button);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void windowResized(int w, int h);
+    void dragEvent(ofDragInfo dragInfo);
+    void gotMessage(ofMessage msg);
+    void reset();
     ofImage         frame;
     ofImage         closeIcon;
     ofImage         moreMoto;
@@ -31,15 +41,16 @@ public:
     ofRectangle     createOwnRect;
     ofRectangle     moreMotoRect;
     ofRectangle     closeIconRect;
-    
+
+
     vector<photo>   photos;
     float           zoomTimer;
-    
+
     float           screenZ;
     bool            bFixed;
     bool            bDrag;
     bool            bNarrow;
-    
+
     
     ofPoint         centerPos;
     ofPoint         targetPos;
@@ -48,5 +59,8 @@ public:
     ofPoint         dragPoint;
     ACTION          action;
     
+
+
 };
+
 
