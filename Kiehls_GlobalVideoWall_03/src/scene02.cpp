@@ -14,7 +14,6 @@ void scene02::setup(){
     }
     
    
-    kinect.open();
     camWidth = 1920;
     camHeight = 1080;
     //---------------------------LUT

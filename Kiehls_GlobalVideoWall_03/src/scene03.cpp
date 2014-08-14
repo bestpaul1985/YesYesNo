@@ -17,7 +17,7 @@ void scene03::setup(){
     photoWidth = 350;
     photoHeight = 350;
     
-    sing_it_01.loadImage("sing_it_01.png");
+    sing_it_01.loadImage("JoinTheCrowd.png");
     sing_it_02.loadImage("sing_it_02.png");
     sing_it_01_Pos.set(ofGetWidth()/2-170, ofGetHeight()/2+130);
     sing_it_02_Pos.set( ofGetWidth()/2, ofGetHeight()/2+300);

@@ -109,6 +109,10 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if (key == 'f') {
+        ofToggleFullscreen();
+    }
+    
     switch (status) {
         case DISPLAY_PHOTO:{
             myScene01.keyPressed(key);
