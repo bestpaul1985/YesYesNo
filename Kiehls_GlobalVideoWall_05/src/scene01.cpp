@@ -280,6 +280,9 @@ void scene01::mouseReleased(int x, int y, int button){
                     if (createOwnRect.inside(x, y)) {
                         action = MAKE_PHOTO;
                         photos[i].animation = photo::zoomin_1;
+                    }else if(!photos[i].frameRect.inside(x, y)){
+                        action = ACTIVED;
+                        photos[i].animation = photo::zoomin_1;
                     }
                 
                     break;

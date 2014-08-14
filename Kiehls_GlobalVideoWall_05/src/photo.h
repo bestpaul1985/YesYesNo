@@ -29,7 +29,7 @@ public:
     ofPoint pos;
     PHOTO_TYPE condition;
     PHOTO_ANIMATION animation;
-    
+    ofRectangle frameRect;
     ofPoint closeButton_Pos;
     
     float angle;
