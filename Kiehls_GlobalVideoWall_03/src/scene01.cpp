@@ -9,7 +9,6 @@
 #include "scene01.h"
 //--------------------------------------------------------------
 void scene01::setup(){
-   
     
     #ifdef _USE_4k_SCREEN
         frame.loadImage("images/frame.png");

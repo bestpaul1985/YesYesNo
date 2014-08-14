@@ -32,10 +32,9 @@ void ofApp::update(){
             if (myScene01.action == scene01::MORE_PHOTO) {
                 myScene01.reset();
             }
-
             
         }break;
-            
+           
         case TAKE_PHOTO:{
             myScene02.update();
             if (myScene02.photoAction == scene02::DONE) {
@@ -48,10 +47,17 @@ void ofApp::update(){
         case SIGN_IT:{
             myScene03.update();
             if (myScene03.bRetake) {
+                
+                myScene02.kinect.open();
+                
                 status = TAKE_PHOTO;
                 myScene03.reset();
             }
             if (myScene03.bSign) {
+                
+                
+                myScene02.kinect.close();
+                
                 status = DRESS_PHOTO;
                 for (int i=0; i<myScene03.meshes.size(); i++) {
                   myScene04.meshes.push_back(myScene03.meshes[i]);
