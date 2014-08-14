@@ -51,6 +51,7 @@ void ofApp::update(){
             myScene03.update();
             if (myScene03.bRetake) {
                 status = TAKE_PHOTO;
+                myScene02.kinect.open();
                 myScene03.reset();
             }
             if (myScene03.bSign) {
