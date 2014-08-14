@@ -190,7 +190,7 @@ void scene02::draw(){
     
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     ofSetColor(255);
-    float scale = 5;
+    float scale = 4.5;
     myFbo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale, 0, 0, grabWidth, grabWidth);
     
     
