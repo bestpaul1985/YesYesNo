@@ -11,6 +11,18 @@ void ofApp::setup(){
     myScene03.setup();
     myScene04.setup();
     status = DISPLAY_PHOTO;
+    
+    ofDirectory dir;
+    int nFiles = dir.listDir("image/photos");
+    if(nFiles) {
+        for(int i=0; i<myScene01.photos.size(); i++) {
+            string filePath = dir.getPath(i);
+            photos.push_back(ofImage());
+            photos.back().loadImage(filePath);
+            myScene01.photos[i].pic = &photos.back();
+        }
+        
+    }
     //--------------------------------------
 
 }
@@ -105,7 +117,10 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == 'f') {
+        ofToggleFullscreen();
+    }
+    
     switch (status) {
         case DISPLAY_PHOTO:{
             myScene01.keyPressed(key);

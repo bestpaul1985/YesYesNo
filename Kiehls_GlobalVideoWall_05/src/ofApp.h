@@ -39,5 +39,6 @@ class ofApp : public ofBaseApp{
         scene03             myScene03;
         scene04             myScene04;
         STATUS              status;
-
+    
+        vector<ofImage>        photos;
 };
