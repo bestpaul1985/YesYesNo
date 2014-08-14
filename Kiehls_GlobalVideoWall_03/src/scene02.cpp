@@ -116,10 +116,11 @@ void scene02::update(){
     if( kinect.isFrameNew() ){
 //        ofPixels blah =kinect.getRgbPixels();
 //        applyLUT(blah);
+        
         grabTexture.loadData(kinect.getRgbPixels());
-        ofPixels pix;
-        grabTexture.readToPixels(pix);
-        applyLUT(pix);
+        //ofPixels pix;
+        //grabTexture.readToPixels(pix);
+        //applyLUT(pix);
 
     }
     
@@ -182,6 +183,10 @@ void scene02::update(){
 //--------------------------------------------------------------
 
 void scene02::draw(){
+    ofSetColor(255);
+    
+   
+    
   
 #ifdef _USE_4k_SCREEN
     int width = camWidth;
@@ -193,7 +198,10 @@ void scene02::draw(){
     ofTranslate(height*0.5f, width*0.5f);
     ofRotateZ(90);
     ofSetColor(255);
-    lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
+    
+    
+    grabTexture.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
+    //lutImg.draw(-camWidth*0.5f, camHeight*0.5f, camWidth, -camHeight);
     ofPopMatrix();
     
     myFbo.end();
