@@ -44,7 +44,7 @@ void scene03::draw(){
     ofSetColor(255);
     int grabWidth = 480;
     int grabHeight = 480;
-    float scale = 4;
+    float scale = 3.5;
     photo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale-75, 0, 0, grabWidth, grabWidth);
 
 #else
