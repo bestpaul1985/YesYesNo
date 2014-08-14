@@ -27,6 +27,7 @@ void ofApp::update(){
                 status = TAKE_PHOTO;
                 myScene02.photoTimer = ofGetElapsedTimeMillis();
                 myScene02.photoAction = scene02::STAND_BY;
+                myScene02.kinect.open();
                 myScene01.reset();
             }
             
@@ -66,6 +67,7 @@ void ofApp::update(){
             myScene04.update();
             if(myScene04.action == scene04::DONE){
                 status = DISPLAY_PHOTO;
+                myScene02.kinect.close();
                 myScene04.reset();
             }
             
