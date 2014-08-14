@@ -29,7 +29,7 @@ void scene01::setup(){
             for (int j=0; j<20; j++) {
                 photo temPhoto;
                 photos.push_back(temPhoto);
-                photos.back().init(540*j + (i%2)*ofRandom(40,60),540*i);
+                photos.back().init(540*j + (i%2)*ofRandom(40,60)-1500,540*i-1500);
                 photos.back().pic = &frame;
             }
         }
@@ -276,9 +276,11 @@ void scene01::mouseReleased(int x, int y, int button){
                     if (moreMotoRect.inside(x, y)) {
                         action = MORE_PHOTO;
                         photos[i].animation = photo::zoomin_1;
-                    }
-                    if (createOwnRect.inside(x, y)) {
+                    }else if (createOwnRect.inside(x, y)) {
                         action = MAKE_PHOTO;
+                        photos[i].animation = photo::zoomin_1;
+                    }else if(!photos[i].frameRect.inside(x, y)){
+                        action = ACTIVED;
                         photos[i].animation = photo::zoomin_1;
                     }
                 
