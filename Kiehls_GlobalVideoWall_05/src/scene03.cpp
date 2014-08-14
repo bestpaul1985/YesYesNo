@@ -40,15 +40,22 @@ void scene03::draw(){
     ofRect(frame);
     ofPopMatrix();
     
-    ofPushMatrix();
 #ifdef _USE_4k_SCREEN
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-75);
-#else
-    ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
-#endif
     ofSetColor(255);
-    photo.draw(-photoWidth*0.5f, -photoHeight*0.5f,photoWidth,photoHeight);
-    ofPopMatrix();
+    int grabWidth = 480;
+    int grabHeight = 480;
+    float scale = 2.5;
+    photo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale-75, 0, 0, grabWidth, grabWidth);
+
+#else
+    ofSetColor(255);
+    int grabWidth = 480;
+    int grabHeight = 480;
+    float scale = 2.5;
+    photo.getTextureReference().drawSubsection((ofGetWidth()-grabWidth*scale)*0.5f, 800, grabWidth*scale, grabWidth*scale-25, 0, 0, grabWidth, grabWidth);
+#endif
+    
+    
     
     ofPushMatrix();
     ofTranslate(sing_it_01_Pos);

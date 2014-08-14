@@ -40,7 +40,7 @@ void ofApp::update(){
             myScene02.update();
             if (myScene02.photoAction == scene02::DONE) {
                 status = SIGN_IT;
-                myScene03.photo = myScene02.grabTexture;
+                myScene03.photo = myScene02.myFbo;
                 myScene02.reset();
             }
         }break;
@@ -56,7 +56,7 @@ void ofApp::update(){
                 for (int i=0; i<myScene03.meshes.size(); i++) {
                   myScene04.meshes.push_back(myScene03.meshes[i]);
                 }
-                myScene04.photo = myScene03.photo;
+                myScene04.photo = myScene02.myFbo;
                 myScene03.reset();
             }
         }break;

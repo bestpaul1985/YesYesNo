@@ -23,7 +23,7 @@ public:
     
 
     ofRectangle frame;
-    ofTexture   photo;
+    ofFbo       photo;
     int         photoWidth;
     int         photoHeight;
     ofImage     sing_it_01;
