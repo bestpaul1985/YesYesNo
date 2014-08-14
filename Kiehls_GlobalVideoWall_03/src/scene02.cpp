@@ -114,14 +114,7 @@ void scene02::update(){
     kinect.update();
     
     if( kinect.isFrameNew() ){
-//        ofPixels blah =kinect.getRgbPixels();
-//        applyLUT(blah);
-        
         grabTexture.loadData(kinect.getRgbPixels());
-        //ofPixels pix;
-        //grabTexture.readToPixels(pix);
-        //applyLUT(pix);
-
     }
     
     if (photoAction == COUNT_DOWN) {

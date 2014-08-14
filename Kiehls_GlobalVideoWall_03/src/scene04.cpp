@@ -91,8 +91,8 @@ void scene04::draw(){
 #else
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
 #endif
-    int grabWidth = 480;
-    int grabHeight = 480;
+    int grabWidth = 1080;
+    int grabHeight = 1080;
     photo.getTextureReference().drawSubsection(-photoWidth*0.5f, -photoHeight*0.5f,
                                                photoWidth,photoHeight, 0, 0,
                                                grabWidth, grabHeight);
