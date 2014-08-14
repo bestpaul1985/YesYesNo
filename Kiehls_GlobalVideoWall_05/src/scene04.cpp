@@ -12,9 +12,9 @@ void scene04::setup(){
     buttonRect01.setFromCenter(ofGetWidth()/2-500,ofGetHeight()/2+1250, buttonImg01.getWidth(), buttonImg01.getHeight());
     buttonImg02.loadImage("images/ok.png");
     buttonRect02.setFromCenter(ofGetWidth()/2+500,ofGetHeight()/2+1250, buttonImg02.getWidth(), buttonImg02.getHeight());
-    buttonImg03.loadImage("images/dress_03.png");
+    buttonImg03.loadImage("images/shareAndWin.png");
     buttonRect03.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg03.getWidth(), buttonImg03.getHeight());
-    buttonImg04.loadImage("images/dress_04.png");
+    buttonImg04.loadImage("images/JoinTheCrowd.png");
     buttonRect04.setFromCenter(ofGetWidth()/2,ofGetHeight()/2-20, buttonImg04.getWidth(), buttonImg04.getHeight());
     
     propImage.loadImage("helmet.png");
