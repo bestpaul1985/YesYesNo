@@ -28,7 +28,7 @@ public:
     void drawMesh();
     
     vector<ofMesh>      meshes;
-    ofTexture           photo;
+    ofFbo               photo;
     ofRectangle         frame;
     int                 photoWidth;
     int                 photoHeight;

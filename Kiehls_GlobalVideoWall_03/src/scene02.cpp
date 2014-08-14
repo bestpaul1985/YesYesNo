@@ -13,7 +13,7 @@ void scene02::setup(){
         ofExit();
     }
     
-//    kinect.open();
+   
 
     camWidth = 1920;
     camHeight = 1080;

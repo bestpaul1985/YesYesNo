@@ -46,8 +46,12 @@ void scene03::draw(){
 #else
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2-25);
 #endif
-    ofSetColor(255);
-    photo.draw(-photoWidth*0.5f, -photoHeight*0.5f,photoWidth,photoHeight);
+    int grabWidth = 480;
+    int grabHeight = 480;
+    photo.getTextureReference().drawSubsection(-photoWidth*0.5f, -photoHeight*0.5f,
+                                               photoWidth,photoHeight, 0, 0,
+                                               grabWidth, grabHeight);
+    
     ofPopMatrix();
     
     ofPushMatrix();

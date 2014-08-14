@@ -35,7 +35,6 @@ public:
     int                 grabWidth;
     int                 grabHeight;
     
-    
     PHOTO_ACTION        photoAction;
     ofVideoGrabber 		vidGrabber;
     ofTexture           grabTexture;
