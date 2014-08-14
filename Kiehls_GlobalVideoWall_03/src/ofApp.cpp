@@ -22,6 +22,7 @@ void ofApp::update(){
 
         case DISPLAY_PHOTO:{
             myScene01.update();
+          
             if (myScene01.action == scene01::MAKE_PHOTO) {
                 status = TAKE_PHOTO;
                 myScene02.photoTimer = ofGetElapsedTimeMillis();
