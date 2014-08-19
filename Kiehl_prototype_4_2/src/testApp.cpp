@@ -147,6 +147,10 @@ void testApp::draw(){
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
    
+    if (key == 'f'){
+        ofToggleFullscreen();
+    }
+    
     if(key == OF_KEY_LEFT){
         for (int i=0; i<drawFrames.size(); i++) {
             drawFrames[i].setTransition(Polaroidframe::GET_OUT,
