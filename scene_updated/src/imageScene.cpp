@@ -32,6 +32,6 @@ void imageScene::draw(){
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	ofSetColor(255,255,255);
 	frog.draw(100,100);
-	
+
 }
 	
