@@ -178,10 +178,9 @@ void ofApp::mouseDragged(int x, int y, int button){
     
     dragDx = 0.9f * dragDx + 0.1f * diff.x;
     
-    
     preMouse = currentMouse;
     
-    cout<<diff<<endl;
+    cout<<diff <<"  "<< dragDx<<endl;
 }
 
 //--------------------------------------------------------------
