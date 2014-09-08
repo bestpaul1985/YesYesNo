@@ -26,13 +26,13 @@ void startScene::draw(){
     ofSetColor(255);
     bgImage.draw(0,0,width,height);
     for (int i=0; i< buttons.size(); i++) {
-        if (buttons[i].myAction ==STEP3) {
+        if (!buttons[i].bMousePressed) {
             buttons[i].draw();
         }
     }
     
     for (int i=0; i< buttons.size(); i++) {
-        if (buttons[i].myAction !=STEP3) {
+        if (buttons[i].bMousePressed) {
             buttons[i].draw();
         }
     }
@@ -121,10 +121,10 @@ void startScene::mouseReleased(int x, int y, int button){
             matrix.glTranslate( buttons[i].pos.x, buttons[i].pos.y, 0 );
             matrix.glRotate( buttons[i].angle, 0, 0, 1 );
             mouse = mouse*matrix.getInverse();
-            if (buttons[i].rect.inside(mouse)) {
+            if (buttons[i].rect.inside(mouse) && buttons[i].myAction == STEP3) {
                 buttons[i].bMousePressed = true;
                 buttons[i].timer = ofGetElapsedTimeMillis();
-                buttons[i].orgPos = buttons[i].pos;
+                buttons[i].currentPos = buttons[i].pos;
                 buttons[i].myAction = STEP1;
 
                 buttons[i].offX = ofRandom(-100,100);
@@ -138,7 +138,9 @@ void startScene::mouseReleased(int x, int y, int button){
                 break;
             }
         }
-    }else if(isButtonSelected()){
+    }
+    
+    if(isButtonSelected()){
     
         for (int i=0; i<buttons.size(); i++) {
             
@@ -149,10 +151,9 @@ void startScene::mouseReleased(int x, int y, int button){
                 matrix.glRotate( buttons[i].angle, 0, 0, 1 );
                 matrix.glScale( buttons[i].scale.x,  buttons[i].scale.y, 1);
                 mouse = mouse*matrix.getInverse();
-                if (!buttons[i].rect.inside(mouse)) {
+                if (!buttons[i].rect.inside(mouse) && buttons[i].myAction == STEP1) {
                     buttons[i].timer = ofGetElapsedTimeMillis();
                     buttons[i].myAction = STEP2;
-                    buttons[i].bMousePressed = false;
                     cout<<i<<endl;
                 }
                 break;

@@ -36,7 +36,6 @@ void button::update(){
     
     dragDx *= 0.97;
     pos.x += dragDx* xSpeed;
-    currentPos.x += dragDx* xSpeed;
 
     if (pos.x < -width*0.5f) {
         pos.x = ofGetWidth()+width*0.5f;
@@ -48,7 +47,6 @@ void button::update(){
     float xPct = ofMap(pos.x, 0, ofGetWidth(), 0, 1, true);
     float xPctShaped = powf(xPct, 3.0);
     pos.y = ofMap(xPctShaped, 0, 1, orgPos.y, ofGetHeight()/3 + 2*orgPos.y/3.0);
-    currentPos.y += ofMap(xPctShaped, 0, 1, orgPos.y, ofGetHeight()/3 + 2*orgPos.y/3.0);
 
     
         switch (myAction) {
@@ -61,21 +59,20 @@ void button::update(){
                 float sharp2 = 0.8;
                 
                 if(ofGetElapsedTimeMillis()-timer<t1){
-                    pos.x = map(ofGetElapsedTimeMillis()-timer, 0, t1, orgPos.x, orgPos.x-offX, sharp1);
-                    pos.y = map(ofGetElapsedTimeMillis()-timer, 0, t1, orgPos.y, orgPos.y-offY, sharp1);
+                    pos.x = map(ofGetElapsedTimeMillis()-timer, 0, t1, currentPos.x, currentPos.x-offX, sharp1);
+                    pos.y = map(ofGetElapsedTimeMillis()-timer, 0, t1, currentPos.y, currentPos.y-offY, sharp1);
                     goal = 0.5;
                     scale.x =  0.9*scale.x + 0.1*goal;
                     scale.y =  0.9*scale.y + 0.1*goal;
                 }
                 else{
                    
-                    pos.x = map(ofGetElapsedTimeMillis()-timer, t1, t2, orgPos.x-offX, orgPos.x, sharp2);
-                    pos.y = map(ofGetElapsedTimeMillis()-timer, t1, t2, orgPos.y-offY, orgPos.y, sharp2);
+                    pos.x = map(ofGetElapsedTimeMillis()-timer, t1, t2, currentPos.x-offX, currentPos.x, sharp2);
+                    pos.y = map(ofGetElapsedTimeMillis()-timer, t1, t2, currentPos.y-offY, currentPos.y, sharp2);
                     goal = 4;
                     scale.x =  0.88*scale.x + 0.12*goal;
                     scale.y =  0.88*scale.y + 0.12*goal;
                 }
-                
                 
             }break;
                 
@@ -104,17 +101,10 @@ void button::update(){
                     
                     if (scale.x < 1.001) {
                         myAction = STEP3;
-                        scale.x = 1;
-                        scale.y = 1;
-                        pos = orgPos;
-                        
+                        bMousePressed = false;
                     }
-                    
                 }
-                
-                
-
-                
+                                
             }break;
                 
             case STEP3:{
