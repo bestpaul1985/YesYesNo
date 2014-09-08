@@ -33,6 +33,9 @@ public:
     ofXml               XML;
     int                 width;
     int                 height;
+    int                 selectedNum;
     ofPoint             preMouse,currentMouse;
+ 
+
 };
 

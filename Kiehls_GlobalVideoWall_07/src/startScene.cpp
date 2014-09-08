@@ -7,8 +7,8 @@ void startScene::setup(){
     loadXML();
     width = 2160/4;
     height = 3840/4;
-
     bDragged = false;
+
 }
 
 //--------------------------------------------------------------
@@ -23,8 +23,10 @@ void startScene::update(){
 //--------------------------------------------------------------
 void startScene::draw(){
     
+
     ofSetColor(255);
     bgImage.draw(0,0,width,height);
+    
     for (int i=0; i< buttons.size(); i++) {
         if (!buttons[i].bMousePressed) {
             buttons[i].draw();
@@ -36,6 +38,7 @@ void startScene::draw(){
             buttons[i].draw();
         }
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -90,6 +93,7 @@ void startScene::mouseDragged(int x, int y, int button){
     
     currentMouse.set(x, y);
     ofPoint diff = currentMouse - preMouse;
+
     if (diff.length()>0) {
         bDragged = true;
     }
@@ -126,7 +130,6 @@ void startScene::mouseReleased(int x, int y, int button){
                 buttons[i].timer = ofGetElapsedTimeMillis();
                 buttons[i].currentPos = buttons[i].pos;
                 buttons[i].myAction = STEP1;
-
                 buttons[i].offX = ofRandom(-100,100);
                 if (buttons[i].offX<0) {
                     buttons[i].offY = 100+buttons[i].offX;
@@ -183,6 +186,7 @@ bool startScene::isButtonSelected(){
 
     for (int i=0; i<buttons.size(); i++) {
         if(buttons[i].bMousePressed){
+            selectedNum = i;
             return true;
         }
     }
