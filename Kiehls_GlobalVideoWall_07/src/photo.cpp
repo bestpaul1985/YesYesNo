@@ -1,22 +1,22 @@
-#include "button.h"
+#include "photo.h"
 
-float button::map(float in, float inMin,float inMax, float outMin, float outMax, float shaper){
+float photo::map(float in, float inMin,float inMax, float outMin, float outMax, float shaper){
     float pct = ofMap (in, inMin, inMax, 0, 1, true);
     pct = powf(pct, shaper);
     float out = ofMap(pct, 0,1, outMin, outMax, true);
     return out;
 }
 //--------------------------------------------------------------
-button::button(){
+photo::photo(){
     xSpeed = ofRandom(0.95, 1.05);
     bMousePressed = false;
     dragDx = 0;
     timer = ofGetElapsedTimeMillis();
     scale.set(1,1);
-    myAction = STEP3;
+    myAction = DEFAULT;
 }
 //--------------------------------------------------------------
-void button::setup(ofImage &img, int x, int y, int Angle){
+void photo::setup(ofImage &img, int x, int y, int Angle){
     
     pos.set(x,y);
     orgPos = pos;
@@ -32,7 +32,7 @@ void button::setup(ofImage &img, int x, int y, int Angle){
 
 
 //--------------------------------------------------------------
-void button::update(){
+void photo::update(){
     
     dragDx *= 0.97;
     pos.x += dragDx* xSpeed;
@@ -50,7 +50,7 @@ void button::update(){
 
     
         switch (myAction) {
-            case STEP1:{
+            case POP_OUT:{
     
                 float goal;
                 float t1 = 300;
@@ -76,7 +76,7 @@ void button::update(){
                 
             }break;
                 
-            case STEP2:{
+            case POP_BACK:{
                 
                 float goal;
                 float t1 = 300;
@@ -100,14 +100,14 @@ void button::update(){
                     scale.y =  0.88*scale.y + 0.12*goal;
                     
                     if (scale.x < 1.001) {
-                        myAction = STEP3;
+                        myAction = DEFAULT;
                         bMousePressed = false;
                     }
                 }
                                 
             }break;
                 
-            case STEP3:{
+            case DEFAULT:{
                 
               
                 
@@ -115,17 +115,10 @@ void button::update(){
         
     }
     
-    
-//    float goal = 4;
-//    scale.y = 0.9*scale.y + 0.1*goal;
-//    if (scale.y>3) {
-//        scale.x = 0.9*scale.x + 0.1*goal;
-//    }
-    
 }
 
 //--------------------------------------------------------------
-void button::draw(){
+void photo::draw(){
    
     ofPushMatrix();
     ofTranslate(pos);

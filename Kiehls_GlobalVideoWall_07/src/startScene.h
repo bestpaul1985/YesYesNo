@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "baseScene.h"
-#include "button.h"
+#include "photo.h"
 
 class startScene : public baseScene {
 
@@ -27,7 +27,7 @@ public:
     
     ofImage             bgImage;
     vector<ofImage>     dogImages;
-    vector<button>      buttons;
+    vector<photo>       photos;
     bool                bFix;
     bool                bDragged;
     ofXml               XML;

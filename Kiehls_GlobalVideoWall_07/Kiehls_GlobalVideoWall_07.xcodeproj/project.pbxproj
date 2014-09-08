@@ -28,7 +28,7 @@
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		F95897F019B3C3FF00D29EBC /* baseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95897EE19B3C3FF00D29EBC /* baseScene.cpp */; };
 		F95897F419B3C57800D29EBC /* startScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95897F219B3C57800D29EBC /* startScene.cpp */; };
-		F98AB35919B4FF0C0076C051 /* button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F98AB35719B4FF0C0076C051 /* button.cpp */; };
+		F98AB35919B4FF0C0076C051 /* photo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F98AB35719B4FF0C0076C051 /* photo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,8 +89,8 @@
 		F95897EF19B3C3FF00D29EBC /* baseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseScene.h; sourceTree = "<group>"; };
 		F95897F219B3C57800D29EBC /* startScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = startScene.cpp; sourceTree = "<group>"; };
 		F95897F319B3C57800D29EBC /* startScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = startScene.h; sourceTree = "<group>"; };
-		F98AB35719B4FF0C0076C051 /* button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = button.cpp; sourceTree = "<group>"; };
-		F98AB35819B4FF0C0076C051 /* button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = button.h; sourceTree = "<group>"; };
+		F98AB35719B4FF0C0076C051 /* photo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = photo.cpp; sourceTree = "<group>"; };
+		F98AB35819B4FF0C0076C051 /* photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = photo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,8 +196,8 @@
 				F95897EF19B3C3FF00D29EBC /* baseScene.h */,
 				F95897F219B3C57800D29EBC /* startScene.cpp */,
 				F95897F319B3C57800D29EBC /* startScene.h */,
-				F98AB35719B4FF0C0076C051 /* button.cpp */,
-				F98AB35819B4FF0C0076C051 /* button.h */,
+				F98AB35719B4FF0C0076C051 /* photo.cpp */,
+				F98AB35819B4FF0C0076C051 /* photo.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -299,7 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				F98AB35919B4FF0C0076C051 /* button.cpp in Sources */,
+				F98AB35919B4FF0C0076C051 /* photo.cpp in Sources */,
 				F95897F019B3C3FF00D29EBC /* baseScene.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				F95897F419B3C57800D29EBC /* startScene.cpp in Sources */,

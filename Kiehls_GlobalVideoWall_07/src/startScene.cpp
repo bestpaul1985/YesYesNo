@@ -14,8 +14,8 @@ void startScene::setup(){
 //--------------------------------------------------------------
 void startScene::update(){
     
-    for (int i=0; i< buttons.size(); i++) {
-        buttons[i].update();
+    for (int i=0; i< photos.size(); i++) {
+        photos[i].update();
     }
     
 }
@@ -27,15 +27,15 @@ void startScene::draw(){
     ofSetColor(255);
     bgImage.draw(0,0,width,height);
     
-    for (int i=0; i< buttons.size(); i++) {
-        if (!buttons[i].bMousePressed) {
-            buttons[i].draw();
+    for (int i=0; i< photos.size(); i++) {
+        if (!photos[i].bMousePressed) {
+            photos[i].draw();
         }
     }
     
-    for (int i=0; i< buttons.size(); i++) {
-        if (buttons[i].bMousePressed) {
-            buttons[i].draw();
+    for (int i=0; i< photos.size(); i++) {
+        if (photos[i].bMousePressed) {
+            photos[i].draw();
         }
     }
     
@@ -56,8 +56,8 @@ void startScene::loadXML(){
     if(XML.getName() == "PHOTO" && XML.setTo("val[0]"))
     {
         do {
-            button  tempPhoto;
-            buttons.push_back(tempPhoto);
+            photo tempPhoto;
+            photos.push_back(tempPhoto);
             int x = int(XML.getValue<float>("X")*ofGetWidth());
             int y = int(XML.getValue<float>("Y")*ofGetHeight());
             int angle = int(XML.getValue<int>("ANGLE"));
@@ -65,7 +65,7 @@ void startScene::loadXML(){
             if (i>dogImages.size()-1) {
                 i = 0;
             }
-            buttons.back().setup(dogImages[i], x , y, angle);
+            photos.back().setup(dogImages[i], x , y, angle);
             i++;
         }
         while(XML.setToSibling());
@@ -99,8 +99,8 @@ void startScene::mouseDragged(int x, int y, int button){
     }
     
     if (!isButtonSelected()) {
-        for (int i=0; i<buttons.size(); i++) {
-            buttons[i].dragDx = 0.9f *  buttons[i].dragDx + 0.1f * diff.x;
+        for (int i=0; i<photos.size(); i++) {
+            photos[i].dragDx = 0.9f *  photos[i].dragDx + 0.1f * diff.x;
         }
     }
     
@@ -119,24 +119,23 @@ void startScene::mousePressed(int x, int y, int button){
 void startScene::mouseReleased(int x, int y, int button){
     
     if (!bDragged && !isButtonSelected()) {
-        for (int i=0; i<buttons.size(); i++) {
+        for (int i=0; i<photos.size(); i++) {
             ofVec3f mouse(x,y,0);
             ofMatrix4x4 matrix;
-            matrix.glTranslate( buttons[i].pos.x, buttons[i].pos.y, 0 );
-            matrix.glRotate( buttons[i].angle, 0, 0, 1 );
+            matrix.glTranslate( photos[i].pos.x, photos[i].pos.y, 0 );
+            matrix.glRotate( photos[i].angle, 0, 0, 1 );
             mouse = mouse*matrix.getInverse();
-            if (buttons[i].rect.inside(mouse) && buttons[i].myAction == STEP3) {
-                buttons[i].bMousePressed = true;
-                buttons[i].timer = ofGetElapsedTimeMillis();
-                buttons[i].currentPos = buttons[i].pos;
-                buttons[i].myAction = STEP1;
-                buttons[i].offX = ofRandom(-100,100);
-                if (buttons[i].offX<0) {
-                    buttons[i].offY = 100+buttons[i].offX;
+            if (photos[i].rect.inside(mouse) && photos[i].myAction == DEFAULT) {
+                photos[i].bMousePressed = true;
+                photos[i].timer = ofGetElapsedTimeMillis();
+                photos[i].currentPos = photos[i].pos;
+                photos[i].myAction = POP_OUT;
+                photos[i].offX = ofRandom(-100,100);
+                if (photos[i].offX<0) {
+                    photos[i].offY = 100+photos[i].offX;
                 }else {
-                    buttons[i].offY = 100-buttons[i].offX;
+                    photos[i].offY = 100-photos[i].offX;
                 }
-                buttons[i].myAction = STEP1;
                 cout<<i<<endl;
                 break;
             }
@@ -145,18 +144,18 @@ void startScene::mouseReleased(int x, int y, int button){
     
     if(isButtonSelected()){
     
-        for (int i=0; i<buttons.size(); i++) {
+        for (int i=0; i<photos.size(); i++) {
             
-            if (buttons[i].bMousePressed) {
+            if (photos[i].bMousePressed) {
                 ofVec3f mouse(x,y,0);
                 ofMatrix4x4 matrix;
-                matrix.glTranslate( buttons[i].pos.x, buttons[i].pos.y, 0 );
-                matrix.glRotate( buttons[i].angle, 0, 0, 1 );
-                matrix.glScale( buttons[i].scale.x,  buttons[i].scale.y, 1);
+                matrix.glTranslate( photos[i].pos.x, photos[i].pos.y, 0 );
+                matrix.glRotate( photos[i].angle, 0, 0, 1 );
+                matrix.glScale( photos[i].scale.x,  photos[i].scale.y, 1);
                 mouse = mouse*matrix.getInverse();
-                if (!buttons[i].rect.inside(mouse) && buttons[i].myAction == STEP1) {
-                    buttons[i].timer = ofGetElapsedTimeMillis();
-                    buttons[i].myAction = STEP2;
+                if (!photos[i].rect.inside(mouse) && photos[i].myAction == POP_OUT) {
+                    photos[i].timer = ofGetElapsedTimeMillis();
+                    photos[i].myAction = POP_BACK;
                     cout<<i<<endl;
                 }
                 break;
@@ -184,8 +183,8 @@ void startScene::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 bool startScene::isButtonSelected(){
 
-    for (int i=0; i<buttons.size(); i++) {
-        if(buttons[i].bMousePressed){
+    for (int i=0; i<photos.size(); i++) {
+        if(photos[i].bMousePressed){
             selectedNum = i;
             return true;
         }

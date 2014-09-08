@@ -1,18 +1,18 @@
 #pragma once
 
 #include "ofMain.h"
-#define MODE 0
+
 enum ACTION{
-    STEP1,
-    STEP2,
-    STEP3
+    POP_OUT,
+    POP_BACK,
+    DEFAULT
 };
 
-class button {
+class photo {
     
 public:
     
-    button();
+    photo();
     void setup(ofImage &img, int x, int y, int Angle);
     void update();
     void draw();
