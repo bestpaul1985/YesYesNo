@@ -3,8 +3,6 @@
 #include "ofMain.h"
 #include "baseScene.h"
 #include "startScene.h"
-#include "zoomScene.h"
-#include "mouseControl.h"
 
 #define SCENE_NUM 1
 
@@ -26,7 +24,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
         baseScene       *myScene[SCENE_NUM];
-        mouseControl    myMouseControl;
         int             currentScene;
     
 };

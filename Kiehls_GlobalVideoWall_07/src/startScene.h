@@ -22,15 +22,17 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     void loadXML();
+    bool isButtonSelected();
+    bool isMouseDragged();
     
     ofImage             bgImage;
     vector<ofImage>     dogImages;
     vector<button>      buttons;
     bool                bFix;
+    bool                bDragged;
     ofXml               XML;
-    ofPoint             preMouse;
-    float               dragDx;
     int                 width;
     int                 height;
+    ofPoint             preMouse,currentMouse;
 };
 

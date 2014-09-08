@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
+
     myScene[0] = new startScene();
     currentScene = 0;
     
@@ -16,7 +17,6 @@ void ofApp::setup(){
 void ofApp::update(){
 
     myScene[currentScene]->update();
-    myMouseControl.update();
 }
 
 //--------------------------------------------------------------
@@ -50,7 +50,6 @@ void ofApp::mouseDragged(int x, int y, int button){
 
     myScene[currentScene]->mouseDragged(x, y, button);
 
-    myMouseControl.mouseDragged(x,y,button);
 
 }
 
@@ -58,7 +57,6 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
 
     myScene[currentScene]->mousePressed(x, y, button);
-    myMouseControl.mousePressed(x,y,button);
 
 }
 
@@ -66,7 +64,6 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
 
     myScene[currentScene]->mouseReleased(x, y, button);
-    myMouseControl.mouseReleased(x,y,button);
 
 }
 
